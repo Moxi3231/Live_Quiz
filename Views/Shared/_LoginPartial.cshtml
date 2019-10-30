@@ -3,20 +3,26 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <div class="btn-group dropright" data-aos="zoom-in">
+            <button type="button" class="btn btn-outline-dark">@User.Identity.GetUserName()</button>
+            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu bg-transparent" style="height:0px; border:none;">
+                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="btn btn-sm btn-outline-info" })
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-outline-danger" >Log Off</a>
+            </div>
+        </div>
+
+
+
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="nav navbar-nav navbar-right form-inline">
+        <li>@Html.ActionLink("SignIn", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })&nbsp; <i class="fas fa-sign-in-alt"></i></li>
     </ul>
 }
