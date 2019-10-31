@@ -6,6 +6,7 @@
     <title>@ViewBag.Title -Quiz</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" type="image/png" href="@Url.Content("/Content/Images/Quiz.png")" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
@@ -16,7 +17,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <span>
-                <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" height="35px" width="35px" alt="...">
+                <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" height="35" width="35" alt="...">
                 @Html.ActionLink("Live_Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </span> <div class="navbar-nav">
                 @Html.Partial("_LoginPartial")
@@ -34,14 +35,14 @@
 
     <br />
 
-    <div class="container container-fluid body-content shadow " data-aos="flip-up">
+    <div class="container container-fluid body-content shadow-sm " data-aos="flip-right" data-aos-duration="2500">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
+    </div>
+    <hr />
+    <footer class="text-center" >
+        <p>&copy; @DateTime.Now.Year - Quiz It</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -10,8 +10,8 @@
 <hr />
 <div class="card">
     <div class="card-header">
-        <h4>Create a new account.</h4>
-       <a>SignIn</a>
+       <h4>Create a new account.</h4>
+       <a href="~/Account/Login" class="align-top float-right text-dark btn btn-link btn-outline-secondary">SignIn</a>
     </div>
     <div class="card-body">
 
@@ -22,12 +22,7 @@
 
             @Html.ValidationSummary("", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                </div>
-            </div>
+
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -48,9 +43,15 @@
                 </div>
             </div>
             <div class="form-group">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    @Html.DropDownList( "Country", ViewBag.Country_List as IEnumerable<SelectListItem>,"Select", new { @class = "form-control" })
+                    @Html.DropDownList("Country", ViewBag.Country_List as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
