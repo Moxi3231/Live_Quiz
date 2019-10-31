@@ -11,21 +11,30 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <body>
-    <div class="pos-f-t">
+    <div class="pos-f-t sticky-top">
         <nav class="navbar navbar-light bg-light shadow">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="btn-group-">
+                <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <button class="btn btn-lg" type="button" data-toggle="collapse" data-target="#adminPanel" aria-controls="adminPanel" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-circle-notch fa-1x"></i>
+                </button>
+            </div>
             <span>
                 <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" height="35" width="35" alt="...">
                 @Html.ActionLink("Live_Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </span> <div class="navbar-nav">
+            </span>
+            <div class="navbar-nav">
                 @Html.Partial("_LoginPartial")
             </div>
         </nav>
 
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light shadow-lg p-1 text-center text-black-50 ">
+
+
+        <div class="collapse shadow-sm" id="navbarToggleExternalContent">
+            <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
                 <span>@Html.ActionLink("Home", "Index", "Home")&nbsp;<i class="fas fa-home text-dark"></i></span><br />
                 <span>@Html.ActionLink("About", "About", "Home")&nbsp;<i class="fas fa-circle-notch text-dark"></i></span><br />
                 <span>@Html.ActionLink("Contact", "Contact", "Home")&nbsp;<i class="fas fa-address-book text-dark"></i></span>
@@ -35,13 +44,13 @@
 
     <br />
 
-    <div class="container container-fluid body-content shadow-sm " data-aos="flip-right" data-aos-duration="2500">
+    <div class=" container-fluid body-content shadow-sm w-100" data-aos="flip-right" data-aos-duration="2500">
         @RenderBody()
-
     </div>
     <hr />
-    <footer class="text-center" >
+    <footer class="text-center">
         <p>&copy; @DateTime.Now.Year - Quiz It</p>
+
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

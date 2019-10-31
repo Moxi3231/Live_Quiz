@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Live_Quiz.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Live_Quiz
 {
@@ -63,6 +64,55 @@ namespace Live_Quiz
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            createRolesandUsers();
+        }
+
+
+        // In this method we will create default User roles and Admin user for login    
+        private void createRolesandUsers()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
+            // In Startup, creating first Admin Role and creating a default Admin User     
+            if (!roleManager.RoleExists("Admin"))
+            {
+
+                // first we create Admin rool    
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
+
+                //Here we create a Admin super user who will maintain the website                   
+                var user = new ApplicationUser() { UserName = "Moxank", Email = "moxankadmin@gmail.com" };
+                var user2 = new ApplicationUser() { UserName = "Aatish", Email = "aatishadmin@gmail.com" };
+                var user3 = new ApplicationUser() { UserName = "Jaimin", Email = "jaiminadmin@gmail.com" };
+
+                var chkUser = UserManager.Create(user, "A@Z200711");
+                var chkUser1 = UserManager.Create(user2, "A@Z200711");
+                var chkUser2 = UserManager.Create(user3, "A@Z200711");
+                //Add default User to Role Admin    
+                if (chkUser.Succeeded && chkUser1.Succeeded && chkUser2.Succeeded)
+                {
+                    var result1 = UserManager.AddToRole(user.Id, "Admin");
+                    var result2 = UserManager.AddToRole(user2.Id, "Admin");
+                    var result3 = UserManager.AddToRole(user3.Id, "Admin");
+                }
+            }
+
+      
+
+            // creating Creating User role     
+            if (!roleManager.RoleExists("User"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "User";
+                roleManager.Create(role);
+
+            }
         }
     }
 }
