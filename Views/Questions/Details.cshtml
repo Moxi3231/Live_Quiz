@@ -1,0 +1,67 @@
+﻿@model Live_Quiz.Models.Question
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPublic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPublic)
+        </dd>
+
+    </dl>
+    Options:
+    @foreach (var x in ViewBag.options)
+    {
+        if (x.isAnswer == true)
+        {
+            <div class="alert alert-success" role="alert">
+                @x.ans
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                @x.ans
+            </div>
+        }
+
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
