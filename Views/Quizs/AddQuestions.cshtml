@@ -1,0 +1,141 @@
+﻿@model Live_Quiz.Models.Question
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Question</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Score, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hint, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Hint, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Hint, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isPublic, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isPublic)
+                    @Html.ValidationMessageFor(model => model.isPublic, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <div class="control-label col-md-2"> Option 1</div>
+            <div class="col-md-10">
+                <input type="text" name="o1ans" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Is Answer
+            </div>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" name="iso1True">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="form-group">
+            <div class="control-label col-md-2"> Option 2</div>
+            <div class="col-md-10">
+                <input type="text" name="o2ans" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Is Answer
+            </div>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" name="iso2True">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="form-group">
+            <div class="control-label col-md-2"> Option 3</div>
+            <div class="col-md-10">
+                <input type="text" name="o3ans" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Is Answer
+            </div>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" name="iso3True">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="form-group">
+            <div class="control-label col-md-2"> Option 4</div>
+            <div class="col-md-10">
+                <input type="text" name="o4ans" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="control-label col-md-2">
+                Is Answer
+            </div>
+            <div class="col-md-10">
+                <div class="checkbox">
+                    <input type="checkbox" name="iso4True">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
