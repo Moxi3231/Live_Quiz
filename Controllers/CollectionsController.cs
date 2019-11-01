@@ -8,21 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using Live_Quiz.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Live_Quiz.Controllers
 {
+    [Authorize]
+
     public class CollectionsController : Controller
     {
+        private static ApplicationDbContext context = new ApplicationDbContext();
+
+        UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
         private DataModel db = new DataModel();
 
         // GET: Collections
         public ActionResult Index()
         {
             string idd = User.Identity.GetUserId();
-            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId==idd);
 
 
-            return View(userPr.Collections.ToList());
+            return View(userPr.Collections.ToList() as IEnumerable<Collection>);
         }
 
         // GET: Collections/Details/5
@@ -43,6 +49,7 @@ namespace Live_Quiz.Controllers
         // GET: Collections/Create
         public ActionResult Create()
         {
+            //ViewBag.email = UserManager.FindById(User.Identity.GetUserId()).Email;
             return View();
         }
 
@@ -51,7 +58,7 @@ namespace Live_Quiz.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Email,isPublic,Description")] Collection collection)
+        public ActionResult Create([Bind(Include = "Id,Name,isPublic,Description")] Collection collection)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +66,7 @@ namespace Live_Quiz.Controllers
 
                 string idd = User.Identity.GetUserId();
                 UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+                collection.Email = UserManager.FindById(idd).Email;
                 userPr.Collections.Add(collection);
 
 

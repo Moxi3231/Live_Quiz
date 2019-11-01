@@ -23,6 +23,7 @@ namespace Live_Quiz.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles ="Admin")]
         public ActionResult CreateRole()
         {
             ViewBag.flag = false;
@@ -30,6 +31,7 @@ namespace Live_Quiz.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateRole(Roles roles)
         {
             ViewBag.flag = false;
@@ -49,6 +51,7 @@ namespace Live_Quiz.Controllers
             return View(roles);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult ViewRoles()
         {
             return View((IEnumerable < Roles > )roleManager.Roles.Select(y=>new Roles(){ Id=y.Id,Name=y.Name}).ToList());
@@ -60,6 +63,7 @@ namespace Live_Quiz.Controllers
             return RedirectToAction("ViewRoles");
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditRole(string id)
         {
             var rres = roleManager.FindById(id);
@@ -67,7 +71,7 @@ namespace Live_Quiz.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+        [Authorize(Roles = "Admin")]
         public ActionResult EditRole(Roles roles)
         {
             ViewBag.message = "Updated!!!";

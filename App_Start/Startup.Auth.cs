@@ -97,6 +97,21 @@ namespace Live_Quiz
                 //Add default User to Role Admin    
                 if (chkUser.Succeeded && chkUser1.Succeeded && chkUser2.Succeeded)
                 {
+                    DataModel db = new DataModel();
+                    db.UserProfiles.Add(new UserProfile
+                    {
+                        AccountId = user.Id
+                    }) ;
+                    db.UserProfiles.Add(new UserProfile
+                    {
+                        AccountId = user2.Id
+                    });
+                    db.UserProfiles.Add(new UserProfile
+                    {
+                        AccountId = user3.Id
+                    });
+                    db.SaveChanges();
+
                     var result1 = UserManager.AddToRole(user.Id, "Admin");
                     var result2 = UserManager.AddToRole(user2.Id, "Admin");
                     var result3 = UserManager.AddToRole(user3.Id, "Admin");

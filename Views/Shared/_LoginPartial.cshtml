@@ -5,8 +5,8 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="btn-group dropdown" data-aos="zoom-in" data-aos-duration="1500">
-            <button type="button" class="btn btn-outline-dark">@User.Identity.GetUserName()</button>
+        <div class="btn-group dropright" data-aos="zoom-in" data-aos-duration="1500">
+            <button type="button" class="btn btn-outline-dark disabled">@User.Identity.GetUserName()</button>
             <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
