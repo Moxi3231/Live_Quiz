@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\QuizsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -302,6 +303,13 @@
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Questions\_ViewStart.cshtml" />
+    <Content Include="Views\Quizs\Create.cshtml" />
+    <Content Include="Views\Quizs\Delete.cshtml" />
+    <Content Include="Views\Quizs\Details.cshtml" />
+    <Content Include="Views\Quizs\Edit.cshtml" />
+    <Content Include="Views\Quizs\Index.cshtml" />
+    <Content Include="Views\Quizs\_ViewStart.cshtml" />
+    <Content Include="Views\Quizs\AddQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

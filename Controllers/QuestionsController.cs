@@ -19,6 +19,7 @@ namespace Live_Quiz.Controllers
         public ActionResult Index()
         {
             string idd = User.Identity.GetUserId();
+
             UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
 
 
