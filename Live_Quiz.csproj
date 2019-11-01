@@ -170,14 +170,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CollectionsController.cs" />
+    <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DataModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Roles.cs" />
@@ -283,6 +287,21 @@
     <Content Include="Views\Roles\CreateRole.cshtml" />
     <Content Include="Views\Roles\ViewRoles.cshtml" />
     <Content Include="Views\Roles\EditRole.cshtml" />
+    <Content Include="Views\DashBoard\Index.cshtml" />
+    <Content Include="Views\Shared\_DashBoard.cshtml" />
+    <Content Include="Views\DashBoard\_ViewStart.cshtml" />
+    <Content Include="Views\Collections\Create.cshtml" />
+    <Content Include="Views\Collections\Delete.cshtml" />
+    <Content Include="Views\Collections\Details.cshtml" />
+    <Content Include="Views\Collections\Edit.cshtml" />
+    <Content Include="Views\Collections\Index.cshtml" />
+    <Content Include="Views\Collections\_ViewStart.cshtml" />
+    <Content Include="Views\Questions\Create.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
+    <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\Edit.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Questions\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

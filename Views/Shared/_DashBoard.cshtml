@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "_Dashboard";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="">  <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" height="35" width="35" alt="..."></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                @Html.ActionLink("Dashboard", "Index", "DashBoard", new { area = "" }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Collection", "Index", "Collections", new { area = "" }, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("QuestionBank", "Index", "Questions", new { area = "" }, new { @class = "nav-link" })
+            </li>
+
+
+        </ul>
+
+            @Html.Partial("_LoginPartial")
+          
+      
+    </div>
+</nav>
+
+
+
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
