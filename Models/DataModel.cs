@@ -56,7 +56,7 @@ namespace Live_Quiz.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public string AccountId { get; set; }
 
         public virtual ICollection<Quiz> Quizzes { get; set; }
@@ -137,6 +137,9 @@ namespace Live_Quiz.Models
 
         public string Email { get; set; }
 
+        [ForeignKey("User")]
+        public int UserProfileId { get; set; }
+        public UserProfile User { get; set; }
 
         public bool isPublic { get; set; }
 

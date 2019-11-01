@@ -7,14 +7,14 @@
 
         <div class="btn-group dropright" data-aos="zoom-in" data-aos-duration="1500">
             <button type="button" class="btn btn-outline-dark disabled">@User.Identity.GetUserName()</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
+            <button onclick="changeUpDown()" type="button" class="btn btn-outline-dark"data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <i id="changeUD" class="fas fa-chevron-circle-down m-n1"></i>
             </button>
-            <div class="dropdown-menu bg-transparent" style="height:0px; border:none;">
-                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="btn btn-sm btn-outline-info" })
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-outline-danger" >Log Off</a>
-            </div>
+           
+
+
         </div>
+
 
 
 

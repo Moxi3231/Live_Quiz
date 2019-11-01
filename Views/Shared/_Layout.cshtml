@@ -6,15 +6,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title -Quiz</title>
+    <title>@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="icon" type="image/png" href="@Url.Content("/Content/Images/Quiz.png")" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
+
 <body>
-    <div class="pos-f-t sticky-top">
+    <div class="pos-f-t sticky-top" style="z-index:2;">
         <nav class="navbar navbar-light bg-light shadow">
             <div class="btn-group-">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,8 +24,8 @@
 
                 @if (User.IsInRole("Admin"))
                 {
-                    <button class="btn btn-lg rotate180" type="button" data-toggle="collapse" data-target="#adminPanel" aria-controls="adminPanel" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-circle-notch fa-1x"></i>
+                    <button class="btn btn-lg " type="button" data-toggle="collapse" data-target="#adminPanel" aria-controls="adminPanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-circle-notch fa-1x rotate180"></i>
                     </button>
                 }
             </div>
@@ -38,32 +39,60 @@
         </nav>
 
 
-
+        <div class="collapse" id="collapseExample">
+            <div class="m-auto bg-light shadow-lg" style="position:fixed; float:right; overflow-x:hidden; z-index:9; width:20%; height:100%; background-color:transparent; right:0;">
+                <br />
+                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info p-2 w-100 " })
+                <br />
+                <br />
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-outline-danger w-100 p-2 m-auto">Log Off</a>
+            </div>
+        </div>
         <div class="collapse shadow-sm" id="navbarToggleExternalContent">
             <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
-                <span>@Html.ActionLink("Home", "Index", "Home")&nbsp;<i class="fas fa-home text-dark"></i></span><br />
-                <span>@Html.ActionLink("About", "About", "Home")&nbsp;<i class="fas fa-circle-notch text-dark"></i></span><br />
+                <span>@Html.ActionLink("Home", "Index", "Home")&nbsp;<i class="fas fa-home text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("About", "About", "Home")&nbsp;<i class="fas fa-circle-notch text-dark"></i></span>
+                <br />
                 <span>@Html.ActionLink("Contact", "Contact", "Home")&nbsp;<i class="fas fa-address-book text-dark"></i></span>
             </div>
         </div>
 
         <div class="collapse shadow-sm" id="adminPanel">
             <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
-                <span>@Html.ActionLink("Create Role", "CreateRole", "Roles")&nbsp;<i class="fas fa-plus text-dark"></i></span><br />
-                <span>@Html.ActionLink("View Roles", "ViewRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span><br />
-              
+                <span>@Html.ActionLink("Create Role", "CreateRole", "Roles")&nbsp;<i class="fas fa-plus text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("View Roles", "ViewRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
+                <br />
+
             </div>
         </div>
     </div>
 
+    <div id="mySidepanel" class="sidepanel text-white shadow-lg">
+        <p style=" position: absolute; top: 10px; left: 5px; font-size: 36px; margin-left: 50px;">QuizIt</p>
+        <a href="javascript:void(0)" class="closebtn " onclick="closeNav()"> <i class="fas fa-times rotate180"></i></a>
+        <hr class="text-white border border-white" />
+        @Html.ActionLink("Collections", "Index", "Collections/", new { }, new { @class = "" })
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="buttonLeft">
+        <button class="btn btn-outline-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
+    </div>
     <br />
 
-    <div class=" container-fluid body-content shadow-sm w-100" data-aos="flip-right" data-aos-duration="2500">
+    <div class=" container-fluid body-content shadow-sm w-100 " data-aos="flip-right" data-aos-duration="2500" style="margin-top:-50px;">
         @RenderBody()
     </div>
-    <hr />
-    <footer class="text-center">
-        <p>&copy; @DateTime.Now.Year - Quiz It</p>
+
+    <footer class="text-center my-5">
+        <hr />
+        <p>
+            &copy; @DateTime.Now.Year -
+            <b>Quiz It</b>
+        </p>
 
     </footer>
     @Scripts.Render("~/bundles/jquery")
@@ -71,6 +100,26 @@
     @RenderSection("scripts", required: false)
     <script src="https://kit.fontawesome.com/d573236f31.js" crossorigin="anonymous"></script>
     <script>
+        var flagupDown = false;
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "350px";
+        }
+
+        /* Set the width of the sidebar to 0 (hide it) */
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+        function changeUpDown() {
+            flagupDown = !flagupDown;
+            if (flagupDown) {
+                $("#changeUD").removeClass("fa-chevron-circle-down");
+                $("#changeUD").addClass("fa-chevron-circle-up");
+
+            } else {
+                $("#changeUD").removeClass("fa-chevron-circle-up");
+                $("#changeUD").addClass("fa-chevron-circle-down");
+            }
+        }
         AOS.init({
             // Global settings:
             disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function

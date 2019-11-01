@@ -58,23 +58,28 @@ namespace Live_Quiz.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,isPublic,Description")] Collection collection)
+        public ActionResult Create(Collection collection)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Collections.Add(collection);
-
-                string idd = User.Identity.GetUserId();
-                UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
-                collection.Email = UserManager.FindById(idd).Email;
-                userPr.Collections.Add(collection);
-
-
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(collection);
             }
-
-            return View(collection);
+            
+            
+            string idd = User.Identity.GetUserId();
+            
+            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+            
+            collection.Email = UserManager.FindById(idd).Email;               
+            collection.User = userPr;
+            collection.UserProfileId = userPr.Id;
+            db.Collections.Add(collection);
+            db.SaveChanges();
+                //db.SaveChanges();
+                //return View(collection);        
+            return RedirectToAction("Index");
+           
+             
         }
 
         // GET: Collections/Edit/5

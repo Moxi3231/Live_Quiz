@@ -4,13 +4,15 @@
     ViewBag.Title = "Create Collection";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="text-center" data-aos="zoom-in-left" data-aos-delay="1500">@ViewBag.Title</h2>
+@ViewBag.error
+@ViewBag.model
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-<div class="card ">
-    <h4 class="card-header text-center">Collection Details</h4>
+<div class="card w-75 m-auto">
+    <h4 class="card-header text-center" data-aos="zoom-in-right" data-aos-delay="1400">Collection Details</h4>
     <div class="card-body">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -22,10 +24,12 @@
 
 
         <div class="form-group">
-            <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                <input type="checkbox" class="custom-control-input" id="isPublic" name="isPublic">
-                <label class="custom-control-label" for="isPublic" name="isPublic">Is Public</label>
+            <div class="custom-checkbox">
+                @Html.LabelFor(model => model.isPublic, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.isPublic, new { htmlAttributes = new { @class = "form-control" } })
             </div>
+            
             @Html.ValidationMessageFor(model => model.isPublic, "", new { @class = "text-danger" })
         </div>
 
@@ -51,3 +55,11 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<script>
+    var flag = false;
+    function change() {
+        flag = !flag;
+        $("#isPublic").val(flag);
+        //alert($("#isPublic").val());
+    }
+</script>

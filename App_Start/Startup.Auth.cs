@@ -94,23 +94,23 @@ namespace Live_Quiz
                 var chkUser = UserManager.Create(user, "A@Z200711");
                 var chkUser1 = UserManager.Create(user2, "A@Z200711");
                 var chkUser2 = UserManager.Create(user3, "A@Z200711");
+
+               
                 //Add default User to Role Admin    
                 if (chkUser.Succeeded && chkUser1.Succeeded && chkUser2.Succeeded)
                 {
-                    DataModel db = new DataModel();
-                    db.UserProfiles.Add(new UserProfile
-                    {
-                        AccountId = user.Id
-                    }) ;
-                    db.UserProfiles.Add(new UserProfile
+                    DataModel dbM = new DataModel();
+                    dbM.UserProfiles.Add(new UserProfile() { AccountId = user.Id });
+                    dbM.UserProfiles.Add(new UserProfile()
                     {
                         AccountId = user2.Id
                     });
-                    db.UserProfiles.Add(new UserProfile
+                    dbM.UserProfiles.Add(new UserProfile()
                     {
                         AccountId = user3.Id
                     });
-                    db.SaveChanges();
+                    dbM.SaveChanges();
+                    
 
                     var result1 = UserManager.AddToRole(user.Id, "Admin");
                     var result2 = UserManager.AddToRole(user2.Id, "Admin");
