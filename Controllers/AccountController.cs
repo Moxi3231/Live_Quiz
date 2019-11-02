@@ -157,6 +157,7 @@ namespace Live_Quiz.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _userManager.AddToRole(user.Id,"User");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     DataModel db = new DataModel();
@@ -168,7 +169,7 @@ namespace Live_Quiz.Controllers
                                   
                     });
                     db.SaveChanges();
-
+                    
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

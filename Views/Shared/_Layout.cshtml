@@ -72,7 +72,7 @@
                 <br />
                 <span>@Html.ActionLink("View Roles", "ViewRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
                 <br />
-
+                <span>@Html.ActionLink("Assign Role To User", "AssignRole", "Roles")&nbsp;<i class="fas fa-edit text-dark"></i></span>
             </div>
         </div>
     </div>
@@ -102,8 +102,7 @@
         <img class="modal-content" id="img01">
         <div id="caption"></div>
     </div>
-    <footer class="text-center my-5">
-        <hr />
+    <footer class="card card-footer text-center shadow w-100" style="position:sticky; bottom:0;">
         <p>
             &copy; @DateTime.Now.Year -
             <b>Quiz It</b>

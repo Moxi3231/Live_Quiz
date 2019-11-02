@@ -1,0 +1,62 @@
+﻿@using Live_Quiz.Models;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@{
+    ViewBag.Title = "ViewUserRoles";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="display-3 text-center">User Roles</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover table-light table-bordered table-responsive-lg">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var erole in ViewBag.roles)
+                {
+                    <tr class="card-header text-center shadow-lg" style="font-size:25px;">
+                        <th colspan="4">@erole.Name</th>
+                    </tr>
+                    int i = 0;
+                    foreach (ApplicationUser euser in ViewBag.users)
+                    {
+                        IdentityUserRole user_role = new IdentityUserRole() { UserId = euser.Id, RoleId = erole.Id };
+                        
+                        foreach (var ii in euser.Roles.Select(x => x).ToList())
+                        {
+                            if (ii.RoleId == erole.Id)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@euser.UserName</td>
+                                    <td>@euser.Email</td>
+                                    <td></td>
+
+                                </tr>
+                                i++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

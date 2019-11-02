@@ -38,9 +38,9 @@ dt {
 .buttonLeft {
     position: sticky;
     z-index: 5;
-    top: 50%;
-    bottom: 50%;
-    width: 10%;
+    top: 45%;
+    bottom: 55%;
+    width: 2%;
 }
 
 .sidepanel {
@@ -183,15 +183,32 @@ dt {
         width: 100%;
     }
 }
-.shakeClass:hover {
+.shakeClass {
     /* Start the shake animation and make the animation last for 0.5 seconds */
-    animation: shake 0.5s;
+    animation: shake 1s;
     /* When the animation is finished, start again */
-    animation-iteration-count: infinite;
+    animation-delay: 5s;
+    animation-iteration-count: 2;
+    transform: scale(1);
+   
+    
 }
+    .shakeClass:hover {
+        box-shadow: 0px 0px 150px #bbb;
+        background-color:#D7D7D7;
+        background-color:transparent;
+        transition: all 200ms ease-in;
+        transform: scale(1.5);
+        /* Start the shake animation and make the animation last for 0.5 seconds */
+        animation: shake 0.5s;
+        /* When the animation is finished, start again */
+        animation-iteration-count: infinite;
+    }
 
 @keyframes shake {
-    0% {
+    ; 0% {
+        box-shadow: 0px 0px 150px #bbb;
+        background-color: #D7D7D7;
         transform: translate(1px, 1px) rotate(0deg);
     }
 
