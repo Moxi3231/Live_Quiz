@@ -1,6 +1,3 @@
-Moxank3132
-Mox@nk6201
-
 Admins:
 	Moxank
 	Aatish
