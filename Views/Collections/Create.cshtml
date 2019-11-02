@@ -35,8 +35,8 @@
 
             <div class="form-group">
                 <label for="Image">Upload Image</label>
-                <input type="file" class="form-control-file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
-                <p class="alert alert-danger " id="fileError" style="display: none;" >Only image is allowed.</p>
+                <input type="file" class="form-control" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+                <p class="alert alert-danger " id="fileError" style="display: none;">Only image is allowed.</p>
             </div>
 
 
@@ -57,6 +57,12 @@
     </div>
 }
 
+@if (ViewBag.noFile != null)
+{
+    <div class="w-75 m-auto alert alert-danger text-center">
+        @ViewBag.noFile 
+    </div>
+}
 <div class="w-75 m-auto alert alert-info text-center">
     @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center" })
 </div>
