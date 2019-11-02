@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Live_Quiz.Models
 {
+    public class ImageFielView
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public byte[] Image { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Live_Quiz.Models;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Live_Quiz.Models;
-using Microsoft.AspNet.Identity;
 
 namespace Live_Quiz.Controllers
 {
@@ -70,10 +67,10 @@ namespace Live_Quiz.Controllers
             {
                 Description = Request.Form["Description"],
                 Hint = Request.Form["Hint"],
-                Score = int.Parse( Request.Form["Score"]),
+                Score = int.Parse(Request.Form["Score"]),
                 isPublic = istrue,
-                Optionss=new List<Options>(),
-                
+                Optionss = new List<Options>(),
+
             };
 
             if (ModelState.IsValid)
@@ -81,7 +78,7 @@ namespace Live_Quiz.Controllers
                 db.Questions.Add(question);
 
 
-                bool iso1True = Request.Form["iso1True"]!=null? true : false;
+                bool iso1True = Request.Form["iso1True"] != null ? true : false;
                 bool iso2True = Request.Form["iso2True"] != null ? true : false;
                 bool iso3True = Request.Form["iso3True"] != null ? true : false;
                 bool iso4True = Request.Form["iso4True"] != null ? true : false;

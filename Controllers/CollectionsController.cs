@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Live_Quiz.Models;
+using Live_Quiz.Models.Repository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,10 +9,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Live_Quiz.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-
 namespace Live_Quiz.Controllers
 {
     [Authorize]
@@ -25,7 +24,7 @@ namespace Live_Quiz.Controllers
         public ActionResult Index()
         {
             string idd = User.Identity.GetUserId();
-            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId==idd);
+            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId == idd);
 
 
             return View(userPr.Collections.ToList() as IEnumerable<Collection>);
@@ -64,22 +63,38 @@ namespace Live_Quiz.Controllers
             {
                 return View(collection);
             }
+
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            //ContentRepository service = new ContentRepository();
+            if (file==null)
+            {
+                return View();
+            }
+            ContentRepository service = new ContentRepository();
+            //ImageFile imageFile = new ImageFile();
+            int i = service.UploadImageInDataBase(file,new ImageFielView() { });
             
-            
+          
+             
+            if (i == 0)
+            {
+                return View(collection);
+            }
+           
             string idd = User.Identity.GetUserId();
-            
+
             UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
-            
-            collection.Email = UserManager.FindById(idd).Email;               
+
+            collection.Email = UserManager.FindById(idd).Email;
             collection.User = userPr;
             collection.UserProfileId = userPr.Id;
+            collection.ImageId = i;
             db.Collections.Add(collection);
             db.SaveChanges();
-                //db.SaveChanges();
-                //return View(collection);        
+            //db.SaveChanges();
+            //return View(collection);
             return RedirectToAction("Index");
-           
-             
+
         }
 
         // GET: Collections/Edit/5
@@ -146,6 +161,26 @@ namespace Live_Quiz.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpGet]
+        public ActionResult RetrieveImage(int id)
+        {
+            byte[] cover = GetImageFromDataBase(id);
+            if (cover != null)
+            {
+                return File(cover, "image/jpg");
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public byte[] GetImageFromDataBase(int Id)
+        {
+            var q = from temp in db.Images where temp.Id == Id select temp.Image;
+            byte[] cover = q.First();
+            return cover;
         }
     }
 }

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using Live_Quiz.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Live_Quiz.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Hosting;
-using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Live_Quiz.Controllers
 {
     [Authorize]
@@ -25,7 +21,7 @@ namespace Live_Quiz.Controllers
             this.country_list = data;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +33,9 @@ namespace Live_Quiz.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -123,7 +119,7 @@ namespace Live_Quiz.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -143,7 +139,7 @@ namespace Live_Quiz.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Country_List =  this.country_list.OrderBy(x=> x[0] ).Select(y=> new SelectListItem() { Text=y,Value=y}).ToList();
+            ViewBag.Country_List = this.country_list.OrderBy(x => x[0]).Select(y => new SelectListItem() { Text = y, Value = y }).ToList();
             return View();
         }
 
@@ -157,11 +153,11 @@ namespace Live_Quiz.Controllers
             ViewBag.Country_List = this.country_list.OrderBy(x => x[0]).Select(y => new SelectListItem() { Text = y, Value = y }).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,Country=model.Country };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Country = model.Country };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     DataModel db = new DataModel();
                     db.UserProfiles.Add(new UserProfile

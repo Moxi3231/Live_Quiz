@@ -1,13 +1,10 @@
-﻿ using System;
+﻿using Live_Quiz.Models;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Live_Quiz.Models;
-using Microsoft.AspNet.Identity;
 
 namespace Live_Quiz.Controllers
 {
@@ -60,7 +57,8 @@ namespace Live_Quiz.Controllers
             return View(quiz);
         }
 
-        public ActionResult AddQuestions() {
+        public ActionResult AddQuestions()
+        {
 
             TempData.Keep("quizId");
             return View();
@@ -132,7 +130,7 @@ namespace Live_Quiz.Controllers
                 UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
                 userPr.Questions.Add(question);
                 int qid = (int)(TempData["quizId"]);
-                Quiz qiz = db.Quizs.FirstOrDefault(x => x.Id ==qid);
+                Quiz qiz = db.Quizs.FirstOrDefault(x => x.Id == qid);
                 QuizQuestion qq = new QuizQuestion
                 {
                     Question = question,

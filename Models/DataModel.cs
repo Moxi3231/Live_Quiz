@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Live_Quiz.Models
+﻿namespace Live_Quiz.Models
 {
-   
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
-    using System.Linq;
-
-    using System.Web;
     public class DataModel : DbContext
     {
         // Your context has been configured to use a 'Model1' connection string from your application's 
@@ -38,18 +28,20 @@ namespace Live_Quiz.Models
         public virtual DbSet<Collection> Collections { get; set; }
 
         public virtual DbSet<QuizCollection> QuizCollections { get; set; }
-        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<ImageFile> Images { get; set; }
 
     }
-    public class Image
+    public class ImageFile
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        public byte[] Image { get; set; }
 
-        public string file { get; set; }
-
-        public string path { get; set; }
-
+        // public Quiz Quiz { get; set; }
+        //   public Collection Collection { get; set; }
+        //  public Question Question { get; set; }
+        //  public Options Options { get; set; }
     }
 
     public class UserProfile
@@ -84,7 +76,9 @@ namespace Live_Quiz.Models
         [Key]
         public int Id { get; set; }
 
-        public Image CoverImage { get; set; }
+        // [ForeignKey("CoverImage")]
+        public int ImageId { get; set; }
+        // public ImageFile CoverImage { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -108,7 +102,9 @@ namespace Live_Quiz.Models
 
         public string Hint { get; set; }
 
-        public Image CoverImage { get; set; }
+        // [ForeignKey("CoverImage")]
+        public int ImageId { get; set; }
+        // public ImageFile CoverImage { get; set; }
 
         public bool isPublic { get; set; }
 
@@ -124,7 +120,9 @@ namespace Live_Quiz.Models
 
         public string ans { get; set; }
 
-        public Image CoverImage { get; set; }
+        // [ForeignKey("CoverImage")]
+        public int ImageId { get; set; }
+        // public ImageFile CoverImage { get; set; }
 
         public bool isAnswer { get; set; }
     }
@@ -150,7 +148,8 @@ namespace Live_Quiz.Models
 
         // public virtual ApplicationUser User { get; set; }
 
-        public Image CoverImage { get; set; }
+        public int ImageId { get; set; }
+        //public ImageFile CoverImage { get; set; }
 
         public virtual ICollection<QuizCollection> QuizeCollections { get; set; }
 

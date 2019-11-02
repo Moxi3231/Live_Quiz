@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 namespace Live_Quiz.Models
 {
 
@@ -11,7 +7,7 @@ namespace Live_Quiz.Models
         [Key]
         public string Id { get; set; }
         [Required]
-        [Display(Name ="Role")]
+        [Display(Name = "Role")]
         public string Name { get; set; }
     }
     public class UserRoles

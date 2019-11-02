@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Live_Quiz.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Live_Quiz.Models;
 
 namespace Live_Quiz.Controllers
 {
@@ -13,7 +10,7 @@ namespace Live_Quiz.Controllers
         public ActionResult Index()
         {
             DataModel db = new DataModel();
-              db.Questions.ToList();
+            db.Questions.ToList();
             return View();
         }
     }

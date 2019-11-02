@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Live_Quiz.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using Live_Quiz.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace Live_Quiz
 {
@@ -35,7 +34,7 @@ namespace Live_Quiz
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -95,7 +94,7 @@ namespace Live_Quiz
                 var chkUser1 = UserManager.Create(user2, "A@Z200711");
                 var chkUser2 = UserManager.Create(user3, "A@Z200711");
 
-               
+
                 //Add default User to Role Admin    
                 if (chkUser.Succeeded && chkUser1.Succeeded && chkUser2.Succeeded)
                 {
@@ -110,7 +109,7 @@ namespace Live_Quiz
                         AccountId = user3.Id
                     });
                     dbM.SaveChanges();
-                    
+
 
                     var result1 = UserManager.AddToRole(user.Id, "Admin");
                     var result2 = UserManager.AddToRole(user2.Id, "Admin");
@@ -118,7 +117,7 @@ namespace Live_Quiz
                 }
             }
 
-      
+
 
             // creating Creating User role     
             if (!roleManager.RoleExists("User"))

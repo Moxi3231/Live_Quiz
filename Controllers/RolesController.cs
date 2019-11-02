@@ -1,19 +1,16 @@
 ﻿using Live_Quiz.Models;
-using System;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
 
 namespace Live_Quiz.Controllers
 {
 
     public class RolesController : Controller
     {
-       private static ApplicationDbContext context = new ApplicationDbContext();
+        private static ApplicationDbContext context = new ApplicationDbContext();
         private RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
         UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
         // GET: Roles
@@ -23,7 +20,7 @@ namespace Live_Quiz.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateRole()
         {
             ViewBag.flag = false;
@@ -41,7 +38,7 @@ namespace Live_Quiz.Controllers
                 // first we create Admin rool    
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
                 role.Name = roles.Name;
-                var res =  roleManager.Create(role);
+                var res = roleManager.Create(role);
                 ViewBag.message = "Role Created";
             }
             else
@@ -54,7 +51,7 @@ namespace Live_Quiz.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ViewRoles()
         {
-            return View((IEnumerable < Roles > )roleManager.Roles.Select(y=>new Roles(){ Id=y.Id,Name=y.Name}).ToList());
+            return View((IEnumerable<Roles>)roleManager.Roles.Select(y => new Roles() { Id = y.Id, Name = y.Name }).ToList());
         }
         public ActionResult Delete(string id)
         {
@@ -67,7 +64,7 @@ namespace Live_Quiz.Controllers
         public ActionResult EditRole(string id)
         {
             var rres = roleManager.FindById(id);
-            return View(new Roles() { Id=rres.Id,Name=rres.Name});
+            return View(new Roles() { Id = rres.Id, Name = rres.Name });
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
