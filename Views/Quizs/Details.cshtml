@@ -26,9 +26,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isPublic)
-        </dt>
+      
 
         <dd>
             @Html.DisplayFor(model => model.isPublic)
@@ -72,12 +70,9 @@
                 @item.Hint
             </td>
             <td>
-                @item.isPublic
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.QuestionId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.QuestionId })
+                @Html.ActionLink("Edit", "Edit", "Questions", new { id = item.QuestionId }) |
+                @Html.ActionLink("Details", "Details", "Questions", new { id = item.QuestionId }) |
+                @Html.ActionLink("Delete", "Delete", "Questions", new { id = item.QuestionId })
             </td>
         </tr>
     }
