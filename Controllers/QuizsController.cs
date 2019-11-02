@@ -51,7 +51,7 @@ namespace Live_Quiz.Controllers
         // GET: Quizs/Create
         public ActionResult Create()
         {
-            ViewBag.coll = db.Collections.Select(x => new SelectListItem { Text = x.Description, Value = x.Id.ToString() });
+            ViewBag.coll = db.Collections.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
             return View();
         }
 
