@@ -86,13 +86,13 @@ dt {
 .openbtn:hover {
     background-color: #444;
 }
-#myImg {
+.imgMain {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
 }
 
-    #myImg:hover {
+    .imgMain:hover {
         opacity: 0.7;
     }
 
@@ -136,7 +136,7 @@ dt {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
-    animation-duration: 0.6s;
+    animation-duration: 1.2s;
 }
 
 @-webkit-keyframes zoom {

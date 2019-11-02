@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -68,6 +69,7 @@ namespace Live_Quiz.Controllers
             //ContentRepository service = new ContentRepository();
             if (file==null)
             {
+                ViewBag.noFile = "No file recieved.Please try again.";
                 return View();
             }
             ContentRepository service = new ContentRepository();
@@ -117,12 +119,56 @@ namespace Live_Quiz.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Email,isPublic,Description")] Collection collection)
+        public ActionResult Edit([Bind(Include = "Id,Name,isPublic,Email,ImageId,")] Collection collection)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(collection).State = EntityState.Modified;
-                db.SaveChanges();
+
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                //ContentRepository service = new ContentRepository();
+
+                int i=0;
+                //ImageFile imageFile = new ImageFile();
+                if (file != null)
+                
+                {
+                    ContentRepository service = new ContentRepository();
+                    i = service.UploadImageInDataBase(file, new ImageFielView() { });
+                    if (i == 0)
+                    {
+                        ViewBag.noFile = "Please try again.Couldn't upload file";
+                        return View(collection);
+                    }
+                    db.Images.Remove(db.Images.Single(x => x.Id == collection.ImageId));
+                    db.SaveChanges();
+                    //collection.ImageId = i;
+                } 
+                //db.Entry(collection).State = EntityState.Modified;
+                bool saveFailed;
+                do
+                {
+                    var coll = db.Collections.Single(x => x.Id == collection.Id);
+                    coll.ImageId = i;
+                    coll.isPublic = collection.isPublic;
+                    coll.Name = collection.Name;
+                    
+                    saveFailed = false;
+
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        saveFailed = true;
+
+                        // Update the values of the entity that failed to save from the store
+                        var entry = ex.Entries.Single();
+                        entry.OriginalValues.SetValues(collection);
+                    }
+
+                } while (saveFailed);
+                
                 return RedirectToAction("Index");
             }
             return View(collection);

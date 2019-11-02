@@ -113,7 +113,7 @@
     @RenderSection("scripts", required: false)
     <script src="https://kit.fontawesome.com/d573236f31.js" crossorigin="anonymous"></script>
     <script>
-        
+       
         var modal = document.getElementById("myModal");
         // Get the image and insert it inside the modal - use its "alt" text as a caption
        
@@ -164,11 +164,11 @@
             if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
                 alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
                 $("#fileSubmit").addClass("disabled");
-                $("#fileError").css({ "display": "block" });
+                $("#fileError").css({ "display": "block" }).hide().fadeIn(1500);
 
             }
             else {
-                $("#fileError").css({ "display": "none" });
+                $("#fileError").css({ "display": "none" }).fadeOut(1500);
             }
 
         }
