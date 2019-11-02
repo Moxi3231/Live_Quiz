@@ -57,5 +57,5 @@
 
 <div class="w-75 m-auto alert alert-link bg-transparent text-center m-5">
     @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center m-auto" })
-    @Html.ActionLink("Edit", "Edit", new { }, new { @class = "alert alert-info text-center m-auto" })
+    @Html.ActionLink("Edit", "Edit", new { Id=Model.Id }, new { @class = "alert alert-info text-center m-auto" })
 </div>

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Live_Quiz.Controllers
 {
+    [Authorize]
     public class QuizsController : Controller
     {
         private DataModel db = new DataModel();
@@ -51,7 +52,12 @@ namespace Live_Quiz.Controllers
         // GET: Quizs/Create
         public ActionResult Create()
         {
-            ViewBag.coll = db.Collections.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
+            var id = User.Identity.GetUserId();
+            ViewBag.coll = db.Collections.Where(x=>x.User.AccountId==id).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            if(ViewBag.coll==null)
+            {
+                return RedirectToAction("Create", "Collections", new { });
+            }
             return View();
         }
 

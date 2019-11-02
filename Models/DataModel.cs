@@ -79,11 +79,13 @@
         // [ForeignKey("CoverImage")]
         public int ImageId { get; set; }
         // public ImageFile CoverImage { get; set; }
+        [Required]
         public string Name { get; set; }
-
+        [Required]
         public string Description { get; set; }
-
+        [Required]
         public bool isPublic { get; set; }
+
         public virtual Collection Collection { get; set; }
         // [ForeignKey("User")]
         // public string UserId { get; set; }
