@@ -33,7 +33,7 @@
                 <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" data-aos="zoom-in-right" height="35" width="35" alt="...">
                 @Html.ActionLink("Live_Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </span>
-           
+
             <div class="navbar-nav">
                 @Html.Partial("_LoginPartial")
             </div>
@@ -50,7 +50,7 @@
                 <br />
                 <br />
                 <i class="fas fa-sign-out-alt fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
-                
+
                 <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-outline-danger  p-2 " style="width:95%; margin-left:2.5%;">Log Off</a>
                 <br /><br />
 
@@ -83,6 +83,8 @@
         <hr class="text-white border border-white" />
         @Html.ActionLink("Collections", "Index", "Collections/", new { }, new { @class = "" })
         @Html.ActionLink("Explore", "FindCollection", "Collections/", new { }, new { @class = "" })
+        @Html.ActionLink("Quizs", "Index", "Quizs", new { }, new { @class = "" })
+        @Html.ActionLink("Questions", "Index", "Questions", new { }, new { @class = "" })
         <a href="#">Clients</a>
         <a href="#">Contact</a>
     </div>
@@ -113,14 +115,14 @@
     @RenderSection("scripts", required: false)
     <script src="https://kit.fontawesome.com/d573236f31.js" crossorigin="anonymous"></script>
     <script>
-        
+
         var modal = document.getElementById("myModal");
         // Get the image and insert it inside the modal - use its "alt" text as a caption
-       
+
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
         function modalImageZoom(id) {
-             var img = document.getElementById(id);
+            var img = document.getElementById(id);
             modal.style.display = "block";
             modalImg.src = img.src;
             captionText.innerHTML = img.alt;

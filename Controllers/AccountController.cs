@@ -165,6 +165,7 @@ namespace Live_Quiz.Controllers
                         AccountId = SignInManager
                                     .AuthenticationManager
                                     .AuthenticationResponseGrant.Identity.GetUserId()
+                                  
                     });
                     db.SaveChanges();
 

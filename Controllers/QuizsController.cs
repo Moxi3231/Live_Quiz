@@ -15,7 +15,15 @@ namespace Live_Quiz.Controllers
         // GET: Quizs
         public ActionResult Index()
         {
-            return View(db.Quizs.ToList());
+            string idd = User.Identity.GetUserId();
+
+            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+
+            if (userPr.Quizzes == null)
+            {
+                userPr.Quizzes = new List<Quiz>();
+            }
+            return View(userPr.Quizzes.ToList());
         }
 
         // GET: Quizs/Details/5
@@ -130,7 +138,10 @@ namespace Live_Quiz.Controllers
                 UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
                 userPr.Questions.Add(question);
                 int qid = (int)(TempData["quizId"]);
+                TempData.Keep("quizId");
                 Quiz qiz = db.Quizs.FirstOrDefault(x => x.Id == qid);
+
+                userPr.Quizzes.Add(qiz);
                 QuizQuestion qq = new QuizQuestion
                 {
                     Question = question,
@@ -138,9 +149,27 @@ namespace Live_Quiz.Controllers
                 };
                 db.QuizQuestions.Add(qq);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AddAnother");
             }
             return View();
+        }
+        public ActionResult AddAnother()
+        {
+            TempData.Keep("quizId");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddAnother(FormCollection form)
+        {
+            TempData.Keep("quizId");
+            if (Request.Form["Create"] != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else {
+                return RedirectToAction("AddQuestions");
+            }
+          
         }
         // GET: Quizs/Edit/5
         public ActionResult Edit(int? id)

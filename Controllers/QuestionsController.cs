@@ -19,7 +19,10 @@ namespace Live_Quiz.Controllers
 
             UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
 
-
+            if (userPr.Questions == null)
+            {
+                userPr.Questions = new List<Question>();
+            }
             return View(userPr.Questions.ToList());
 
         }
