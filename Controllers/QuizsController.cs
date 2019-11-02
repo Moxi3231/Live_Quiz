@@ -38,6 +38,12 @@ namespace Live_Quiz.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.questions = quiz.QuizQuestions;
+            List<Question> qq = new List<Question>();
+            foreach (QuizQuestion x in ViewBag.questions) {
+                qq.Add(x.Question);
+            }
+            ViewBag.q = qq;
             return View(quiz);
         }
 
