@@ -38,12 +38,20 @@ namespace Live_Quiz.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.questions = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+            List<Question> qq = new List<Question>();
+            foreach (QuizQuestion x in db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList())
+            {
+                qq.Add(x.Question);
+            }
+            ViewBag.q = qq;
             return View(quiz);
         }
 
         // GET: Quizs/Create
         public ActionResult Create()
         {
+            ViewBag.coll = db.Collections.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() });
             return View();
         }
 
@@ -57,9 +65,17 @@ namespace Live_Quiz.Controllers
             if (ModelState.IsValid)
             {
                 db.Quizs.Add(quiz);
+                int idc=int.Parse(Request.Form["coll"]);
+               Collection cc= db.Collections.FirstOrDefault(x => x.Id == idc);
+                QuizCollection qc = new QuizCollection
+                {
+                    Quiz = quiz,
+                    Collection = cc
+                };
+                db.QuizCollections.Add(qc);
                 db.SaveChanges();
                 TempData["quizId"] = quiz.Id;
-                return RedirectToAction("AddQuestions");
+                 return RedirectToAction("AddQuestions");
             }
 
             return View(quiz);
@@ -140,14 +156,15 @@ namespace Live_Quiz.Controllers
                 int qid = (int)(TempData["quizId"]);
                 TempData.Keep("quizId");
                 Quiz qiz = db.Quizs.FirstOrDefault(x => x.Id == qid);
-
+                
                 userPr.Quizzes.Add(qiz);
                 QuizQuestion qq = new QuizQuestion
                 {
                     Question = question,
                     Quiz = qiz
                 };
-                db.QuizQuestions.Add(qq);
+                qiz.QuizQuestions.Add(qq);
+               // db.QuizQuestions.Add(qq);
                 db.SaveChanges();
                 return RedirectToAction("AddAnother");
             }
