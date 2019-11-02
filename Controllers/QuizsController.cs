@@ -38,9 +38,9 @@ namespace Live_Quiz.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.questions = quiz.QuizQuestions;
+            ViewBag.questions = db.QuizQuestions.Where(x=>x.QuizId==quiz.Id).ToList();
             List<Question> qq = new List<Question>();
-            foreach (QuizQuestion x in ViewBag.questions) {
+            foreach (QuizQuestion x in db.QuizQuestions.Where(x => x.QuizId == quiz.Id).ToList()) {
                 qq.Add(x.Question);
             }
             ViewBag.q = qq;
@@ -146,14 +146,15 @@ namespace Live_Quiz.Controllers
                 int qid = (int)(TempData["quizId"]);
                 TempData.Keep("quizId");
                 Quiz qiz = db.Quizs.FirstOrDefault(x => x.Id == qid);
-
+                
                 userPr.Quizzes.Add(qiz);
                 QuizQuestion qq = new QuizQuestion
                 {
                     Question = question,
                     Quiz = qiz
                 };
-                db.QuizQuestions.Add(qq);
+                qiz.QuizQuestions.Add(qq);
+               // db.QuizQuestions.Add(qq);
                 db.SaveChanges();
                 return RedirectToAction("AddAnother");
             }
