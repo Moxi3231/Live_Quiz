@@ -77,6 +77,10 @@ namespace Live_Quiz.Controllers
             if (ModelState.IsValid)
             {
                 db.Quizs.Add(quiz);
+                string idd = User.Identity.GetUserId();
+
+                UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+                quiz.User = userPr;
                 int idc=int.Parse(Request.Form["coll"]);
                Collection cc= db.Collections.FirstOrDefault(x => x.Id == idc);
                 QuizCollection qc = new QuizCollection
@@ -104,6 +108,7 @@ namespace Live_Quiz.Controllers
         public ActionResult AddQuestions(FormCollection form)
         {
             bool istrue;
+            TempData.Keep("quizId");
             if (Request.Form["isPublic"].Contains("true"))
             {
                 istrue = true;
@@ -168,7 +173,7 @@ namespace Live_Quiz.Controllers
                 int qid = (int)(TempData["quizId"]);
                 TempData.Keep("quizId");
                 Quiz qiz = db.Quizs.FirstOrDefault(x => x.Id == qid);
-                
+               
                 userPr.Quizzes.Add(qiz);
                 QuizQuestion qq = new QuizQuestion
                 {
@@ -219,6 +224,7 @@ namespace Live_Quiz.Controllers
         [HttpPost]
         public ActionResult QuestionBank(FormCollection form)
         {
+            TempData.Keep("quizId");
             int idd = int.Parse(Request.Form["Qbank"]);
             int qid = int.Parse(TempData["quizId"].ToString());
             QuizQuestion qq = new QuizQuestion
