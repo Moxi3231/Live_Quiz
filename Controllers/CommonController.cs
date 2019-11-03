@@ -22,10 +22,8 @@ namespace Live_Quiz.Controllers
             List<Collection> collections = db.Collections.Where(x => (x.isPublic == false && x.Name.ToLower() == value.ToLower())).ToList();
             List<Quiz> quizs = db.Quizs.Where(x=>x.isPublic==false && x.Name.ToLower() == value.ToLower()).ToList();
 
-            if(User.Identity.IsAuthenticated)
-            {
-
-            }
+            ViewBag.collections = collections;
+            ViewBag.quizs = quizs;
             return View();
         }
 
