@@ -76,11 +76,13 @@ namespace Live_Quiz.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Quizs.Add(quiz);
                 string idd = User.Identity.GetUserId();
-
                 UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
                 quiz.User = userPr;
+                userPr.Quizzes.Add(quiz);
+                quiz.UserProfileId = userPr.Id;
+                db.Quizs.Add(quiz);
+            
                 int idc=int.Parse(Request.Form["coll"]);
                Collection cc= db.Collections.FirstOrDefault(x => x.Id == idc);
                 QuizCollection qc = new QuizCollection
