@@ -17,9 +17,15 @@ namespace Live_Quiz.Controllers
             if (value==null)
                 return View();
             ViewBag.isValAvail = true;
-            var collections = db;
 
 
+            List<Collection> collections = db.Collections.Select(x => x.isPublic == false && x.Name.ToLower() == value.ToLower()).ToList();
+            List<Quiz> quizs = db.Quizs.Select(x=>x.isPublic==false && x.Name.ToLower() == value.ToLower()).ToList();
+
+            if(User.Identity.IsAuthenticated)
+            {
+
+            }
             return View();
         }
 
