@@ -10,7 +10,7 @@
 
     <div class="card-header text-center">
         @Html.ActionLink("Edit", "Edit", new { Id = Model.Id }, new { @class = "alert alert-info text-center m-auto d-inline floatleft" })
-        <h4 class=" text-center d-inline text-capitalize text-center" >
+        <h4 class=" text-center d-inline text-capitalize text-center">
 
             Collection
         </h4>
@@ -119,8 +119,33 @@
 
 <br />
 <hr />
+<div class="card text-center shadow w-75 m-auto" data-aos="zoom-out-right" data-aos-delay="1000">
+    <div class="card-header display-3">
+        Add From Previously Created Quiz.
+    </div>
+    <div class="card-body">
+        @if(ViewBag.availQuiz.Count==0)
+        {
+            <div class="alert alert-danger">No Quiz Available.</div>
+        }
+        else
+        {
+            <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.collectionid" />
+            <select id="quizid" name="quizid">
+               @foreach (Live_Quiz.Models.Quiz item in ViewBag.availQuiz)
+               {
+                <option value="@item.Id">@item.Name</option>
+               }
+            </select>
+        }
+    </div>
+</div>
 
+
+<br />
+<hr />
+    
 <div class="w-75 m-auto alert alert-info  text-center m-5 shadow">
     @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center m-auto" })
-  
+
 </div>

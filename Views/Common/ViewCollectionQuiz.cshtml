@@ -27,6 +27,14 @@
 
                 </th>
             </tr>
+            @if(ViewBag.quizs.Count==0)
+            {
+                <tr><td colspan="5">
+                    <div class="alert alert-danger text-center">
+                        No Quiz For Collection: @ViewBag.Collection
+                    </div>
+                    </td></tr>
+            }
             @foreach (Live_Quiz.Models.Quiz item in ViewBag.quizs)
             {
                 <tr>
@@ -52,4 +60,7 @@
         </table>
     </div>
 </div>
-        }
+<div class="alert alert-info text-center" >
+    <a href="/Common">Back To Search</a>
+</div>
+      

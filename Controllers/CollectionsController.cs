@@ -42,7 +42,8 @@ namespace Live_Quiz.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.error = "Access Denied";
+                return View("Error");
             }
             Collection collection = db.Collections.Find(id);
 
@@ -71,6 +72,33 @@ namespace Live_Quiz.Controllers
             {
                 return HttpNotFound();
             }
+
+
+            List<Quiz> availableQuizzes = new List<Quiz>();
+            List<Quiz> availableQuizzes2 = new List<Quiz>();
+            var uis = User.Identity.GetUserId();
+            var aquizzes = db.UserProfiles.FirstOrDefault(x => x.AccountId ==uis ).Quizzes.Select(x => x).ToList();
+
+            aquizzes.ForEach(b=> {
+                var flag = true;
+                b.QuizCollections.Select(x => x).ToList().ForEach(a =>
+                {
+                    if(a.CollectionId==id && flag)
+                    {
+                        flag = false;
+                        availableQuizzes.Add(b);
+                        
+                    }
+                });
+            });
+            aquizzes.ForEach(x => {
+                if(!availableQuizzes.Contains(x))
+                {
+                    availableQuizzes2.Add(x);
+                }
+            });
+            ViewBag.availQuiz = availableQuizzes2;
+            ViewBag.collectionid = id;
             return View(collection);
         }
 
@@ -122,6 +150,7 @@ namespace Live_Quiz.Controllers
             collection.Email = UserManager.FindById(idd).Email;
             collection.User = userPr;
             collection.UserProfileId = userPr.Id;
+            collection.User = userPr;
             collection.ImageId = i;
             db.Collections.Add(collection);
             db.SaveChanges();
@@ -241,6 +270,7 @@ namespace Live_Quiz.Controllers
             base.Dispose(disposing);
         }
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult RetrieveImage(int id)
         {
             byte[] cover = GetImageFromDataBase(id);
@@ -253,7 +283,7 @@ namespace Live_Quiz.Controllers
                 return null;
             }
         }
-
+        [AllowAnonymous]
         public byte[] GetImageFromDataBase(int Id)
         {
             var q = from temp in db.Images where temp.Id == Id select temp.Image;

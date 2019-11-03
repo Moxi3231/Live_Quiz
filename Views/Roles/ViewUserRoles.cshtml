@@ -4,9 +4,17 @@
 @{
     ViewBag.Title = "ViewUserRoles";
 }
-
-<div class="card">
-    <div class="card-header">
+    <div class="card card-header shadow-sm bg-light text-white" style="position:sticky; top:90px; z-index:6;">
+        <div class="card-body " id="allroles"  style="display:inline; overflow-x:scroll; white-space:nowrap; ">
+            @foreach (var role in ViewBag.roles)
+            {
+                <a style="display:inline;" href="#@role.Name">@role.Name</a>
+            }
+        
+        </div>
+    </div>
+<div class="card shadow-lg">
+    <div class="card-header shadow">
         <h3 class="display-3 text-center">User Roles</h3>
     </div>
     <div class="card-body">
@@ -25,12 +33,12 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-spy="scroll" data-target="#allroles" data-offset="0">
 
 
                 @foreach (var erole in ViewBag.roles)
                 {
-                    <tr class="card-header text-center shadow-lg" style="font-size:25px;">
+                    <tr id="erole.Name" class="card-header text-center shadow-lg" style="font-size:25px;">
                         <th colspan="4">@erole.Name</th>
                     </tr>
                     int i = 0;
@@ -57,6 +65,7 @@
                         }
                     }
                 }
+               
             </tbody>
         </table>
     </div>

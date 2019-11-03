@@ -7,12 +7,12 @@
 <hr />
 <br />
 
-
-<div action="" class="search" id="search">
-    <input value="@ViewBag.Searched_Value" type="search" id="svalue" class="inputsearch shadow-lg" onchange="submitChangedValue()" placeholder="Search for Quizes or Collections">
-    <i id="iconchange" onclick="change()" class="fa fa-search"></i>
-</div>
-<div class="container-fluid">
+<div data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="1000">
+    <div action="" class="search" id="search">
+        <input value="@ViewBag.Searched_Value" type="search" id="svalue" class="inputsearch shadow-lg" onchange="submitChangedValue()" placeholder="Search for Quizes or Collections">
+        <i id="iconchange" onclick="change()" class="fa fa-search"></i>
+    </div>
+</div><div class="container-fluid">
     @if (ViewBag.isValAvail)
     {
         <h5 class="card-body text-center">Search Results: @ViewBag.Searched_Value</h5>
@@ -30,7 +30,7 @@
                             <th>
                                 Name
                             </th>
-
+                            <th>Author</th>
                             <th>
                                 Description
                             </th>
@@ -46,6 +46,9 @@
                             <tr>
                                 <td>
                                     @item.Name
+                                </td>
+                                <td>
+                                    @item.Email
                                 </td>
                                 <td>
                                     @item.Description

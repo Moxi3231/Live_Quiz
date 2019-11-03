@@ -3,8 +3,26 @@
 @{
     ViewBag.Title = "Error";
 }
+<div class="card alert shadow-lg text-capitalize text-center">
+    <div class="card-header shadow-lg">
+        <h1 class="text-danger display-1">Error.</h1>
+    </div>
+    <div class="card-body alert-danger">
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-<h3 class="text-danger">@ViewBag.error</h3>
+       
+        <h2 class="text-danger">An error occurred while processing your request.</h2>
+        <hr />
+        <h3 class="text-danger">@foreach (char c in ViewBag.error) {
+            if (c == '\n')
+            {
+                <br />
+            }
+            else
+            {
+                @c;
+            }
+        }</h3>
 
+
+    </div>
+</div>

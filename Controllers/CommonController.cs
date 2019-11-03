@@ -10,6 +10,10 @@ namespace Live_Quiz.Controllers
     {
         private DataModel db = new DataModel();
         // GET: Common
+        public ActionResult Index()
+        {
+            return RedirectToAction("SearchQuizCollection");
+        }
         public ActionResult SearchQuizCollection(string value)
         {
             ViewBag.Searched_Value = value;
@@ -30,7 +34,7 @@ namespace Live_Quiz.Controllers
         {
             if(CollectionId==null)
             {
-                ViewBag.error = "Access Denied";
+                ViewBag.error = "Access Denied.\n You are trying to access illegally";
                 return View("Error");
             }
             Collection coll = db.Collections.SingleOrDefault(x => x.Id == CollectionId);
@@ -44,13 +48,14 @@ namespace Live_Quiz.Controllers
             allQuiz.ForEach(x => {
                 var tempflag = true;
             x.QuizCollections.ToList().ForEach(y=>{
-                if(y.CollectionId == coll.Id && tempflag)
+                if(y.CollectionId == coll.Id && x.isPublic && tempflag)
                 {
                     tempflag = false;
-                    allQuiz.Add(x);
+                    reqQuiz.Add(x);
                 }
             });
             });
+            ViewBag.quizs = reqQuiz;
             return View();
         }
 
