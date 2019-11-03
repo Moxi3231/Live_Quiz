@@ -40,6 +40,17 @@ namespace Live_Quiz.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Collection collection = db.Collections.Find(id);
+
+            var allQuizes = db.Quizs.Select(x => x).ToList();
+            List<Quiz> quizList = new List<Quiz>();
+            /* allQuizes.ForEach(x => {
+                if(x.Collection.Id==id)
+                 {
+                     quizList.Add(x);
+                 }
+             });*/
+            ViewBag.allQuizes = allQuizes;
+            ViewBag.Quizes = quizList;
             if (collection == null)
             {
                 return HttpNotFound();

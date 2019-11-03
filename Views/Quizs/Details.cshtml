@@ -4,12 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="display-4 text-center">Details for Quiz <b>@Model.Name</b></h2>
 
-<div>
-    <h4>Quiz</h4>
+<div class="card shadow w-75 m-auto text-center">
+    <h4 class="card-header">Quiz</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="card-body">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -26,7 +26,9 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
-      
+        <dt>
+            @Html.DisplayNameFor(model=>model.isPublic)
+        </dt>
 
         <dd>
             @Html.DisplayFor(model => model.isPublic)
@@ -35,46 +37,54 @@
     </dl>
 </div>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-<h2>Questions</h2>
-<table class="table">
-    <tr>
-        <th>
-           Description
-        </th>
-        <th>
-       Score
-        </th>
-        <th>
-            Hint
-        </th>
-        <th>
-           isPublic
-        </th>
-        <th></th>
-    </tr>
-    
-    @foreach (Question item in ViewBag.q)
-    {
+<div class="w-75 m-auto alert alert-info text-center">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center" })
+</div>
+<br />
+<h2 class="card-header text-center display-2 w-75 m-auto">Questions For Quiz</h2>
+<div class="card card-body w-75 m-auto shadow text-center" data-aos="flip-right"data-aos-duration="2000">
+    <table class="table table-bordered table-hover">
         <tr>
-            <td>
-                @item.Description
-            </td>
-            <td>
-                @item.Score
-            </td>
-            <td>
-                @item.Hint
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Questions", new { id = item.QuestionId }) |
-                @Html.ActionLink("Details", "Details", "Questions", new { id = item.QuestionId }) |
-                @Html.ActionLink("Delete", "Delete", "Questions", new { id = item.QuestionId })
-            </td>
+            <th>
+                Description
+            </th>
+            <th>
+                Score
+            </th>
+            <th>
+                Hint
+            </th>
+            <th>
+                isPublic
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (Question item in ViewBag.q)
+        {
+            <tr>
+                <td>
+                    @item.Description
+                </td>
+                <td>
+                    @item.Score
+                </td>
+                <td>
+                    @item.Hint
+                </td>
+                <td>
+                    @item.isPublic
+                </td>
+                <td>
+                    <a id="1" href="/Questions/Edit?id=@item.QuestionId">Edit</a>
+
+                   |<a id="1" href="/Questions/Details?id=@item.QuestionId">Details</a>|
+                    <a id="1" href="/Questions/Delete?id=@item.QuestionId">Delete</a>
+                
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

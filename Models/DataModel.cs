@@ -86,9 +86,10 @@
         public string Description { get; set; }
         [Required]
         public bool isPublic { get; set; }
-
-        public virtual Collection Collection { get; set; }
-        // [ForeignKey("User")]
+      //  [ForeignKey("Collection")]
+        //public int CollectionId { get; set; }
+        //public virtual Collection Collection { get; set; }
+        //// [ForeignKey("User")]
         // public string UserId { get; set; }
         //   public virtual ApplicationUser User { get; set; }
         public virtual ICollection<QuizCollection> QuizCollections { get; set; }

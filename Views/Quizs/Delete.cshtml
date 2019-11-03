@@ -3,46 +3,53 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div class="card text-justify text-center w-75 m-auto">
+    <div class="card-header">
 
-<h2>Delete</h2>
+        <h2 class="text-center display-3">Delete</h2>
+        <h3 class="alert alert-danger">Are you sure you want to delete this?</h3>
+    </div>
+    <div class="card-body">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Quiz</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isPublic)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.isPublic)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
 
-    </dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.isPublic)
+                </dt>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                <dd>
+                    @Html.DisplayFor(model => model.isPublic)
+                </dd>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            }
         </div>
-    }
+    </div>
+</div>
+<div class="alert alert-info w-75 m-auto text-center ">
+
+    @Html.ActionLink("Back to List", "Index")
 </div>

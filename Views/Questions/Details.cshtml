@@ -4,12 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="text-center">Details</h2>
 
-<div>
-    <h4>Question</h4>
+<div class="card text-center shadow w-75 m-auto">
+    <h4 class="card-header display-3">Question</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="card-body">
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
@@ -44,24 +44,26 @@
 
     </dl>
     Options:
-    @foreach (var x in ViewBag.options)
-    {
-        if (x.isAnswer == true)
+    <div class="w-50 m-auto">
+        @foreach (var x in ViewBag.options)
         {
-            <div class="alert alert-success" role="alert">
-                @x.ans
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-danger" role="alert">
-                @x.ans
-            </div>
-        }
+            if (x.isAnswer == true)
+            {
+                <div class="alert alert-success" role="alert">
+                    @x.ans
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">
+                    @x.ans
+                </div>
+            }
 
-    }
+        }
+    </div>
 </div>
-<p>
+<p class="alert alert-info text-center w-75 m-auto">
     @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

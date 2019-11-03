@@ -8,7 +8,7 @@
 
 <div class="card w-75 m-auto shadow">
     <h4 class="card-header text-center">Collection</h4>
-    <dl class="card-body text-center" >
+    <dl class="card-body text-center">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -29,8 +29,8 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.isPublic)      
-            
+            @Html.DisplayNameFor(model => model.isPublic)
+
         </dt>
 
         <dd>
@@ -46,7 +46,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Description)
-            
+
 
         </dd>
 
@@ -55,7 +55,17 @@
 
 
 
-<div class="w-75 m-auto alert alert-link bg-transparent text-center m-5">
+<div class="w-75 m-auto alert alert-info  text-center m-5">
     @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center m-auto" })
-    @Html.ActionLink("Edit", "Edit", new { Id=Model.Id }, new { @class = "alert alert-info text-center m-auto" })
+    @Html.ActionLink("Edit", "Edit", new { Id = Model.Id }, new { @class = "alert alert-info text-center m-auto" })
 </div>
+
+
+
+
+@foreach(Live_Quiz.Models.Quiz item in ViewBag.allQuizes)
+{
+    
+    <br />
+       
+}
