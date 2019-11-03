@@ -174,7 +174,36 @@
             }
 
         }
-
+       
+        $("a").each(function (elem) {
+            if (this.innerHTML == "Edit") {
+                $("<i class=\"fas fa-edit\"></>").appendTo(this);
+                this.classList.add("text-warning");
+            }
+            if (this.innerHTML == "Details") {
+                $("<i class=\"fas fa-info\"></>").appendTo(this);
+                this.classList.add("text-success");
+            }
+            if (this.innerHTML == "Delete") {
+                $("<i class=\"fas fa-trash\"></>").appendTo(this);
+                this.classList.add("text-danger");
+            }
+            if (this.innerHTML == "Create New") {
+                $("<i class=\"fas fa-plus rotate180\"></>").appendTo(this);
+                this.classList.add("text-primary");
+            }
+            if (this.innerHTML.startsWith("Remove")) {
+                $("<i class=\"fas fa-minus text-warning\"></>&nbsp;").prependTo(this);
+                this.classList.add("text-warning");
+            }
+            if (this.innerHTML.toLowerCase() == "back to list") {
+                $("<i class=\"fas fa-backward\"></>").appendTo(this);
+               // this.classList.add("text-success");
+            }
+        });
+        $(".card").each(function () {
+            this.classList.add("shadow");
+        });
         AOS.init({
             // Global settings:
             disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function

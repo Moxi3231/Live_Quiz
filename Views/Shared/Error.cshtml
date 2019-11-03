@@ -12,7 +12,12 @@
        
         <h2 class="text-danger">An error occurred while processing your request.</h2>
         <hr />
-        <h3 class="text-danger">@foreach (char c in ViewBag.error) {
+        <h3 class="text-danger">
+        @if(ViewBag.error==null)
+        {
+            <span>Access Denied.</span>
+        }
+        @foreach (char c in ViewBag.error) {
             if (c == '\n')
             {
                 <br />

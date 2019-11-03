@@ -17,15 +17,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Score)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hint)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isPublic)
-            </th>
+           
             <th></th>
         </tr>
 
@@ -35,15 +27,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Score)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hint)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.isPublic)
-                </td>
+               
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
                     @Html.ActionLink("Details", "Details", new { id = item.QuestionId }) |

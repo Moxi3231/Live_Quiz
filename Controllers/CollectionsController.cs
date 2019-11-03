@@ -290,5 +290,49 @@ namespace Live_Quiz.Controllers
             byte[] cover = q.First();
             return cover;
         }
+        [HttpPost]
+        public ActionResult AddQuizToCollection(FormCollection model)
+        {
+            var cid1 = model["collectionid"];
+            var qid1 = model["quizid"];
+            if (cid1 == null || qid1 == null)
+            {
+                return View("Error");
+            }
+            var cid= Convert.ToInt64(cid1.ToString());
+            var qid = Convert.ToInt64(qid1.ToString());
+            Collection coll = db.Collections.Find(cid);
+            Quiz quiz = db.Quizs.Find(qid);
+
+            if (coll == null || quiz == null)
+            {
+                return View("Error");
+            }
+            var qc = new QuizCollection() {CollectionId=(int)cid,QuizId=(int)qid,Collection=coll,Quiz=quiz };
+            db.QuizCollections.Add(qc);
+            db.SaveChanges();
+            return RedirectToAction("Details",new { id=cid});
+        }
+        [HttpGet]
+        public ActionResult RemoveQuizFromCollection(int? qid, int? cid)
+        {
+            if (cid == null || qid == null)
+            {
+                return View("Error");
+            }
+            Collection coll = db.Collections.Find(cid);
+            Quiz quiz = db.Quizs.Find(qid);
+            
+            if(coll==null || quiz==null)
+            {
+                return View("Error");
+            }
+
+            var quizcoll = coll.QuizeCollections.Where(x => x.QuizId == (int)qid).FirstOrDefault();
+            //coll.QuizeCollections.Remove(quizcoll);
+            db.QuizCollections.Remove(quizcoll);
+            db.SaveChanges();
+            return RedirectToAction("Details",new { id=cid});
+        }
     }
 }

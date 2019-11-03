@@ -75,12 +75,7 @@
                 <th>
                     Name
                 </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    IsPublic
-                </th>
+               
 
                 <th></th>
             </tr>
@@ -99,16 +94,12 @@
                     <td>
                         @item.Name
                     </td>
+                    
                     <td>
-                        @item.Description
-                    </td>
-                    <td>
-                        @item.isPublic
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Edit", "Edit","Quizs", new { id = item.Id },new { }) |
+                        @Html.ActionLink("Details", "Details","Quizs", new { id = item.Id },new { }) |
+                        @Html.ActionLink("Delete", "Delete","Quizs", new { id = item.Id },new { @class="text-danger"})|
+                        <a class="text-danger" href="/Collections/RemoveQuizFromCollection?qid=@item.Id&cid=@Model.Id">Remove @item.Name from @Model.Name</a>
                     </td>
                 </tr>
             }
@@ -124,21 +115,29 @@
         Add From Previously Created Quiz.
     </div>
     <div class="card-body">
-        @if(ViewBag.availQuiz.Count==0)
+        @if (ViewBag.availQuiz.Count == 0)
         {
             <div class="alert alert-danger">No Quiz Available.</div>
         }
         else
         {
-            <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.collectionid" />
-            <select id="quizid" name="quizid">
-               @foreach (Live_Quiz.Models.Quiz item in ViewBag.availQuiz)
-               {
-                <option value="@item.Id">@item.Name</option>
-               }
-            </select>
-        }
-    </div>
+
+            using (Html.BeginForm("AddQuizToCollection", "Collections", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.collectionid" />
+                    <select id="quizid" class="form-control text-center w-50 m-auto" name="quizid">
+                        @foreach (Live_Quiz.Models.Quiz item in ViewBag.availQuiz)
+                        {
+                            <option class="text-center" value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    <button class="btn w-75 m-auto btn-outline-success btn-block">Add quiz to current collection.</button>
+                </div>
+
+                }
+            }
+        </div>
 </div>
 
 

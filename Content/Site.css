@@ -27,6 +27,9 @@ i {
     font-style: normal;
     font-family: monospace;
 }
+table td{
+    font-size:15px;
+}
 .rotate180 {
     -webkit-transition: 0.6s ease-out;
     -moz-transition: 0.6s ease-out;
