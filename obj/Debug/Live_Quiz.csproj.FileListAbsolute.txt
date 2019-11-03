@@ -206,4 +206,3 @@ D:\Projects\Live_Quiz\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.dll
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.pdb
-D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
