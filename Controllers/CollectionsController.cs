@@ -28,8 +28,13 @@ namespace Live_Quiz.Controllers
             string idd = User.Identity.GetUserId();
             UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId == idd);
 
-
-            return View(userPr.Collections.ToList() as IEnumerable<Collection>);
+            var data = userPr.Collections.ToList() ;
+            if(data==null)
+            {
+                
+                return RedirectToAction("Create",new {isError=true,error="No Collection, Create One" });
+            }
+            return View(data as IEnumerable<Collection>);
         }
 
         // GET: Collections/Details/5
@@ -49,6 +54,17 @@ namespace Live_Quiz.Controllers
                      quizList.Add(x);
                  }
              });*/
+            allQuizes.ForEach(b=> {
+                var tempflag = false;
+                b.QuizCollections.Select(a => a).ToList().ForEach(n=>
+                { 
+                    if(n.CollectionId==id && tempflag==false)
+                    {
+                        tempflag = true;
+                        quizList.Add(b);
+                    }
+                });
+            });
             ViewBag.allQuizes = allQuizes;
             ViewBag.Quizes = quizList;
             if (collection == null)
