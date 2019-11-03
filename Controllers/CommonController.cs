@@ -26,6 +26,33 @@ namespace Live_Quiz.Controllers
             ViewBag.quizs = quizs;
             return View();
         }
+        public ActionResult ViewCollectionQuiz(int? CollectionId)
+        {
+            if(CollectionId==null)
+            {
+                ViewBag.error = "Access Denied";
+                return View("Error");
+            }
+            Collection coll = db.Collections.SingleOrDefault(x => x.Id == CollectionId);
+            ViewBag.Collection = coll.Name;
+            if(coll.isPublic==false)
+            {
+                return HttpNotFound();
+            }
+            List<Quiz> reqQuiz = new List<Quiz>();
+            var allQuiz = db.Quizs.Select(x => x).ToList();
+            allQuiz.ForEach(x => {
+                var tempflag = true;
+            x.QuizCollections.ToList().ForEach(y=>{
+                if(y.CollectionId == coll.Id && tempflag)
+                {
+                    tempflag = false;
+                    allQuiz.Add(x);
+                }
+            });
+            });
+            return View();
+        }
 
     }
 }

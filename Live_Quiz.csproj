@@ -317,6 +317,7 @@
     <Content Include="Views\Roles\ViewUserRoles.cshtml" />
     <Content Include="Views\Quizs\QuestionBank.cshtml" />
     <Content Include="Views\Common\SearchQuizCollection.cshtml" />
+    <Content Include="Views\Common\ViewCollectionQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

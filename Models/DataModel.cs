@@ -91,7 +91,7 @@
         //public virtual Collection Collection { get; set; }
         //// [ForeignKey("User")]
         // public string UserId { get; set; }
-        //   public virtual ApplicationUser User { get; set; }
+        //public virtual ApplicationUser User { get; set; }
         //[ForeignKey("User")]
         [Required]
         public int UPId { get; set; }
