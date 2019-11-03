@@ -18,53 +18,92 @@
         <h5 class="card-body text-center">Search Results: @ViewBag.Searched_Value</h5>
         if (ViewBag.collections.Count != 0)
         {
-            <div class="card">
+            <div class="card shadow text-center">
 
 
-                <div>
-
+                <div class="card-header">
+                    Collections: @ViewBag.Searched_Value
                 </div>
-                <div>
+                <div class="card-body">
 
                 </div>
             </div>
         }
         if (ViewBag.quizs.Count != 0)
-        {
-            <div class="card">
 
 
-                <div>
+        { <div class="card shadow text-center">
 
+
+                <div class="card-header">
+                    Quizzes: @ViewBag.Searched_Value
                 </div>
-                <div>
+                <div class="card-body">
+                    <table class="table table-active table-bordered table-responsive-sm">
+                        <tr>
+                            <th>
+                               Name
+                            </th>
+                           
+                            <th>
+                               Description
+                            </th>
+                            <th>
+                                <b>Image</b>
+                            </th>
+                           <th>
 
+                           </th>
+                        </tr>
+                        @foreach (Live_Quiz.Models.Quiz item in ViewBag.collections)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                             <td>
+                                 @item.Description
+                             </td>
+                               
+
+                                <td>
+                                    <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
+                                        <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain" src="/Collections/RetrieveImage/@item.ImageId" alt="@item.Name" height=40 width=100 />
+                                    </button>
+                                </td>
+                               <td>
+                                   <button class="btn btn-success">Play</button>
+                               </td>
+                            </tr>
+                        }
+
+                    </table>
                 </div>
             </div>
         }
-       <div> 
-        @if (ViewBag.collections.Count == 0 && ViewBag.quizs.Count == 0)
-        {
-            <div class="alert alert-danger text-center">
-                No Quiz Or Collection of such value found.
-            </div>
-        }
-        else if (ViewBag.collections.Count == 0 || ViewBag.quizs.Count == 0)
-        {
-            if (ViewBag.collections.Count == 0)
+        <div>
+            @if (ViewBag.collections.Count == 0 && ViewBag.quizs.Count == 0)
             {
                 <div class="alert alert-danger text-center">
-                    No Collection of such value found.
+                    No Quiz Or Collection of such value found.
                 </div>
             }
-            if(ViewBag.quizs.Count==0)
+            else if (ViewBag.collections.Count == 0 || ViewBag.quizs.Count == 0)
             {
-                <div class="alert alert-danger text-center">
-                    No Quiz of such value found.
-                </div>
+                if (ViewBag.collections.Count == 0)
+                {
+                    <div class="alert alert-danger text-center">
+                        No Collection of such value found.
+                    </div>
+                }
+                if (ViewBag.quizs.Count == 0)
+                {
+                    <div class="alert alert-danger text-center">
+                        No Quiz of such value found.
+                    </div>
+                }
             }
-        }
-       </div>
+        </div>
     }
 </div>
 <script>
