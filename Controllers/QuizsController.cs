@@ -17,7 +17,7 @@ namespace Live_Quiz.Controllers
         public ActionResult Index()
         {
             string idd = User.Identity.GetUserId();
-
+            
             UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
 
             if (userPr.Quizzes == null)
@@ -54,9 +54,9 @@ namespace Live_Quiz.Controllers
         {
             var id = User.Identity.GetUserId();
             ViewBag.coll = db.Collections.Where(x=>x.User.AccountId==id).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
-            if(ViewBag.coll==null)
+            if(ViewBag.coll.Count ==0)
             {
-                return RedirectToAction("Create", "Collections", new { });
+                return RedirectToAction("Create", "Collections", new { isError = true, error = "no collection found, please create a collection in order to create to quiz." });
             }
             return View();
         }
@@ -68,6 +68,12 @@ namespace Live_Quiz.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description,isPublic")] Quiz quiz)
         {
+            var id = User.Identity.GetUserId();
+            ViewBag.coll = db.Collections.Where(x => x.User.AccountId == id).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            if (ViewBag.coll.Count == 0)
+            {
+                return RedirectToAction("Create", "Collections", new { isError = true, error = "no collection, please create one." });
+            }
             if (ModelState.IsValid)
             {
                 db.Quizs.Add(quiz);
@@ -83,7 +89,7 @@ namespace Live_Quiz.Controllers
                 TempData["quizId"] = quiz.Id;
                  return RedirectToAction("AddQuestions");
             }
-
+           
             return View(quiz);
         }
 

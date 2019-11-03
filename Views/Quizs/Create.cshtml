@@ -43,7 +43,7 @@
                 <label>Collection</label>
 
                
-                    @Html.DropDownList("coll",(IEnumerable<SelectListItem>)ViewData["coll"],new { @class="form-control"})
+                    @Html.DropDownList("coll")
               
             @{    
                 var x = ViewData["coll"] as IEnumerable<SelectListItem>;
@@ -65,3 +65,6 @@
     @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center" })
 </div >
 
+<script>
+    document.getElementById("coll").classList.add("form-control");
+</script>

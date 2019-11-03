@@ -2,6 +2,7 @@
 using Live_Quiz.Models.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -49,6 +50,10 @@ namespace Live_Quiz.Controllers
         // GET: Collections/Create
         public ActionResult Create()
         {
+            var iserror = Convert.ToBoolean( Request.QueryString["isError"]);
+            var error = Request.QueryString["error"];
+            ViewBag.error = iserror;
+            ViewBag.errormessage = error;
             //ViewBag.email = UserManager.FindById(User.Identity.GetUserId()).Email;
             return View();
         }

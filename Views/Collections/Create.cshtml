@@ -5,8 +5,12 @@
 }
 
 <h2 class="text-center" data-aos="zoom-in-left" data-aos-delay="1500">@ViewBag.Title</h2>
-@ViewBag.error
-@ViewBag.model
+@if (ViewBag.error!=null && ViewBag.error)
+{
+    <div class="w-75 m-auto text-center alert alert-danger text-capitalize">
+        @ViewBag.errormessage
+    </div>
+}
 @using (Html.BeginForm("Create", "Collections", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -60,7 +64,7 @@
 @if (ViewBag.noFile != null)
 {
     <div class="w-75 m-auto alert alert-danger text-center">
-        @ViewBag.noFile 
+        @ViewBag.noFile
     </div>
 }
 <div class="w-75 m-auto alert alert-info text-center">

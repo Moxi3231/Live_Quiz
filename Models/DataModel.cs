@@ -80,6 +80,7 @@
         public int ImageId { get; set; }
         // public ImageFile CoverImage { get; set; }
         [Required]
+        
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
@@ -97,9 +98,9 @@
     {
         [Key]
         public int QuestionId { get; set; }
-
+        [Required]
         public string Description { get; set; }
-
+        [Required]
         public int Score { get; set; }
 
         public string Hint { get; set; }
@@ -107,7 +108,7 @@
         // [ForeignKey("CoverImage")]
         public int ImageId { get; set; }
         // public ImageFile CoverImage { get; set; }
-
+        [Required]
         public bool isPublic { get; set; }
 
         public virtual ICollection<Options> Optionss { get; set; }
@@ -119,30 +120,30 @@
 
         [Key]
         public int OptionsId { get; set; }
-
+        [Required]
         public string ans { get; set; }
 
         // [ForeignKey("CoverImage")]
         public int ImageId { get; set; }
         // public ImageFile CoverImage { get; set; }
-
+        [Required]
         public bool isAnswer { get; set; }
     }
     public class Collection
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public string Name { get; set; }
-
+        [Required]
         public string Email { get; set; }
 
         [ForeignKey("User")]
         public int UserProfileId { get; set; }
         public UserProfile User { get; set; }
-
+        [Required]
         public bool isPublic { get; set; }
-
+        [Required]
         public string Description { get; set; }
 
         //[ForeignKey("User")]
