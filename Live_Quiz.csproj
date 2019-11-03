@@ -315,7 +315,11 @@
     <Content Include="Views\Quizs\AddAnother.cshtml" />
     <Content Include="Views\Roles\AssignRole.cshtml" />
     <Content Include="Views\Roles\ViewUserRoles.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Quizs\QuestionBank.cshtml" />
+=======
     <Content Include="Views\Common\SearchQuizCollection.cshtml" />
+>>>>>>> 72be4060159c3f870bf52aab271820e4caff2570
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
