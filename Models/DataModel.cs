@@ -111,7 +111,9 @@
         // public ImageFile CoverImage { get; set; }
         [Required]
         public bool isPublic { get; set; }
-
+        [ForeignKey("User")]
+        public int UserProfileId { get; set; }
+        public UserProfile User { get; set; }
         public virtual ICollection<Options> Optionss { get; set; }
 
         public virtual ICollection<QuizQuestion> QuizQuestions { get; set; }

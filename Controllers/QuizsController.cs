@@ -87,7 +87,7 @@ namespace Live_Quiz.Controllers
                 db.QuizCollections.Add(qc);
                 db.SaveChanges();
                 TempData["quizId"] = quiz.Id;
-                 return RedirectToAction("AddQuestions");
+                 return RedirectToAction("AddAnother");
             }
            
             return View(quiz);
@@ -195,13 +195,42 @@ namespace Live_Quiz.Controllers
             {
                 return RedirectToAction("Index");
             }
-            else {
+            else if (Request.Form["QuestionBank"] != null)
+            {
+                return RedirectToAction("QuestionBank");
+            }
+            else
+            {
                 return RedirectToAction("AddQuestions");
             }
           
         }
-        // GET: Quizs/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult QuestionBank()
+        {
+            TempData.Keep("quizId");
+            string idd = User.Identity.GetUserId();
+
+            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+
+            ViewBag.Qbank = db.Questions.Where(x => x.User.Id == userPr.Id).Select(y => new SelectListItem { Text = y.Description, Value = y.QuestionId.ToString() });
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult QuestionBank(FormCollection form)
+        {
+            int idd = int.Parse(Request.Form["Qbank"]);
+            int qid = int.Parse(TempData["quizId"].ToString());
+            QuizQuestion qq = new QuizQuestion
+            {
+                QuestionId = idd,
+                QuizId = qid
+            };
+            db.QuizQuestions.Add(qq);
+            db.SaveChanges();
+            return RedirectToAction("AddAnother");
+        }   // GET: Quizs/Edit/5
+            public ActionResult Edit(int? id)
         {
             if (id == null)
             {

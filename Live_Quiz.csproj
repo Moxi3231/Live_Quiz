@@ -313,6 +313,7 @@
     <Content Include="Views\Quizs\AddAnother.cshtml" />
     <Content Include="Views\Roles\AssignRole.cshtml" />
     <Content Include="Views\Roles\ViewUserRoles.cshtml" />
+    <Content Include="Views\Quizs\QuestionBank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
