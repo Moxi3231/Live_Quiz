@@ -98,7 +98,6 @@ C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\bin\Microsoft.Owin.Security.Twit
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.CoreCompileInputs.cache
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.dll
@@ -207,3 +206,6 @@ D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.dll
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.pdb
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.init.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.GenerateResource.cache
