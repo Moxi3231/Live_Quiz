@@ -1,9 +1,12 @@
 ﻿using Live_Quiz.Models;
+using Live_Quiz.Models.Repository;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Live_Quiz.Controllers
@@ -52,6 +55,11 @@ namespace Live_Quiz.Controllers
         // GET: Quizs/Create
         public ActionResult Create()
         {
+
+            var iserror = Convert.ToBoolean(Request.QueryString["isError"]);
+            var error = Request.QueryString["error"];
+            ViewBag.error = iserror;
+            ViewBag.errormessage = error;
             var id = User.Identity.GetUserId();
             ViewBag.coll = db.Collections.Where(x=>x.User.AccountId==id).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
             if(ViewBag.coll.Count ==0)
@@ -66,10 +74,30 @@ namespace Live_Quiz.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,isPublic")] Quiz quiz)
+        public ActionResult Create(Quiz quiz)
         {
             var id = User.Identity.GetUserId();
             ViewBag.coll = db.Collections.Where(x => x.User.AccountId == id).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+
+            HttpPostedFileBase file = Request.Files["ImageData"];
+            //ContentRepository service = new ContentRepository();
+            if (file == null)
+            {
+                ViewBag.noFile = "No file recieved.Please try again.";
+                return View();
+            }
+            ContentRepository service = new ContentRepository();
+            //ImageFile imageFile = new ImageFile();
+            int i = service.UploadImageInDataBase(file, new ImageFielView() { });
+
+
+
+            //if (i == 0)
+            //{
+             //   return View(quiz);
+            //}
+
+
             if (ViewBag.coll.Count == 0)
             {
                 return RedirectToAction("Create", "Collections", new { isError = true, error = "no collection, please create one." });
@@ -81,6 +109,7 @@ namespace Live_Quiz.Controllers
                 quiz.UPId = userPr.Id;
                 userPr.Quizzes.Add(quiz);
                 quiz.UPId = userPr.Id;
+                quiz.ImageId = i;
                 db.Quizs.Add(quiz);
             
                 int idc=int.Parse(Request.Form["coll"]);
