@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "SearchQuizCollection";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/CSS/StyleSheet1.css")" type="text/css" />
+<h2 class="text-center">Search Quiz or Collection</h2>
+<hr />
+<br />
+
+
+<div action="" class="search"  id="search">
+    <input value="@ViewBag.Searched_Value" type="search" id="svalue" class="inputsearch shadow-lg" onchange="submitChangedValue()"  placeholder="Search for Quizes or Collections">
+    <i id="iconchange" onclick="change()" class="fa fa-search"></i>
+</div>
+
+@if(ViewBag.isValAvail)
+{
+    <h5 class="card-body text-center">Search Results: @ViewBag.Searched_Value</h5>
+    <div class="card">
+
+
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+    </div>
+}
+
+<script>
+    function submitChangedValue() {
+        var value = $("#svalue").val();
+        $(location).attr("href","/Common/SearchQuizCollection?value=" + value);
+    }
+    var changeflag = false;
+    function change() {
+        if (!changeflag) {
+            document.getElementById("search").style.width = "50%";
+           $("#iconchange").removeClass("fa-search").addClass("fa-times");
+            $("#svalue").css({ "display": "block" });
+           
+        }
+        else {
+            document.getElementById("search").style.width = "0%";
+          
+            $("#svalue").css({ "display": "none" });
+            $("#iconchange").removeClass("fa-times").addClass("fa-search");
+
+        }
+         changeflag = !changeflag
+    }
+</script>

@@ -130,6 +130,12 @@ namespace Live_Quiz.Controllers
             return RedirectToAction("ViewUserRoles");
         }
         [HttpGet]
+        public ActionResult Remove(string userid,string role)
+        {
+            userManager.RemoveFromRole(userid, role);
+            return RedirectToAction("ViewUserRoles");
+        }
+        [HttpGet]
         public ActionResult ViewUserRoles()
         {
             var allusers = userManager.Users.Select(x => x);
