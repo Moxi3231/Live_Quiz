@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CollectionsController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -197,6 +198,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\StyleSheet1.css" />
     <Content Include="Content\Images\Quiz.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -313,6 +315,7 @@
     <Content Include="Views\Quizs\AddAnother.cshtml" />
     <Content Include="Views\Roles\AssignRole.cshtml" />
     <Content Include="Views\Roles\ViewUserRoles.cshtml" />
+    <Content Include="Views\Common\SearchQuizCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

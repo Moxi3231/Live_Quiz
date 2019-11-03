@@ -22,7 +22,7 @@
                     <th>
                         Email
                     </th>
-                    <th>Operations</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +46,9 @@
                                     <td>@i</td>
                                     <td>@euser.UserName</td>
                                     <td>@euser.Email</td>
-                                    <td></td>
+                                    <td>
+                                        <a href="/Roles/Remove?userid=@euser.Id&role=@erole.Name" class="btn btn-block btn-outline-warning">Remove @euser.UserName from @erole.Name</a> 
+                                    </td>
 
                                 </tr>
                                 i++;

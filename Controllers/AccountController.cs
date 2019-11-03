@@ -157,7 +157,7 @@ namespace Live_Quiz.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRole(user.Id,"User");
+                    UserManager.AddToRole(user.Id,"User");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     DataModel db = new DataModel();
