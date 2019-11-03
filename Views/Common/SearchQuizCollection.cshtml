@@ -25,7 +25,45 @@
                     Collections: @ViewBag.Searched_Value
                 </div>
                 <div class="card-body">
+                    <table class="table table-active table-bordered table-responsive-sm">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
 
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                <b>Image</b>
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                        @foreach (Live_Quiz.Models.Collection item in ViewBag.collections)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Description
+                                </td>
+
+
+                                <td>
+                                    <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
+                                        <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain" src="/Collections/RetrieveImage/@item.ImageId" alt="@item.Name" height=40 width=100 />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-success">Show Quizes</button>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
                 </div>
             </div>
         }
@@ -55,7 +93,7 @@
 
                            </th>
                         </tr>
-                        @foreach (Live_Quiz.Models.Quiz item in ViewBag.collections)
+                        @foreach (Live_Quiz.Models.Quiz item in ViewBag.quizs)
                         {
                             <tr>
                                 <td>
@@ -68,7 +106,7 @@
 
                                 <td>
                                     <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
-                                        <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain" src="/Collections/RetrieveImage/@item.ImageId" alt="@item.Name" height=40 width=100 />
+                                        <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain"  alt="@item.Name" height=40 width=100 />
                                     </button>
                                 </td>
                                <td>

@@ -78,9 +78,9 @@ namespace Live_Quiz.Controllers
             {
                 string idd = User.Identity.GetUserId();
                 UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
-                quiz.User = userPr;
+                quiz.UPId = userPr.Id;
                 userPr.Quizzes.Add(quiz);
-                quiz.UserProfileId = userPr.Id;
+                quiz.UPId = userPr.Id;
                 db.Quizs.Add(quiz);
             
                 int idc=int.Parse(Request.Form["coll"]);

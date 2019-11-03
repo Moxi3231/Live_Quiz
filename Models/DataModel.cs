@@ -92,9 +92,10 @@
         //// [ForeignKey("User")]
         // public string UserId { get; set; }
         //   public virtual ApplicationUser User { get; set; }
-        [ForeignKey("User")]
-        public int UserProfileId { get; set; }
-        public UserProfile User { get; set; }
+        //[ForeignKey("User")]
+        [Required]
+        public int UPId { get; set; }
+       // public UserProfile User { get; set; }
         public virtual ICollection<QuizCollection> QuizCollections { get; set; }
         public virtual ICollection<QuizQuestion> QuizQuestions { get; set; }
     }

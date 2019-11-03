@@ -102,6 +102,9 @@ C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.CoreC
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.dll
 C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.pdb
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.init.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.GenerateResource.cache
 D:\Projects\Live_Quiz\bin\Live_Quiz.dll.config
 D:\Projects\Live_Quiz\bin\Live_Quiz.dll
 D:\Projects\Live_Quiz\bin\Live_Quiz.pdb
@@ -205,7 +208,3 @@ D:\Projects\Live_Quiz\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.dll
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.pdb
-D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
-C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
-C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.init.resources
-C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.GenerateResource.cache
