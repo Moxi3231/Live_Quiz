@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Live_Quiz.Controllers
 {
+    [Authorize]
     public class QuestionsController : Controller
     {
         private DataModel db = new DataModel();

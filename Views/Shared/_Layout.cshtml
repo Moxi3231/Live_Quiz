@@ -75,7 +75,7 @@
                 <span>@Html.ActionLink("Assign Role To User", "AssignRole", "Roles")&nbsp;<i class="fas fa-edit text-dark"></i></span>
                 <br />
                 <span>@Html.ActionLink("View User's Role's", "ViewUserRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
-          
+
             </div>
         </div>
     </div>
@@ -88,14 +88,18 @@
         @Html.ActionLink("Explore", "SearchQuizCollection", "Common/", new { }, new { @class = "" })
         @Html.ActionLink("Quizs", "Index", "Quizs", new { }, new { @class = "" })
         @Html.ActionLink("Questions", "Index", "Questions", new { }, new { @class = "" })
-       
-    </div>
-    <div class="buttonLeft shakeClass">
-        <button class="btn btn-outline-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
-    </div>
-    <br />
 
-    <div class=" container-fluid body-content shadow-sm w-100 " data-aos="flip-right" data-aos-duration="2500" style="margin-top:-50px;">
+    </div>
+
+    <br />
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="buttonLeft shakeClass">
+            <button class="btn btn-outline-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
+        </div>
+    }
+    <div class=" container-fluid body-content shadow-sm w-100 m-1" data-aos="flip-right" data-aos-duration="2500" style="margin-top:-50px;">
         @RenderBody()
     </div>
 
@@ -174,7 +178,7 @@
             }
 
         }
-       
+
         $("a").each(function (elem) {
             if (this.innerHTML == "Edit") {
                 $("<i class=\"fas fa-edit\"></>").appendTo(this);
@@ -198,7 +202,7 @@
             }
             if (this.innerHTML.toLowerCase() == "back to list") {
                 $("<i class=\"fas fa-backward\"></>").appendTo(this);
-               // this.classList.add("text-success");
+                // this.classList.add("text-success");
             }
         });
         $(".card").each(function () {

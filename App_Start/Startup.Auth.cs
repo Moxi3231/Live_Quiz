@@ -6,6 +6,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
+using System.Linq;
+using System.Text;
 
 namespace Live_Quiz
 {
@@ -74,8 +76,9 @@ namespace Live_Quiz
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            DataModel dbM = new DataModel();
 
-
+          
             // In Startup, creating first Admin Role and creating a default Admin User     
             if (!roleManager.RoleExists("Admin"))
             {
@@ -98,7 +101,7 @@ namespace Live_Quiz
                 //Add default User to Role Admin    
                 if (chkUser.Succeeded && chkUser1.Succeeded && chkUser2.Succeeded)
                 {
-                    DataModel dbM = new DataModel();
+                    
                     dbM.UserProfiles.Add(new UserProfile() { AccountId = user.Id });
                     dbM.UserProfiles.Add(new UserProfile()
                     {

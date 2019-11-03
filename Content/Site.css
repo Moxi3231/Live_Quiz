@@ -263,3 +263,10 @@ table td{
 
 
 
+.card-header{
+    font-size:45px;
+
+}
+.card-header a{
+    font-size:20px;
+}

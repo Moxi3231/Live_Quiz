@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 namespace Live_Quiz.Controllers
@@ -286,8 +287,13 @@ namespace Live_Quiz.Controllers
         [AllowAnonymous]
         public byte[] GetImageFromDataBase(int Id)
         {
-            var q = from temp in db.Images where temp.Id == Id select temp.Image;
-            byte[] cover = q.First();
+            var q = (from temp in db.Images where temp.Id == Id select temp.Image).FirstOrDefault();
+            if (q == null)
+            {
+
+                return null;
+            }
+            byte[] cover = q;
             return cover;
         }
         [HttpPost]
