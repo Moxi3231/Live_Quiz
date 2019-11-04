@@ -1,0 +1,50 @@
+﻿@model Live_Quiz.Models.ApplicationUser
+@{
+    ViewBag.Title = "EditDetails";
+}
+@Html.AntiForgeryToken()
+
+<div class="card shadow w-75 m-auto text-md-center">
+    <h4 class="card-header">Collection</h4>
+    <div class="card-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label" }):
+            @Html.DisplayFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+
+        </div>
+
+
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" }) :
+            @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+
+        </div>
+
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label" }):
+            @Html.DisplayFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+            @if (Model.Country == null)
+            {
+                <p class="alert-danger">Undefined</p>
+            }
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.League, htmlAttributes: new { @class = "control-label" }):
+            @Html.DisplayFor(model => model.League, new { htmlAttributes = new { @class = "form-control" } })
+            @if (Model.League == null)
+            {
+                <p class="alert-danger">Undefined</p>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="w-75 m-auto alert alert-info text-center">
+    @Html.ActionLink("Change Password", "ChangePassword","Manage", new { }, new { @class = "alert alert-info text-center" })
+</div>

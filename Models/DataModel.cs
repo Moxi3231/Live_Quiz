@@ -29,7 +29,7 @@
 
         public virtual DbSet<QuizCollection> QuizCollections { get; set; }
         public virtual DbSet<ImageFile> Images { get; set; }
-
+        public virtual DbSet<League> Leagues { get; set; }
     }
     public class ImageFile
     {
@@ -176,5 +176,15 @@
         public Collection Collection { get; set; }
 
     }
-
+    public class League
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public string LeagueName { get; set; }
+        [Required]
+        public int Min_Value { get; set; }
+        [Required]
+        public int Max_Value { get; set; }
+    }
 }

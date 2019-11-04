@@ -1,0 +1,46 @@
+﻿@model Live_Quiz.Models.League
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="card w-75 text-capitalize text-center m-auto">
+    <h4 class="card-header">League</h4>
+    <dl class="card-body">
+        <dt>
+            @Html.DisplayNameFor(model => model.LeagueName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeagueName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Min_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Min_Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Max_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Max_Value)
+        </dd>
+
+    </dl>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+</div>

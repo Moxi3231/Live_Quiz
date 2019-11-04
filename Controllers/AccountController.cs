@@ -20,7 +20,23 @@ namespace Live_Quiz.Controllers
             var data = System.IO.File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/country_list.csv.txt")).Split(',');
             this.country_list = data;
         }
+        [HttpGet]
+        public ActionResult EditDetails()
+        {
+            var id = User.Identity.GetUserId();
+            ApplicationUser usr = UserManager.FindById(id);
+            if(usr==null)
+            {
+                return View("Error");
+            }
 
+            return View(usr);
+        }
+        [HttpPost]
+        public ActionResult EditDetails(FormCollection collection)
+        {
+            return View();
+        }
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
