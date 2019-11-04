@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model=>model.isPublic)
+            @Html.DisplayNameFor(model => model.isPublic)
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
 </div>
 <br />
 <h2 class="card-header text-center display-2 w-75 m-auto">Questions For Quiz</h2>
-<div class="card card-body w-75 m-auto shadow text-center" data-aos="flip-right"data-aos-duration="2000">
+<div class="card card-body w-75 m-auto shadow text-center" data-aos="flip-right" data-aos-duration="2000">
     <table class="table table-bordered table-hover">
         <tr>
             <th>
@@ -79,12 +79,50 @@
                 <td>
                     <a id="1" href="/Questions/Edit?id=@item.QuestionId">Edit</a>
 
-                   |<a id="1" href="/Questions/Details?id=@item.QuestionId">Details</a>|
-                    <a id="1" href="/Questions/Delete?id=@item.QuestionId">Delete</a>
-                
+                    |<a id="1" href="/Questions/Details?id=@item.QuestionId">Details</a>|
+                    <a id="1" href="/Questions/Delete?id=@item.QuestionId">Delete</a>|
+                    <a class="text-danger" href="/Quizs/RemoveQuestionFromQuiz?qid=@item.QuestionId&qizid=@Model.Id">Remove from @Model.Name</a>
+
                 </td>
             </tr>
         }
 
     </table>
+</div>
+
+<br />
+<hr />
+<div class="card text-center shadow w-75 m-auto" data-aos="zoom-out-right" data-aos-delay="1000">
+    <div class="card-header display-3">
+        Add From Previously Created Questions.
+    </div>
+    <div class="card-body">
+        @if (ViewBag.Qbank.Count == 0)
+        {
+            <div class="alert alert-danger">No Quiz Available.</div>
+        }
+        else
+        {
+
+
+            using (Html.BeginForm("QuestionBank", "Quizs", FormMethod.Post))
+            {
+            <div class="form-group">
+
+                <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.quizid" />
+                <br>
+                <select id="Qbank" class="form-control text-center w-50 m-auto" name="Qbank">
+                    @foreach (Live_Quiz.Models.Question item in ViewBag.Qbank)
+                    {
+                        <option class="text-center" value="@item.QuestionId">@item.Description</option>
+                    }
+                </select>
+
+                <input class="btn w-75 m-auto btn-outline-success btn-block" type="submit" value="Add" />
+
+            </div>
+
+            }
+        }
+    </div>
 </div>

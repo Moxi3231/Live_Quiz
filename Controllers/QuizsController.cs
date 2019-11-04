@@ -37,6 +37,7 @@ namespace Live_Quiz.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.quizid = id;
             Quiz quiz = db.Quizs.Find(id);
             if (quiz == null)
             {
@@ -48,10 +49,44 @@ namespace Live_Quiz.Controllers
             {
                 qq.Add(x.Question);
             }
+            List<Question> Qbank = new List<Question>();
+            string idd = User.Identity.GetUserId();
+
+            UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+
+            foreach (Question x in db.Questions.Where(x => x.User.Id==userPr.Id).ToList())
+            {
+                if (!(qq.Contains(x)))
+                {
+                    Qbank.Add(x);
+                }
+            }
+            TempData["quizid"] = id;
+            ViewBag.Qbank=Qbank;
             ViewBag.q = qq;
             return View(quiz);
         }
+        [HttpGet]
+        public ActionResult RemoveQuestionFromQuiz(int? qid, int? qizid)
+        {
+            if (qizid == null || qid == null)
+            {
+                return View("Error");
+            }
+            Quiz qiz = db.Quizs.Find(qizid);
+            Question q = db.Questions.Find(qid);
 
+            if (qiz == null || q == null)
+            {
+                return View("Error");
+            }
+
+            var quizque = qiz.QuizQuestions.Where(x => x.QuestionId == (int)qid).FirstOrDefault();
+            //coll.QuizeCollections.Remove(quizcoll);
+            db.QuizQuestions.Remove(quizque);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = qizid });
+        }
         // GET: Quizs/Create
         public ActionResult Create()
         {
@@ -244,11 +279,24 @@ namespace Live_Quiz.Controllers
         public ActionResult QuestionBank()
         {
             TempData.Keep("quizId");
+            int quizid = int.Parse(TempData["quizid"].ToString());
             string idd = User.Identity.GetUserId();
-
+            List<Question> qq = new List<Question>();
+            foreach (QuizQuestion x in db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quizid).ToList())
+            {
+                qq.Add(x.Question);
+            }
             UserProfile userPr = db.UserProfiles.FirstOrDefault(x => x.AccountId.Equals(idd));
+            List<Question> Qbank = new List<Question>();
+            foreach (Question x in db.Questions.Where(x => x.User.Id == userPr.Id).ToList())
+            {
+                if (!(qq.Contains(x)))
+                {
+                    Qbank.Add(x);
+                }
+            }
 
-            ViewBag.Qbank = db.Questions.Where(x => x.User.Id == userPr.Id).Select(y => new SelectListItem { Text = y.Description, Value = y.QuestionId.ToString() });
+            ViewBag.Qbank = Qbank;//db.Questions.Where(x => x.User.Id == userPr.Id).Select(y => new SelectListItem { Text = y.Description, Value = y.QuestionId.ToString() });
 
             return View();
         }
