@@ -281,7 +281,7 @@ namespace Live_Quiz.Controllers
             }
             else
             {
-                return null;
+                return HttpNotFound();
             }
         }
         [AllowAnonymous]

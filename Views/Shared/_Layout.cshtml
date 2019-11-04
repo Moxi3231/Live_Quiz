@@ -99,7 +99,11 @@
             <button class="btn btn-outline-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
         </div>
     }
-    <div class=" container-fluid body-content shadow-sm w-100 m-1" data-aos="flip-right" data-aos-duration="2500" style="margin-top:-50px;">
+    else
+    {
+        <div class="" style="height:50px;"></div>
+    }
+    <div class=" container-fluid body-content shadow-sm w-100 " data-aos="flip-right" data-aos-duration="2500" style="margin-top:-50px;">
         @RenderBody()
     </div>
 
