@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -334,12 +335,56 @@ namespace Live_Quiz.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,isPublic")] Quiz quiz)
+        public ActionResult Edit(Quiz quiz)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(quiz).State = EntityState.Modified;
-                db.SaveChanges();
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                //ContentRepository service = new ContentRepository();
+
+                int i = 0;
+                //ImageFile imageFile = new ImageFile();
+                if (file != null)
+
+                {
+                    ContentRepository service = new ContentRepository();
+                    i = service.UploadImageInDataBase(file, new ImageFielView() { });
+                    if (i == 0)
+                    {
+                        ViewBag.noFile = "Please try again.Couldn't upload file";
+                        return View(quiz);
+                    }
+                    var imageData = db.Images.SingleOrDefault(x => x.Id == quiz.ImageId);
+                    if (imageData != null)
+                        db.Images.Remove(imageData);
+
+                    db.SaveChanges();
+                    //collection.ImageId = i;
+                }
+                bool saveFailed;
+                do
+                {
+                    var qui = db.Quizs.SingleOrDefault(x => x.Id == quiz.Id);
+                    qui.ImageId = i;
+                    qui.isPublic = quiz.isPublic;
+                    qui.Name = quiz.Name;
+
+                    saveFailed = false;
+
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        saveFailed = true;
+
+                        // Update the values of the entity that failed to save from the store
+                        var entry = ex.Entries.Single();
+                        entry.OriginalValues.SetValues(quiz);
+                    }
+
+                } while (saveFailed);
                 return RedirectToAction("Index");
             }
             return View(quiz);

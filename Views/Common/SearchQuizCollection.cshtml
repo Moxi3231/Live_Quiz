@@ -12,7 +12,9 @@
         <input value="@ViewBag.Searched_Value" type="search" id="svalue" class="inputsearch shadow-lg" onchange="submitChangedValue()" placeholder="Search for Quizes or Collections">
         <i id="iconchange" onclick="change()" class="fa fa-search"></i>
     </div>
-</div><div class="container-fluid">
+</div>
+
+<div class="container-fluid">
     @if (ViewBag.isValAvail)
     {
         <h5 class="card-body text-center">Search Results: @ViewBag.Searched_Value</h5>
@@ -148,25 +150,31 @@
     }
 </div>
 <script>
-    function submitChangedValue() {
-        var value = $("#svalue").val();
-        $(location).attr("href", "/Common/SearchQuizCollection?value=" + value);
-    }
-    var changeflag = false;
-    function change() {
-        if (!changeflag) {
-            document.getElementById("search").style.width = "50%";
-            $("#iconchange").removeClass("fa-search").addClass("fa-times");
-            $("#svalue").css({ "display": "block" });
+    $(".card").each(function () {
+            this.classList.add("shadow");
+        });
 
+        function submitChangedValue() {
+            var value = $("#svalue").val();
+            $(location).attr("href", "/Common/SearchQuizCollection?value=" + value);
         }
-        else {
-            document.getElementById("search").style.width = "0%";
+        var changeflag = false;
+        function change() {
+            if (!changeflag) {
+                document.getElementById("search").style.width = "50%";
+                $("#iconchange").removeClass("fa-search").addClass("fa-times");
+                $("#svalue").css({ "display": "block" });
 
-            $("#svalue").css({ "display": "none" });
-            $("#iconchange").removeClass("fa-times").addClass("fa-search");
+            }
+            else {
+                document.getElementById("search").style.width = "0%";
 
+                $("#svalue").css({ "display": "none" });
+                $("#iconchange").removeClass("fa-times").addClass("fa-search");
+
+            }
+            changeflag = !changeflag
         }
-        changeflag = !changeflag
-    }
+
+
 </script>

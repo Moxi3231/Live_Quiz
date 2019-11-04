@@ -201,7 +201,10 @@ namespace Live_Quiz.Controllers
                         ViewBag.noFile = "Please try again.Couldn't upload file";
                         return View(collection);
                     }
-                    db.Images.Remove(db.Images.Single(x => x.Id == collection.ImageId));
+                    var imageData = db.Images.SingleOrDefault(x => x.Id == collection.ImageId);
+                    if(imageData!=null)
+                        db.Images.Remove(imageData);
+
                     db.SaveChanges();
                     //collection.ImageId = i;
                 } 
@@ -246,7 +249,7 @@ namespace Live_Quiz.Controllers
             Collection collection = db.Collections.Find(id);
             if (collection == null)
             {
-                return HttpNotFound();
+                return null;
             }
             return View(collection);
         }

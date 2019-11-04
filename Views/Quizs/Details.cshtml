@@ -49,33 +49,27 @@
             <th>
                 Description
             </th>
-            <th>
-                Score
-            </th>
-            <th>
-                Hint
-            </th>
-            <th>
-                isPublic
-            </th>
+            
+          
             <th></th>
         </tr>
-
+        @if(ViewBag.q.Count==0)
+        {
+            <tr>
+                <th colspan="2" class="alert alert-danger">
+                    No Question In This Quiz.<br />
+                    Add From Below.
+                </th>
+            </tr>
+        }
         @foreach (Question item in ViewBag.q)
         {
             <tr>
                 <td>
                     @item.Description
                 </td>
-                <td>
-                    @item.Score
-                </td>
-                <td>
-                    @item.Hint
-                </td>
-                <td>
-                    @item.isPublic
-                </td>
+                
+                
                 <td>
                     <a id="1" href="/Questions/Edit?id=@item.QuestionId">Edit</a>
 
@@ -99,7 +93,7 @@
     <div class="card-body">
         @if (ViewBag.Qbank.Count == 0)
         {
-            <div class="alert alert-danger">No Quiz Available.</div>
+            <div class="alert alert-danger">No Question Available.</div>
         }
         else
         {
@@ -117,8 +111,8 @@
                         <option class="text-center" value="@item.QuestionId">@item.Description</option>
                     }
                 </select>
-
-                <input class="btn w-75 m-auto btn-outline-success btn-block" type="submit" value="Add" />
+                <hr />
+                <input class="btn w-50 m-auto btn-outline-success btn-block" type="submit" value="Add" />
 
             </div>
 

@@ -80,10 +80,13 @@
         </div>
     </div>
 
-    <div id="mySidepanel" class="sidepanel text-white shadow-lg">
-        <p style=" position: absolute; top: 10px; left: 5px; font-size: 36px; margin-left: 50px;">QuizIt</p>
+    <div id="mySidepanel" class="sidepanel text-white shadow-lg ">
+        <p style=" position: absolute; top: 10px; left: 5px; font-size: 36px; margin-left: 50px;">
+            <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" data-aos="zoom-in-right" height="35" width="35" alt="...">
+            QuizIt
+        </p>
         <a href="javascript:void(0)" class="closebtn " onclick="closeNav()"> <i class="fas fa-times rotate180"></i></a>
-        <hr class="text-white border border-white" />
+        <hr class="text-white  border-top border-white" />
         @Html.ActionLink("Collections", "Index", "Collections/", new { }, new { @class = "" })
         @Html.ActionLink("Explore", "SearchQuizCollection", "Common/", new { }, new { @class = "" })
         @Html.ActionLink("Quizs", "Index", "Quizs", new { }, new { @class = "" })
@@ -92,7 +95,7 @@
     </div>
 
     <br />
-    
+
     @if (User.Identity.IsAuthenticated)
     {
         <div class="buttonLeft shakeClass">
@@ -126,6 +129,9 @@
     <script>
         var modal = document.getElementById("myModal");
         // Get the image and insert it inside the modal - use its "alt" text as a caption
+
+
+
 
         var modalImg = document.getElementById("img01");
         var captionText = document.getElementById("caption");
@@ -204,12 +210,13 @@
                 $("<i class=\"fas fa-minus text-warning\"></>&nbsp;").prependTo(this);
                 this.classList.add("text-warning");
             }
-            if (this.innerHTML.toLowerCase() == "back to list") {
+            if (this.innerHTML.toLowerCase() == "back to list" || this.innerHTML.toLowerCase() == "back to search") {
                 $("<i class=\"fas fa-backward\"></>").appendTo(this);
                 // this.classList.add("text-success");
             }
+
         });
-        $(".card").each(function () {
+         $(".card").each(function () {
             this.classList.add("shadow");
         });
         AOS.init({
