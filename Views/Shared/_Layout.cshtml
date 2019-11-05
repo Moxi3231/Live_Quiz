@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
-<body style="background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+<body style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
     background-size: cover;  background-blend-mode: overlay;  ">
     <div class="pos-f-t sticky-top" style="z-index:2;">
         <nav class="navbar navbar-light bg-light shadow">
@@ -58,8 +58,9 @@
 
             </div>
         </div>
-        <div class="collapse shadow-sm" id="navbarToggleExternalContent">
-            <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
+        <div class="collapse shadow-sm" id="navbarToggleExternalContent" >
+            <div class="bg-transparent m-1 p-1 text-center text-black-50 "  style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
                 <span>@Html.ActionLink("Home", "Index", "Home")&nbsp;<i class="fas fa-home text-dark"></i></span>
                 <br />
                 <span>@Html.ActionLink("About", "About", "Home")&nbsp;<i class="fas fa-circle-notch text-dark"></i></span>
@@ -69,7 +70,8 @@
         </div>
 
         <div class="collapse shadow-sm" id="adminPanel">
-            <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
+            <div class="bg-transparent m-1 p-1 text-center text-black-50 "  style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
                 <span>@Html.ActionLink("Create Role", "CreateRole", "Roles")&nbsp;<i class="fas fa-plus text-dark"></i></span>
                 <br />
                 <span>@Html.ActionLink("View Roles", "ViewRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
@@ -104,7 +106,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="buttonLeft shakeClass">
-            <button class="btn btn-outline-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
+            <button class="btn btn-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
         </div>
     }
     else
