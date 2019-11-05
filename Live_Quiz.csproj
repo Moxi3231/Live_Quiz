@@ -204,6 +204,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS\StyleSheet1.css" />
+    <Content Include="Content\Images\back1.jpg" />
+    <Content Include="Content\Images\back2.jpg" />
+    <Content Include="Content\Images\back3.jpg" />
+    <Content Include="Content\Images\back4.jpg" />
     <Content Include="Content\Images\Curious.jpg" />
     <Content Include="Content\Images\inclusive.jpg" />
     <Content Include="Content\Images\Playful.jpg" />

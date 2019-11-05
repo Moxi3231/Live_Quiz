@@ -14,7 +14,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
-<body>
+<body style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
     <div class="pos-f-t sticky-top" style="z-index:2;">
         <nav class="navbar navbar-light bg-light shadow">
             <div class="btn-group-">
@@ -40,24 +41,26 @@
         </nav>
 
 
-        <div class="collapse" id="collapseExample">
-            <div class="m-auto  bg-light shadow-lg" style="position:fixed; float:right; overflow-x:hidden; z-index:9; width:20%; height:100%; background-color:transparent; right:0;">
+        <div class="collapse" id="collapseExample" >
+            <div class="m-auto   shadow-lg" style="position:fixed; float:right; overflow-x:hidden; z-index:9; width:20%; height:100%; background-color:transparent; right:0; background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
                 <br />
                 <i class="fas fa-user-edit fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
                 <br />
                 <br />
-                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-outline-info p-2  ", @style = "width:95%; margin-left:2.5%;" })
+                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-info p-2  ", @style = "width:95%; margin-left:2.5%; color:black;" })
                 <br />
                 <br />
                 <i class="fas fa-sign-out-alt fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
 
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-outline-danger  p-2 " style="width:95%; margin-left:2.5%;">Log Off</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-danger  p-2 " style="width:95%; margin-left:2.5%;">Log Off</a>
                 <br /><br />
 
             </div>
         </div>
-        <div class="collapse shadow-sm" id="navbarToggleExternalContent">
-            <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
+        <div class="collapse shadow-sm" id="navbarToggleExternalContent" >
+            <div class="bg-transparent m-1 p-1 text-center text-black-50 "  style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
                 <span>@Html.ActionLink("Home", "Index", "Home")&nbsp;<i class="fas fa-home text-dark"></i></span>
                 <br />
                 <span>@Html.ActionLink("About", "About", "Home")&nbsp;<i class="fas fa-circle-notch text-dark"></i></span>
@@ -67,7 +70,8 @@
         </div>
 
         <div class="collapse shadow-sm" id="adminPanel">
-            <div class="bg-transparent m-1 p-1 text-center text-black-50 ">
+            <div class="bg-transparent m-1 p-1 text-center text-black-50 "  style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
                 <span>@Html.ActionLink("Create Role", "CreateRole", "Roles")&nbsp;<i class="fas fa-plus text-dark"></i></span>
                 <br />
                 <span>@Html.ActionLink("View Roles", "ViewRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
@@ -82,7 +86,8 @@
         </div>
     </div>
 
-    <div id="mySidepanel" class="sidepanel text-white shadow-lg ">
+    <div id="mySidepanel" class="sidepanel  shadow-lg text-black-50" style="background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;   ">
         <p style=" position: absolute; top: 10px; left: 5px; font-size: 36px; margin-left: 50px;">
             <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" data-aos="zoom-in-right" height="35" width="35" alt="...">
             QuizIt
@@ -101,7 +106,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="buttonLeft shakeClass">
-            <button class="btn btn-outline-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
+            <button class="btn btn-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
         </div>
     }
     else
@@ -219,7 +224,8 @@
 
         });
          $(".card").each(function () {
-            this.classList.add("shadow");
+             this.classList.add("shadow","bg-light","text-black");
+             $(this).css({ "opacity": "0.95" });    
         });
         AOS.init({
             // Global settings:
@@ -243,6 +249,8 @@
             anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 
         });
+
+
     </script>
 </body>
 </html>

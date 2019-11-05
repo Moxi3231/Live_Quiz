@@ -150,10 +150,7 @@
     }
 </div>
 <script>
-    $(".card").each(function () {
-            this.classList.add("shadow");
-        });
-
+   
         function submitChangedValue() {
             var value = $("#svalue").val();
             $(location).attr("href", "/Common/SearchQuizCollection?value=" + value);
@@ -175,6 +172,5 @@
             }
             changeflag = !changeflag
         }
-
 
 </script>
