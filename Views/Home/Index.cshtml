@@ -2,13 +2,74 @@
     ViewBag.Title = "Home";
 }
 
-<div class="card" data-aos="zoom-in" data-aos-delay="1000"  data-aos-duration="1000">
-    <div class="card-header bg-light text-center" >
+<div class="" data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1500">
+    <div class=" text-center">
         <h6 class="display-4">@ViewBag.Title</h6>
     </div>
     <div class="card-body">
 
-        <img src="@Url.Content("/Content/Images/QuizWall.jpg")" class="w-100 h-100 " />
+        <div class="card card-body w-100 h-auto" style="border: none;">
+            <video autoplay muted class="w-100" style="height: 600px;  background-color: black; "
+                   id="myVideo" src="@Url.Content("~/Content/Videos/Vid1.mp4")" aria-hidden="true"></video>
+            <div class="card card-body content bg-transparent shadow-lg" style="bottom:350px; background-color: transparent;">
+                <h5 class="text-white text-justify text-center" id="text2"></h5>
+                <button id="vidBtn" class="btn btn-block btn-outline-light w-25 m-auto" data-toggle="modal" [disabled]="loggedIn"
+                        onclick="$(location).attr('href','/Account/Register')">
+                    Join Us
+                </button>
+            </div>
+        </div>
+        <hr />
+        <div class="text-center " data-aos="flip-left" data-aos-duration="500">
+            <a class="card-body display-4 text-center" style="font-size:40px;" href="/Common/SearchQuizCollection">Explore Quiz/Collection</a>
+        </div>
+
+
+        <hr />
+
+
+
+        <div class="card-group w-100">
+
+            <div class="card w-auto  m-1" data-aos="zoom-in">
+                <div class="card-header">
+                    Video1
+                </div>
+                <div class="card-body w-100">
+                    <video controls class="w-100">
+                        <source src="@Url.Content("~/Content/Videos/Video.mp4")" type="video/mp4">
+                    </video>
+                </div>
+                <div>
+
+                </div>
+            </div>
+
+            <div class="card w-auto  m-1" data-aos="zoom-in">
+                <div class="card-header">
+                    Video2
+                </div>
+                <div class="card-body">
+                    <video controls class="w-100" data-aos="zoom-in">
+                        <source src="@Url.Content("~/Content/Videos/Video1.mp4")"
+                                type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <div class="card w-auto  m-1" data-aos="zoom-in">
+                <div class="card-header">
+                    Video3
+                </div>
+                <div class="card-body">
+                    <video controls class="w-100" data-aos="slide-down">
+                        <source src="@Url.Content("~/Content/Videos/Video2.mp4")"
+                                type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
         <hr />
         <div class=" text-center display-4" data-aos="zoom-in" data-aos-duration="1500">
 
@@ -16,9 +77,6 @@
 
         </div>
         <hr />
-        <div class="text-center " data-aos="flip-left" data-aos-duration="500">
-            <a class="card-body display-4 text-center" style="font-size:40px;" href="/Common/SearchQuizCollection">Explore Quiz/Collection</a>
-        </div>
 
 
         <div class="card-group w-100 m-auto">
@@ -48,8 +106,33 @@
 
             </div>
         </div>
+
+
+        <hr />
+        <div class="card" style="height: 20em; " data-aos="zoom-in">
+            <div class="card-body "
+                 style="background-image: url(@Url.Content("~/Content/Images/LearnAnywhere.jpg")); background-size:100em 35em; opacity: 0.95; background-repeat:no-repeat;">
+                <br>
+                <blockquote class="blockquote">
+                    <br>
+                    <p class="mb-0  text-justify text-white" id="text" style="opacity: 1;"></p>
+                    <footer class="blockquote-footer text-capitalize text-dark" style="opacity: 1; padding-left: 2em;">
+                        <cite title="Source Title">BENJAMIN FRANKLIN</cite>
+                    </footer>
+                </blockquote>
+
+            </div>
+        </div>
+    </div>
+    <p class="display-2 text-capitalize text-justify text-center" data-aos="slide-down">Our Motto</p>
+    <hr class="border">
+    <div class="card bg-transparent" data-aos="zoom-out-right">
+        <img src="@Url.Content("~/Content/Images/ShareQuote.jpg")">
     </div>
 
+
+
+    <br />
 </div>
 
 
@@ -58,3 +141,36 @@
         font-size: 40px;
     }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    var text = "TELL ME AND I FORGET.\n TEACH ME AND I REMEMBER.\n INVOLVE ME AND I LEARN.\n";
+    var text2 = "Tommorow is for Taking\n Thousands of classes to fuel your creativity and career.";
+
+
+    var showText = function (target, message, index, interval) {
+      if (index < message.length) {
+
+        //newMes = newMes + message[index++] ;
+        if (message[index] == '\n')
+          $(target).append('<br>');
+        $(target).append(message[index++]);
+        setTimeout(function () { showText(target, message, index, interval); }, interval);
+      }
+      else {
+        index = 0;
+        $(target).text('');
+        setTimeout(function () { showText(target, message, index, interval); }, interval);
+      }
+
+    }
+    $(function () {
+     // $("#putHeaderHere").load("header.html");
+      showText("#text", text, 0, 100);
+      showText("#text2", text2, 0, 200);
+      //alert("dsf");
+    });
+
+
+      //alert("dsf");
+
+</script>

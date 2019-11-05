@@ -274,3 +274,130 @@ table td{
 hr {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+
+
+
+.blinking-cursor {
+    font-weight: 100;
+    font-size: 30px;
+    color: #2E3D48;
+    -webkit-animation: 1s blink step-end infinite;
+    -moz-animation: 1s blink step-end infinite;
+    -ms-animation: 1s blink step-end infinite;
+    -o-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
+}
+
+@keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+@-moz-keyframes blink {
+    from, to {
+        color: transparent;
+    }
+
+    50% {
+        color: black;
+    }
+}
+
+@-webkit-keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+@-ms-keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+@-o-keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+#footer:hover {
+    color: cadetblue;
+}
+
+.content {
+    position: relative;
+    bottom: 275px;
+    /*background: rgba(0, 0, 0, 0.5);
+            */ color: #f1f1f1;
+    width: 100%;
+}
+
+#vidBtn {
+    animation-name: colorChange;
+    animation-direction: normal;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: transparent;
+    }
+
+    25% {
+        background-color: black;
+    }
+
+    50% {
+        background-color: transparent;
+    }
+
+    75% {
+        background-color: black;
+    }
+
+    100% {
+        background-color: whitesmoke;
+    }
+}
+    
