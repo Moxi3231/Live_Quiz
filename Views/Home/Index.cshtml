@@ -127,7 +127,28 @@
     <p class="display-2 text-capitalize text-justify text-center" data-aos="slide-down">Our Motto</p>
     <hr class="border">
     <div class="card bg-transparent" data-aos="zoom-out-right">
-        <img src="@Url.Content("~/Content/Images/ShareQuote.jpg")">
+
+        <div id="div1" class="container-fluid  " style="margin-left:6.5%;">
+            @{ /* @for (var i = 0; i < 81; i++)
+                 {
+                     var text = "image_part_0";
+                     // style='display:none;' src='/"+text+'0'+(i+1)+".jpg'>"
+                     if (i % 9 == 0)
+                     {
+                         <br />
+                     }
+                     if (i < 9)
+                     {
+                         <img style="margin:0; padding:0;" src="@Url.Content("~/Content/Images/ShareQuote/" + text + "0" + (i + 1) + ".jpg")"/>
+                     }
+                     else
+                     {
+                         <img style="margin:0; padding:0;" src="@Url.Content("~/Content/Images/ShareQuote/" + text + (i + 1) + ".jpg")"/>
+                     }
+                 }*/
+            }
+        </div>
+
     </div>
 
 
@@ -137,11 +158,6 @@
 
 
 
-<style>
-    h5 {
-        font-size: 40px;
-    }
-</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     var text = "TELL ME AND I FORGET.\n TEACH ME AND I REMEMBER.\n INVOLVE ME AND I LEARN.\n";
@@ -149,29 +165,53 @@
 
 
     var showText = function (target, message, index, interval) {
-      if (index < message.length) {
+        if (index < message.length) {
 
-        //newMes = newMes + message[index++] ;
-        if (message[index] == '\n')
-          $(target).append('<br>');
-        $(target).append(message[index++]);
-        setTimeout(function () { showText(target, message, index, interval); }, interval);
-      }
-      else {
-        index = 0;
-        $(target).text('');
-        setTimeout(function () { showText(target, message, index, interval); }, interval);
-      }
+            //newMes = newMes + message[index++] ;
+            if (message[index] == '\n')
+                $(target).append('<br>');
+            $(target).append(message[index++]);
+            setTimeout(function () { showText(target, message, index, interval); }, interval);
+        }
+        else {
+            index = 0;
+            $(target).text('');
+            setTimeout(function () { showText(target, message, index, interval); }, interval);
+        }
 
     }
     $(function () {
-     // $("#putHeaderHere").load("header.html");
-      showText("#text", text, 0, 100);
-      showText("#text2", text2, 0, 200);
-      //alert("dsf");
+        // $("#putHeaderHere").load("header.html");
+        showText("#text", text, 0, 100);
+        showText("#text2", text2, 0, 200);
+        //alert("dsf");
     });
 
 
-      //alert("dsf");
+    //alert("dsf");
+
+    var textB = "/Content/Images/ShareQuote/image_part_0";
+    for (var i = 0; i < 81; i++) {
+        if (i % 9 == 0) {
+            $("#div1").append("<br>");
+        }
+
+        if (i < 9) {
+            $("#div1").append("<img data-aos='zoom-in' data-aos-duration'" + (i * i) + 100 + "' data-aos-delay='" + (i * i) + 100 + "'  id='img" + i + "' style='display:none;' src='" + textB + '0' + (i + 1) + ".jpg'>");
+        }
+        else {
+            $("#div1").append("<img data-aos='zoom-in' data-aos-duration'" + (i * i) + 100 + "' data-aos-delay='" + (i * i) + 100 + "'  id='img" + i + "' style='display:none;' src='" + textB + (i + 1) + ".jpg'>");
+        }
+        $("#img" + i).fadeIn();
+        //$("#img" + i).addClass("imgClass");
+
+    }
 
 </script>
+
+<style>
+    h5 {
+        font-size: 40px;
+    }
+
+</style>
