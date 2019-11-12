@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections;
 
 namespace Live_Quiz.Controllers
 {
@@ -121,6 +122,14 @@ namespace Live_Quiz.Controllers
             {
                 ViewBag.noFile = "No file recieved.Please try again.";
                 return View();
+            }
+            if (quiz.isPublic == true)
+            {
+                PinData.ht.Add(PinData.pin, quiz.Id);
+                Live.qon.Add(PinData.pin, "f");
+                QuizPlayers.lu.Add(PinData.pin, new ArrayList());
+                UserAns.ans.Add(PinData.pin, new Hashtable());
+                UserAns.score.Add(PinData.pin++, new Hashtable());
             }
             ContentRepository service = new ContentRepository();
             //ImageFile imageFile = new ImageFile();

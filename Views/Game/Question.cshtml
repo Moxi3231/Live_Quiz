@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Question";
+}
+
+<h2>Question</h2>
+
+@section Scripts
+{
+<script>
+    $(document).ready(function () {
+        function switchto() {
+           window.location.href = "@Url.Action("ScoreBoard", "game")?pin=@Request.QueryString["pin"]"
+        }
+        setTimeout(switchto, 5000);
+
+    })
+</script>
+    }

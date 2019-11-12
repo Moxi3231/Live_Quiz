@@ -1,0 +1,54 @@
+﻿@using Live_Quiz.Models;
+
+@{
+    ViewBag.Title = "options";
+}
+<div id="main">
+    @if ((string)UserAns.block[Request.Cookies["uname"].Value.ToString()] == "t")
+    {
+    <center>
+        <h1>You are Blocked</h1>
+    </center>
+    }
+    else if (Live.qon[int.Parse(Request.Cookies["pin"].Value.ToString())].Equals("t"))
+    {
+        <div id="table">
+            <center>
+                <table style="height:580px; width:100%" border="2" id="otable">
+                    <tr>
+                        <td style="height:25%; width:25%;"><input type="submit" name="option" value="A" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input type="submit" name="option" value="B" style="height:100%; width:100%;" /></td>
+                    </tr>
+                    <tr>
+                        <td style="height:25%; width:25%;"><input type="submit" name="option" value="C" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input type="submit" name="option" value="D" style="height:100%; width:100%;" /></td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+    }
+    else
+    {
+        <div id="wait">
+            <center>
+                <h2>Please wait and see on main screen</h2>
+            </center>
+        </div>
+    }
+</div>
+@section Scripts
+{
+    <script>
+                $(document).ready(function () {
+                    check();
+                    function check() {
+                        $.ajax({
+                            url: "options",
+                            type: "POST",
+                        })
+                        $("#main").load(location.href + " #main>*", "");
+                        setTimeout(check, 1000);
+                    }
+        })
+    </script>
+}

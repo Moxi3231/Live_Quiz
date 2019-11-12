@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index","Game",FormMethod.Post))
+{
+    @:Enter a pin: -@Html.TextBox("pin", null, new { @class = "form-control" })
+    <input type="submit" value="Enter pin" />
+}

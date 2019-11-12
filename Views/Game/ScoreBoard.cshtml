@@ -1,0 +1,47 @@
+﻿@using System.Collections;
+@using Live_Quiz.Models;
+@model Hashtable
+
+@{
+    ViewBag.Title = "ScoreBoard";
+}
+<center>
+    <h2>Result</h2>
+</center>
+
+@using (Html.BeginForm("ScoreBoard", "game", FormMethod.Post))
+{
+    <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
+    <table class="table" id="utable" style="font-size:24px;">
+        <tr style="font-size:30px;">
+            <td>
+                Name
+            </td>
+            <td>
+                Score
+            </td>
+        </tr>
+        @foreach (DictionaryEntry i in Model)
+        {
+            <tr>
+                <td>
+                    @i.Key
+                </td>
+                <td>
+                    @if (Session[(string)i.Key] != null)
+                    {
+                        if ((string)UserAns.block[Session[(string)i.Key]] == "t")
+                        {
+                            @:block
+                        }
+                    }
+                    else
+                    {
+                        @i.Value
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Next" name="btn" />
+}

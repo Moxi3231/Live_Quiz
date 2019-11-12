@@ -1,0 +1,90 @@
+﻿@using System.Collections;
+@using Live_Quiz.Models;
+@model ArrayList
+@{
+    ViewBag.Title = "dashboard";
+}
+<style>
+    a:hover{
+        color:red;
+    }
+</style>
+<div id="home">
+    @if (Model == null || Model.Count==0)
+    {
+        <center>
+            <h1>
+                Please wait for players
+            </h1>
+        </center>
+    }
+    else
+    {
+        using (Html.BeginForm("on", "game", FormMethod.Post))
+        {
+            <div style="height:200px; margin:auto">
+                <center>
+                    <h1>Pin is:-@Request.QueryString["pin"]</h1>
+                    <h3 id="cou">Players:-@Model.Count</h3>
+                    <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
+                    <input type="submit" value="Start" name="btn" />
+                </center>
+            </div>
+        }
+            <center>
+                <button onclick="openFullscreen();">Fullscreen</button>
+            </center>
+        <div id="main">
+            <center>
+                <h3>Name</h3>
+                <table class="table" id="utable" style="font-size:24px;">
+                    @foreach (var item in Model)
+                    {
+                        <tr align="center">
+                            <td><a onclick="udelete('@item')">@item</a></td>
+                        </tr>
+                    }
+                </table>
+            </center>
+        </div>
+}
+    </div>
+    @section Scripts
+{
+        <script>
+            function udelete(s) {
+                console.log("in");
+                $.ajax({
+                    url: "DeleteUser?pin="+@Request.QueryString["pin"],
+                    type: "POST",
+                    data: {"name":s}
+                })
+            }
+            var elem = document.documentElement;
+            function openFullscreen() {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) { /* Firefox */
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                    elem.msRequestFullscreen();
+                }
+            }
+        $(document).ready(function () {
+           check();
+            var l = 0, tem;
+            function check() {
+                $.ajax({
+                    url: "dashboard?pin="+@Request.QueryString["pin"],
+                    type: "GET"
+                })
+                $("#utable").load(location.href + " #utable>*", "");
+                $("#cou").load(location.href + " #cou", "");
+                $("#home").load(location.href + " #home>*", "");
+                setTimeout(check,1500);
+            }
+        })
+        </script>
+    }

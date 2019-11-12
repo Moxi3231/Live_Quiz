@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "nickname";
+}
+
+<h2>nickname</h2>
+<form action="nickname?pin=@Request.QueryString["pin"]" method="post">
+    Enter NickName:-<br />
+    @Html.TextBox("name", null, new { @class = "form-control" })
+    <input type="submit" value="Enter" />
+</form>
