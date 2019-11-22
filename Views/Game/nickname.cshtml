@@ -3,9 +3,36 @@
     ViewBag.Title = "nickname";
 }
 
-<h2>nickname</h2>
 <form action="nickname?pin=@Request.QueryString["pin"]" method="post">
-    Enter NickName:-<br />
-    @Html.TextBox("name", null, new { @class = "form-control" })
-    <input type="submit" value="Enter" />
+    <div class="card w-75 m-auto shadow">
+        <div class="card-header text-center">
+            <h4>NickName</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 w-100">
+                    <div class="form-group">
+                        <h4>Enter Name here</h4>
+                        @Html.TextBox("name", null, new { @class = "form-control" })
+                    </div>
+                    <div>
+                        <h5 class="text-danger">
+                            If you already a user of Live-Quiz than enter a username as a nickname.
+                        </h5>
+                    </div>
+                </div>
+                <div class="col-md-4 w-100 h-100 m-auto" style="font-size:22px;">
+                    <i class="fab fa-kickstarter-k fa-10x"></i>
+                </div>
+            </div>
+            <hr />
+            <p class="btn btn-link text-center btn-block">
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Enter" class="btn btn-outline-success w-100" />
+                    </div>
+                </div>
+            </p>
+        </div>
+    </div>
 </form>

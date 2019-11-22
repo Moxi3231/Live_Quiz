@@ -349,6 +349,8 @@
     <Content Include="Views\Game\options.cshtml" />
     <Content Include="Views\Game\Question.cshtml" />
     <Content Include="Views\Game\ScoreBoard.cshtml" />
+    <Content Include="Views\Game\End.cshtml" />
+    <Content Include="Views\Game\FinalScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,46 +9,96 @@
         color:red;
     }
 </style>
+ <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        PIN
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+                <center>
+                    <h1>Pin is:-@Request.QueryString["pin"]</h1>
+                </center>
+                </div>
+            </div>
+     </div><br />
+
 <div id="home">
-    @if (Model == null || Model.Count==0)
+    @if (Model == null || Model.Count == 0)
     {
-        <center>
-            <h1>
-                Please wait for players
-            </h1>
-        </center>
+
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        Alert
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <center>
+                    <h2>
+                        Please wait for players
+                    </h2>
+                </center>
+            </div>
+        </div>
     }
     else
     {
-        using (Html.BeginForm("on", "game", FormMethod.Post))
-        {
-            <div style="height:200px; margin:auto">
+         <div class="card w-75 m-auto shadow">
+            <div class="card-header">
                 <center>
-                    <h1>Pin is:-@Request.QueryString["pin"]</h1>
-                    <h3 id="cou">Players:-@Model.Count</h3>
-                    <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
-                    <input type="submit" value="Start" name="btn" />
+                    <h2>
+                        Joined
+                    </h2>
                 </center>
             </div>
-        }
-            <center>
-                <button onclick="openFullscreen();">Fullscreen</button>
-            </center>
-        <div id="main">
-            <center>
-                <h3>Name</h3>
-                <table class="table" id="utable" style="font-size:24px;">
-                    @foreach (var item in Model)
+            <div class="card-body">
+                <center>
+                    <h3 id="cou">Players:-@Model.Count</h3>
+                </center>
+            </div>
+         </div><br />
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        Players
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <div id="main">
+                    <center>
+                        <h3>Name</h3>
+                        <table class="table" id="utable" style="font-size:24px;">
+                            @foreach (var item in Model)
+                            {
+                                <tr align="center">
+                                    <td><a onclick="udelete('@item')">@item</a></td>
+                                </tr>
+                            }
+                        </table>
+                    </center>
+                    @using (Html.BeginForm("on", "game", FormMethod.Post))
                     {
-                        <tr align="center">
-                            <td><a onclick="udelete('@item')">@item</a></td>
-                        </tr>
+                        <div style="height:200px; margin:auto">
+                            <center>
+                                <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
+                                <input type="submit" value="Start" name="btn" />
+                            </center>
+                        </div>
                     }
-                </table>
-            </center>
+                </div>
+            </div>
         </div>
-}
-    </div>
+        
+    }
+</div>
     @section Scripts
 {
         <script>

@@ -1,10 +1,77 @@
-﻿
+﻿@using Live_Quiz.Models;
+@model Question
 @{
     ViewBag.Title = "Question";
 }
 
-<h2>Question</h2>
+<div id="main">
+    <div class="card w-75 m-auto shadow">
+        <div class="card-header">
+            <h2>
+                Question
+            </h2>
+        </div>
+        <div class="card-body">
+            <div id="question">
+                <h2>
+                    @Model.Description
+                </h2><br />
+                <h4>
+                    Points:-@Model.Score
+                </h4><br />
+                <h5>
+                    Hint:-@Model.Hint
+                </h5>
+            </div>
+        </div>
+    </div>
+    @*<br />
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <h2>
+                    Hint
+                </h2>
+            </div>
+            <div class="card-body">
+                <div id="Hint">
+                    <h4>
+                        @Model.Hint
+                    </h4>
+                </div>
+            </div>
+        </div>*@<br />
+    <div class="card w-75 m-auto shadow">
+        <div class="card-header">
+            <h2>
+                Options
+            </h2>
+        </div>
+        <div class="card-body">
+            <div id="option">
+                <table>
+                    @{ var k = 0;}
+                    @foreach (var x in ViewBag.options)
+                    {
+                        var t = '\0';
+                        <tr>
+                            <td>
+                                <h2>
+                                    @{t = Convert.ToChar('A' + k);}
+                                    @t: &nbsp;
+                                    @x.ans
+                                </h2>
+                            </td>
+                        </tr>
+                        k++;
+                    }
+                </table>
 
+            </div>
+        </div>
+    </div><br />
+
+
+</div>
 @section Scripts
 {
 <script>

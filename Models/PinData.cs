@@ -10,5 +10,6 @@ namespace Live_Quiz.Models
     {
         public static int pin = 100;
         public static Hashtable ht = new Hashtable();
+        public static Hashtable qql = new Hashtable();
     }
 }

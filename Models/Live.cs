@@ -12,5 +12,6 @@ namespace Live_Quiz.Models
         public static string b = "f";
         public static string l { get; set; } = "f";
         public static Hashtable qon = new Hashtable();
+        public static Hashtable qs = new Hashtable();
     }
 }

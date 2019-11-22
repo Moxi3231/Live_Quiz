@@ -433,5 +433,18 @@ namespace Live_Quiz.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Play(int id)
+        {
+            Hashtable h=PinData.ht;
+            foreach(DictionaryEntry e in h)
+            {
+                if((int)e.Value==id)
+                {
+                    return RedirectToAction("dashboard","game",new {pin=e.Key });
+                }
+            }
+            return View("index");
+        }
     }
 }
