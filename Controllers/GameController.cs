@@ -16,6 +16,7 @@ namespace Live_Quiz.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.err = false;
             //test
             DataModel db = new DataModel();
             List<Quiz> lq;
@@ -64,6 +65,7 @@ namespace Live_Quiz.Controllers
             {
                 Response.Redirect("game/nickname?pin=" + fc["pin"]);
             }
+            ViewBag.err = true;
             return View("Index");
         }
         [HttpGet]

@@ -7,7 +7,7 @@
         @Html.AntiForgeryToken()
 
     <div class="btn-group dropright" data-aos="zoom-in" data-aos-duration="1500">
-        <button class="btn btn-outline-dark form-inline" onclick="go()">Enter Game Pin</button>
+        <a class="btn btn-outline-dark form-inline" href="/game/index">Enter Game Pin</a>
         &nbsp;
         <button type="button" class="btn btn-outline-dark disabled">@User.Identity.GetUserName()</button>
         <button onclick="changeUpDown()" type="button" class="btn btn-outline-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -26,12 +26,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right form-inline"><li>
-       <button class="btn btn-outline-info form-inline" onclick="go()">Enter Game Pin</button>&nbsp;
+       <a class="btn btn-outline-info form-inline" href="/game/index">Enter Game Pin</a>&nbsp;
        @Html.ActionLink("SignIn", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) <i class="fas fa-sign-in-alt"></i></li>
     </ul>
 }
-<script>
-    function go() {
-        window.open('@Url.Action("index", "game" )', '_blank');
-    }
-</script>

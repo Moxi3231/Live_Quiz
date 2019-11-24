@@ -11,16 +11,18 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6 w-100">
+            <div class="col-md-6 w-100 my-5">
                 <div class="form-group">
                     <h4>Enter pin here</h4>
                     @Html.TextBox("pin", null, new { @class = "form-control" })
                 </div>
+                @if (ViewBag.err) { 
                 <div>
                     <h5 class="text-danger">
-                        If you don't enter correct pin you will redirect to this page.
+                        Enter a valid pin.
                     </h5>
                 </div>
+            }
             </div>
             <div class="col-md-4 w-100 h-100 m-auto" style="font-size:22px;">
                 <i class="fas fa-keyboard fa-10x"></i>
