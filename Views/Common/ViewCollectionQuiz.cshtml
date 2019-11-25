@@ -53,8 +53,9 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button class="btn btn-success" onclick="$(location).attr('href','/Quizs/Play/@item.Id')">Play</button>
-                            <button class="btn btn-success" onclick="$(location).attr('href','/Common/QuizBoard?quizid=@item.Id')">LeaderBoard</button>
+                            <button class="btn btn-primary" onclick="$(location).attr('href','/Quizs/Play/@item.Id')">Play</button>
+                            <button class="btn btn-info" onclick="$(location).attr('href','/Common/QuizBoard?quizid=@item.Id')">LeaderBoard</button>
+                            <button class="btn btn-primary" onclick="$(location).attr('href','/OnePlayerMode/OnePlayer?qid=@item.Id')">One On One</button>
                         </div>
                     </td>
                 </tr>

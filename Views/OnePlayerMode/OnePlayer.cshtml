@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "OnePlayer";
+}
+
+<div class="card w-75 m-auto shadow-lg text-center font-weight-light">
+    <div class="card-header">
+        Quiz: <b>@ViewBag.quiz.Name</b>
+    </div>
+    <div class="card-body">
+        <p>
+            <strong>
+                @ViewBag.quiz.Description
+            </strong>
+        </p>
+        <img src="/Collections/RetrieveImage/@ViewBag.quiz.ImageId" alt="No Image" />
+        
+        @using (Html.BeginForm("OneQuestion", "OnePlayerMode", FormMethod.Post))
+        { 
+            <button type="submit" class="btn btn-outline-secondary btn-block"  >
+                Let's get started.
+            </button>
+        }
+        </div>
+
+</div>
