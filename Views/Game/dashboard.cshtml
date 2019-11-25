@@ -20,7 +20,7 @@
             <div class="card-body">
                 <div class="card-body">
                 <center>
-                    <h1>Pin is: <b> @Request.QueryString["pin"]</b></h1>
+                    <h1>Pin is:-@Request.QueryString["pin"]</h1>
                 </center>
                 </div>
             </div>
@@ -31,17 +31,17 @@
     {
 
         <div class="card w-75 m-auto shadow">
-            <div class="card-header alert alert-danger">
+            <div class="card-header">
                 <center>
                     <h2>
-                        Waiting
+                        Alert
                     </h2>
                 </center>
             </div>
             <div class="card-body">
                 <center>
                     <h2>
-                        Waiting for players to join.
+                        Please wait for players
                     </h2>
                 </center>
             </div>
@@ -50,7 +50,7 @@
     else
     {
          <div class="card w-75 m-auto shadow">
-            <div class="card-header alert alert-success">
+            <div class="card-header">
                 <center>
                     <h2>
                         Joined
@@ -59,40 +59,42 @@
             </div>
             <div class="card-body">
                 <center>
-                    <h3 id="cou">Number of Players: @Model.Count</h3>
+                    <h3 id="cou">Players:-@Model.Count</h3>
                 </center>
             </div>
          </div><br />
         <div class="card w-75 m-auto shadow">
-            <div class="card-header alert alert-info">
+            <div class="card-header">
                 <center>
                     <h2>
-                        Players Name
+                        Players
                     </h2>
                 </center>
             </div>
             <div class="card-body">
                 <div id="main">
                     <center>
-                        <table class="table table-borderless table-hover"  id="utable" style="font-size:24px;">
+                        <h3>Name</h3>
+                        <table class="table" id="utable" style="font-size:24px;">
                             @foreach (var item in Model)
                             {
                                 <tr align="center">
-                                    <td>
-                                    <a onclick="udelete('@item')">@item</a>
-                                    </td>
+                                    <td><a onclick="udelete('@item')">@item</a></td>
                                 </tr>
                             }
                         </table>
                     </center>
                     @using (Html.BeginForm("on", "game", FormMethod.Post))
                     {
-                        <div style="height:200px; margin:auto">
-                            <center>
-                                <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
-                                <input type="submit" class="btn btn-secondary" value="Start" name="btn" />
-                            </center>
-                        </div>
+                        <hr />
+                        <p class="btn btn-link text-center btn-block">
+                            <div class="form-group">
+                                <div>
+                                    <input type="submit" name="btn" value="Start" class="btn btn-primary w-100" />
+                                </div>
+                            </div>
+                        </p>
+                        <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
                     }
                 </div>
             </div>

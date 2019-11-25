@@ -11,7 +11,7 @@
             <div class="card-header">
                 <center>
                     <h2>
-                        Alert
+                        Quiz is Over
                     </h2>
                 </center>
             </div>
@@ -19,10 +19,18 @@
                 <div id="over">
                     <center>
                         <h1>
-                            Quiz is Over See Result on main Screen
+                            See Result on main Screen
                         </h1>
                     </center>
                 </div>
+                <hr />
+                <p class="btn btn-link text-center btn-block">
+                    <div class="form-group">
+                        <div>
+                            <input type="button" onclick='window.location="/Home"' value="Home" class="btn btn-outline-success w-100" />
+                        </div>
+                    </div>
+                </p>
             </div>
         </div>
     }
@@ -49,16 +57,14 @@
     {
         <div id="table">
             <center>
-                <table style="height:580px; width:100%" border="2" id="otable">
+                <table style="height:620px; width:100%" id="otable">
                     <tr>
-                        <td style="height:25%; width:25%;">
-                        <input type="button" onclick="pass('0')" class="btn btn-outline-primary" id="btn1" name="option" value="A" style="height:100%; width:100%;" />
-                        </td>
-                        <td style="height:25%; width:25%;"><input type="button" class="btn btn-primary " onclick="pass('1')" id="btn2" name="option" value="B" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input class="btn btn-success" type="button" onclick="pass('0')" id="btn1" name="option" value="A" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input class="btn btn-primary" type="button" onclick="pass('1')" id="btn2" name="option" value="B" style="height:100%; width:100%;" /></td>
                     </tr>
                     <tr>
-                        <td style="height:25%; width:25%;"><input type="button" class="btn btn-info" onclick="pass('2')" id="btn3" name="option" value="C" style="height:100%; width:100%;" /></td>
-                        <td style="height:25%; width:25%;"><input type="button" class="btn btn-outline-info" onclick="pass('3')" id="btn4" name="option" value="D" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input class="btn btn-warning" type="button" onclick="pass('2')" id="btn3" name="option" value="C" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input class="btn btn-danger" type="button" onclick="pass('3')" id="btn4" name="option" value="D" style="height:100%; width:100%;" /></td>
                     </tr>
                 </table>
             </center>
@@ -128,7 +134,7 @@
                             success: function (response) {
                             }
                         })
-                        $("#main").load(location.href + " #main", "");
+                        $("#main").load(location.href + " #main>*", "");
                         setTimeout(check, 1300);
                     }
         })

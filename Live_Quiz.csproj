@@ -344,13 +344,13 @@
     <Content Include="Views\Game\Blocku.cshtml" />
     <Content Include="Views\Game\check.cshtml" />
     <Content Include="Views\Game\dashboard.cshtml" />
+    <Content Include="Views\Game\End.cshtml" />
+    <Content Include="Views\Game\FinalScore.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
     <Content Include="Views\Game\nickname.cshtml" />
     <Content Include="Views\Game\options.cshtml" />
     <Content Include="Views\Game\Question.cshtml" />
     <Content Include="Views\Game\ScoreBoard.cshtml" />
-    <Content Include="Views\Game\End.cshtml" />
-    <Content Include="Views\Game\FinalScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

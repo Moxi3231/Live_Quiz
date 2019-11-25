@@ -16,7 +16,6 @@ namespace Live_Quiz.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.err = false;
             //test
             DataModel db = new DataModel();
             List<Quiz> lq;
@@ -63,9 +62,8 @@ namespace Live_Quiz.Controllers
         {
             if (PinData.ht.ContainsKey(int.Parse(fc["pin"])))
             {
-                Response.Redirect("game/nickname?pin=" + fc["pin"]);
+                return Redirect("game/nickname?pin=" + fc["pin"]);
             }
-            ViewBag.err = true;
             return View("Index");
         }
         [HttpGet]
@@ -123,7 +121,7 @@ namespace Live_Quiz.Controllers
         [HttpGet]
         public ActionResult options()
         {
-            ViewBag.ua=(Hashtable)UserAns.score[int.Parse(Request.Cookies["pin"].Value.ToString())];
+            ViewBag.ua = (Hashtable)UserAns.score[int.Parse(Request.Cookies["pin"].Value.ToString())];
             return View();
         }
         [ActionName("options")]
@@ -155,7 +153,7 @@ namespace Live_Quiz.Controllers
             {
                 List<Question> q = (List<Question>)PinData.qql[int.Parse(Request.QueryString["pin"])];
                 Question ob;
-             
+
                 if (q.Count != 0)
                 {
                     ob = q[0];
@@ -164,20 +162,20 @@ namespace Live_Quiz.Controllers
                 else
                 {
                     Live.qs[int.Parse(Request.QueryString["pin"])] = "f";
-                    return View("End");
+                    return RedirectToAction("End", "game", new { pin = int.Parse(Request.QueryString["pin"]) });
                 }
                 return View(ob);
             }
         }
         [HttpGet]
         public ActionResult ScoreBoard()
-        { 
+        {
             Live.qon[int.Parse(Request.QueryString["pin"])] = "f";
             List<Question> q = (List<Question>)PinData.qql[int.Parse(Request.QueryString["pin"])];
             ICollection<Options> ol = q[0].Optionss;
-            foreach(var i in ol)
+            foreach (var i in ol)
             {
-                if(i.isAnswer)
+                if (i.isAnswer)
                 {
                     ViewBag.qans = i.ans;
                 }
@@ -185,7 +183,7 @@ namespace Live_Quiz.Controllers
             Hashtable uht = (Hashtable)UserAns.ans[int.Parse(Request.QueryString["pin"])];
             Hashtable sht = (Hashtable)UserAns.score[int.Parse(Request.QueryString["pin"])];
             List<DictionaryEntry> d;
-            d=sht.Cast<DictionaryEntry>().OrderByDescending(entry => entry.Value).ToList();
+            d = sht.Cast<DictionaryEntry>().OrderByDescending(entry => entry.Value).ToList();
             return View(d);
         }
         [ActionName("ScoreBoard")]
@@ -196,7 +194,7 @@ namespace Live_Quiz.Controllers
             {
                 List<Question> q = (List<Question>)PinData.qql[int.Parse(fc["pin"])];
                 Hashtable sht = (Hashtable)UserAns.score[int.Parse(fc["pin"])];
-               
+
                 if (fc["btn"] == "Next")
                 {
                     Live.qon[int.Parse(fc["pin"])] = "t";
@@ -220,9 +218,20 @@ namespace Live_Quiz.Controllers
             ob.Remove(Request.Params["name"]);
         }
 
-        public ActionResult End()
+        public ActionResult End(int? pin)
         {
-            return View();
+            Hashtable sht = (Hashtable)UserAns.score[pin];
+            List<DictionaryEntry> d;
+            d = sht.Cast<DictionaryEntry>().OrderByDescending(entry => entry.Value).ToList();
+
+            /*PinData.ht.Remove(pin);
+            PinData.qql.Remove(pin);
+            QuizPlayers.lu.Remove(pin);
+            UserAns.ans.Remove(pin);
+            Live.qon.Remove(pin);
+            Live.qs.Remove(pin);
+            UserAns.score.Remove(pin);*/
+            return View(d);
         }
 
         public ActionResult FinalScore()
@@ -230,7 +239,8 @@ namespace Live_Quiz.Controllers
             return View();
         }
 
-        [AllowAnonymous][HttpPost]
+        [AllowAnonymous]
+        [HttpPost]
         public void update_score()
         {
             int pin = int.Parse(Request.Cookies["pin"].Value.ToString());
@@ -238,14 +248,14 @@ namespace Live_Quiz.Controllers
             Hashtable us = (Hashtable)UserAns.score[pin];
             List<Question> q = (List<Question>)PinData.qql[pin];
             ICollection<Options> ol = (ICollection<Options>)q[0].Optionss;
-            if (Request.Params["ans"]!=null)
+            if (Request.Params["ans"] != null)
             {
                 int k = 0;
-                foreach(var i in ol)
+                foreach (var i in ol)
                 {
-                    if(i.isAnswer)
+                    if (i.isAnswer)
                     {
-                        if(k==ans)
+                        if (k == ans)
                         {
                             us[Request.Cookies["uname"].Value.ToString()] = (int)us[Request.Cookies["uname"].Value.ToString()] + q[0].Score;
                         }
