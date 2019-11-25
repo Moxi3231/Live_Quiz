@@ -187,6 +187,18 @@
     <Compile Include="Migrations\201911041237477_DM.Designer.cs">
       <DependentUpon>201911041237477_DM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911250713099_DBModel.cs" />
+    <Compile Include="Migrations\201911250713099_DBModel.Designer.cs">
+      <DependentUpon>201911250713099_DBModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911250716236_DBModel1.cs" />
+    <Compile Include="Migrations\201911250716236_DBModel1.Designer.cs">
+      <DependentUpon>201911250716236_DBModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911250720562_DBModel2.cs" />
+    <Compile Include="Migrations\201911250720562_DBModel2.Designer.cs">
+      <DependentUpon>201911250720562_DBModel2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModel.cs" />
@@ -369,6 +381,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911041237477_DM.resx">
       <DependentUpon>201911041237477_DM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911250713099_DBModel.resx">
+      <DependentUpon>201911250713099_DBModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911250716236_DBModel1.resx">
+      <DependentUpon>201911250716236_DBModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911250720562_DBModel2.resx">
+      <DependentUpon>201911250720562_DBModel2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

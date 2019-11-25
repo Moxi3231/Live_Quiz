@@ -30,6 +30,7 @@
         public virtual DbSet<QuizCollection> QuizCollections { get; set; }
         public virtual DbSet<ImageFile> Images { get; set; }
         public virtual DbSet<League> Leagues { get; set; }
+        public virtual DbSet<UserQuiz> UserQuizzes { get; set; }
     }
     public class ImageFile
     {
@@ -58,6 +59,15 @@
         public virtual ICollection<Question> Questions { get; set; }
 
 
+    }
+    public class UserQuiz
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        public int UId { get; set; }
+        [Required]
+        public int QId { get; set; }
     }
     public class QuizQuestion
     {

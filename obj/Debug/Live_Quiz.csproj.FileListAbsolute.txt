@@ -316,3 +316,6 @@ D:\Git\Live_Quiz\obj\Debug\Live_Quiz.csproj.CoreCompileInputs.cache
 D:\Git\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 D:\Git\Live_Quiz\obj\Debug\Live_Quiz.dll
 D:\Git\Live_Quiz\obj\Debug\Live_Quiz.pdb
+D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel.resources
+D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel1.resources
+D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel2.resources
