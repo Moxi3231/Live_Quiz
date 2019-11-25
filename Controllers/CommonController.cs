@@ -15,6 +15,31 @@ namespace Live_Quiz.Controllers
         
         //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
         private DataModel db = new DataModel();
+        
+        [NonAction]
+        public void updateUserLeague(string id)
+        {
+            //DataModel db = new DataModel();
+            int upid = db.UserProfiles.SingleOrDefault(x => x.AccountId == id).Id;
+
+            var res = db.UserQuizzes.Where(x => x.UId == upid).ToList();
+            int score = 0;
+            foreach (var item in res)
+            {
+                score = score + item.Score;
+            }
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var usr = UserManager.FindById(id);
+            var leagues = db.Leagues.Select(x => x);
+            foreach (var item in leagues)
+            {
+                if (item.Min_Value <= score && score <= item.Max_Value)
+                {
+                    usr.League = item.LeagueName;
+                    break;
+                }
+            }
+        }
         // GET: Common
         public ActionResult Index()
         {
@@ -63,8 +88,10 @@ namespace Live_Quiz.Controllers
                 return View("Error");
             }
             ViewBag.emFlag = false;
+            updateUserLeague(uid);
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var userr = UserManager.FindById(uid);
+
             ViewBag.uname = userr.UserName;
             ViewBag.league = userr.League;
             //var id = User.Identity.GetUserId();

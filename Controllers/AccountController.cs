@@ -20,10 +20,33 @@ namespace Live_Quiz.Controllers
             var data = System.IO.File.ReadAllText(HostingEnvironment.MapPath(@"~/App_Data/country_list.csv.txt")).Split(',');
             this.country_list = data;
         }
+        [NonAction]
+        public void updateUserLeague(string id)
+        {
+            DataModel db = new DataModel();
+            int upid = db.UserProfiles.SingleOrDefault(x => x.AccountId == id).Id;
+            var res = db.UserQuizzes.Where(x => x.UId == upid).ToList();
+            int score = 0;
+            foreach(var item in res)
+            {
+                score = score + item.Score;
+            }
+            var usr = UserManager.FindById(id);
+            var leagues = db.Leagues.Select(x => x);
+            foreach(var item in leagues)
+            {
+                if(item.Min_Value<=score && score<=item.Max_Value)
+                {
+                    usr.League = item.LeagueName;
+                    break;
+                }
+            }
+        }
         [HttpGet]
         public ActionResult EditDetails()
         {
             var id = User.Identity.GetUserId();
+            updateUserLeague(id);
             ApplicationUser usr = UserManager.FindById(id);
             if(usr==null)
             {
