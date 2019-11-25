@@ -208,7 +208,6 @@ D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csproj.GenerateResource.cache
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.dll
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.pdb
-D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache
 D:\Git\Live_Quiz\bin\Live_Quiz.dll.config
 D:\Git\Live_Quiz\bin\Live_Quiz.dll
 D:\Git\Live_Quiz\bin\Live_Quiz.pdb
@@ -319,3 +318,5 @@ D:\Git\Live_Quiz\obj\Debug\Live_Quiz.pdb
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel.resources
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel1.resources
 D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel2.resources
+D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel3.resources
+D:\Projects\Live_Quiz\obj\Debug\Live_Quiz.csprojAssemblyReference.cache

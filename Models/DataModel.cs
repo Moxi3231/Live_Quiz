@@ -44,7 +44,7 @@
         //  public Question Question { get; set; }
         //  public Options Options { get; set; }
     }
-
+   
     public class UserProfile
     {
         [Key]
@@ -68,6 +68,7 @@
         public int UId { get; set; }
         [Required]
         public int QId { get; set; }
+        public int Score { get; set; }
     }
     public class QuizQuestion
     {

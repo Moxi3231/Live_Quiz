@@ -52,7 +52,10 @@
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-success" onclick="$(location).attr('href','/Quizs/Play/@item.Id')">Play</button>
+                        <div class="btn-group">
+                            <button class="btn btn-success" onclick="$(location).attr('href','/Quizs/Play/@item.Id')">Play</button>
+                            <button class="btn btn-success" onclick="$(location).attr('href','/Common/QuizBoard?quizid=@item.Id')">LeaderBoard</button>
+                        </div>
                     </td>
                 </tr>
             }

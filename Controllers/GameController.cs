@@ -7,11 +7,17 @@ using System.Web.Mvc;
 using Live_Quiz.Models;
 using System.Collections;
 using System.Threading;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Live_Quiz.Controllers
 {
     public class GameController : Controller
     {
+        private static ApplicationDbContext context1 = new ApplicationDbContext();
+
+        UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context1));
+        DataModel db = new DataModel();
         // GET: Game
         [HttpGet]
         public ActionResult Index()
@@ -231,6 +237,35 @@ namespace Live_Quiz.Controllers
             Live.qon.Remove(pin);
             Live.qs.Remove(pin);
             UserAns.score.Remove(pin);*/
+
+          
+            var users = context1.Users.Select(x => x).ToList();
+            foreach(DictionaryEntry e in d)
+            {
+                var u = users.SingleOrDefault(x => x.UserName.ToLower() == (string)e.Key.ToString().ToLower());
+                if(u!=null)
+                {
+                    UserQuiz uq = new UserQuiz();
+                    UserProfile up = db.UserProfiles.SingleOrDefault(x => x.AccountId == u.Id);
+                    uq.UId = up.Id;
+                    uq.QId = (int)PinData.ht[pin];
+                    int xtemp = (int)PinData.ht[pin];
+                    var temp = db.UserQuizzes.SingleOrDefault(x => (x.QId == xtemp && x.UId == up.Id));
+                    if(temp==null)
+                    {
+                        uq.Score = (int)e.Value;
+                        db.UserQuizzes.Add(uq);
+                    }
+                    else
+                    {
+                        temp.Score = (int)e.Value;
+                    }   
+                   
+                    db.SaveChanges();
+                }
+            }
+
+
             return View(d);
         }
 
