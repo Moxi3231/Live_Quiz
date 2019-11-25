@@ -1,13 +1,13 @@
 ﻿@{
     ViewBag.Title = "ScoreBoard";
 }
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div class="card w-75 m-auto text-center shadow-lg">
     <div class="card-header">
         <h6 class="display-2">ScoreBoard</h6>
     </div>
     <div class="card-body">
-        @if(ViewBag.emFlag)
+        @if (ViewBag.emFlag)
         {
             <div class="alert alert-danger display-4">
                 You haven't played any quiz.
@@ -15,6 +15,7 @@
         }
         else
         {
+            <div class="display-4">Total Score: <strong id="score"></strong></div>
             <table class="table table-hover table-dark table-striped border border-light">
                 <thead>
                     <tr>
@@ -33,24 +34,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{ 
+                    @{
                         int i = 0;
+                        int tscore = 0;
                     }
-                    @foreach(Live_Quiz.Models.UserQuizView usr in ViewBag.res)
+                    @foreach (Live_Quiz.Models.UserQuizView usr in ViewBag.res)
                     {
-                    <tr>
-                        <td>@i</td>
-                        <td>@usr.QuizName</td>
-                        <td>@usr.Score</td>
-                        <td>
-                            <a href="/Common/QuizBoard?quizid=@usr.QuizId">Top 5 for @usr.QuizName</a>
-                        </td>
-                    </tr>
+                        tscore += usr.Score;
+                        <tr>
+                            <td>@i</td>
+                            <td>@usr.QuizName</td>
+                            <td>@usr.Score</td>
+                            <td>
+                                <a href="/Common/QuizBoard?quizid=@usr.QuizId">Top 5 for @usr.QuizName</a>
+                            </td>
+                        </tr>
                         i = i + 1;
                     }
+
+
+
                 </tbody>
             </table>
+            <input type="hidden" value="@tscore" id="gg" />
         }
+
     </div>
 </div>
 
+<script>
+    function tfunc() {
+           $("#score").html($("#gg").val());
+    }
+    $(document).ready(function () {
+
+        setTimeout(tfunc, 2000);
+    });
+    
+</script>

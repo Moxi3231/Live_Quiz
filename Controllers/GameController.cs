@@ -303,5 +303,17 @@ namespace Live_Quiz.Controllers
                 }
             }
         }
+
+
+        public ActionResult OneOnOne(int? quizid)
+        {
+            if(quizid==null)
+            {   
+                ViewBag.error = "Access Denied";
+                return View("Error");
+            }
+
+            return View();
+        }
     }
 }
