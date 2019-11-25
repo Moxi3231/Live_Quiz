@@ -1,0 +1,26 @@
+﻿@using Live_Quiz.Models
+@using System.Collections
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="card-columns">
+    @foreach (Collection x in ViewBag.Collection)
+    {
+       
+    <div class="card">
+        <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
+            <img id="@x.Id" onclick="modalImageZoom(@x.Id)" class="card-img-top" src="/Collections/RetrieveImage/@x.ImageId" alt="@x.Name" />
+        </button>
+        <div class="card-body">
+            <h5 class="card-title">@x.Name</h5>
+            <p class="card-text">@x.Description</p>
+        </div>
+        &nbsp;&nbsp; @Html.ActionLink("Details", "Details", new { id = x.Id })
+
+    </div>
+
+    }
+
+</div>

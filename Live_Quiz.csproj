@@ -374,10 +374,12 @@
     <Content Include="Views\Common\QuizBoard.cshtml" />
     <Content Include="Views\Common\UserBoard.cshtml" />
     <Content Include="Views\Game\OneOnOne.cshtml" />
+    <Content Include="Views\Explore\Index.cshtml" />
+    <Content Include="Views\Explore\Details.cshtml" />
+    <Content Include="Views\Explore\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Explore\" />
     <Folder Include="Views\OnePlayerMode\" />
   </ItemGroup>
   <ItemGroup>

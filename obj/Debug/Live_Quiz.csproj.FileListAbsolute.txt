@@ -430,3 +430,9 @@ E:\Programs\Live_Quiz\obj\Debug\Live_Quiz.csproj.GenerateResource.cache
 E:\Programs\Live_Quiz\obj\Debug\Live_Quiz.csproj.CopyComplete
 E:\Programs\Live_Quiz\obj\Debug\Live_Quiz.dll
 E:\Programs\Live_Quiz\obj\Debug\Live_Quiz.pdb
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DM.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel1.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel2.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.Migrations.DBModel3.resources
+C:\Users\hp\OneDrive\Documents\GitHub\Live_Quiz\obj\Debug\Live_Quiz.csproj.GenerateResource.cache
