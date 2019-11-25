@@ -33,12 +33,7 @@
                         <td>
                             Score
                         </td>
-                        <td>
-                            Country
-                        </td>
-                        <td>
-                            League
-                        </td>
+                      
                     </tr>
                 </thead>
                 <tbody>
@@ -52,20 +47,7 @@
                         <td>
                         <a href="/Common/UserBoard?uid=@usr.uid">@usr.Uname</a></td>
                         <td>@usr.score</td>
-                        <td>
-                           @usr.country
-                            @if(usr.country==null)
-                            {
-                                <p>Undefined</p>
-                            }
-                        </td>
-                        <td>
-                            @usr.league
-                            @if (usr.league == null)
-                            {
-                                <p>Undefined</p>
-                            }
-                        </td>
+                       
                     </tr>
                         i = i + 1;
                     }
