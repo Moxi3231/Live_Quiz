@@ -94,6 +94,10 @@ namespace Live_Quiz.Controllers
             Hashtable us = (Hashtable)UserAns.score[int.Parse(Request.QueryString["pin"])];
             Hashtable b = (Hashtable)UserAns.block[int.Parse(Request.QueryString["pin"])];
             ArrayList ob = (ArrayList)QuizPlayers.lu[int.Parse(Request.QueryString["pin"])];
+            if(us.ContainsKey(fc["name"]))
+            {
+                return View("nickname");
+            }
             Session["pin"] = int.Parse(Request.QueryString["pin"]);
             Session["name"] = fc["name"];
             Response.Cookies["pin"].Value = Request.QueryString["pin"];
