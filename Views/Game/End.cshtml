@@ -43,13 +43,17 @@
             }
         </table>
         <hr />
+        @using (Html.BeginForm("remoq", "game", FormMethod.Post))
+        {
         <p class="btn btn-link text-center btn-block">
             <div class="form-group">
                 <div>
-                    <input type="button" onclick="go()" value="Home" class="btn btn-outline-success w-100" />
+                    <input type="submit" name="btn" value="Home" class="btn btn-outline-success w-100" />
+                    <input type="hidden" value="@Request.QueryString["pin"]" name="pin"/>
                 </div>
             </div>
         </p>
+        }
     </div>
     </div>
 

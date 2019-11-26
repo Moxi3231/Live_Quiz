@@ -1,0 +1,60 @@
+﻿@model Live_Quiz.Models.Question
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 class="display-3 text-center">Delete</h2>
+
+<div class="card text-center w-75 m-auto">
+    <div class="card-header">
+        <h4>Question</h4>
+
+        <h3 class="alert alert-warning">Are you sure you want to delete this?</h3>
+    </div>
+    <dl class="card-body">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPublic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPublic)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Delete" class="btn btn-block btn-outline-danger" />
+        <hr />
+        <div class="alert alert-info">
+            
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

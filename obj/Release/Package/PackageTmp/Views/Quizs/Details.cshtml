@@ -1,0 +1,122 @@
+﻿@model Live_Quiz.Models.Quiz
+@using Live_Quiz.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="display-4 text-center">Details for Quiz <b>@Model.Name</b></h2>
+
+<div class="card shadow w-75 m-auto text-center">
+    <h4 class="card-header">Quiz</h4>
+    <hr />
+    <dl class="card-body">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPublic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPublic)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="w-75 m-auto alert alert-info text-center">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center" })
+</div>
+<br />
+<h2 class="card-header text-center display-2 w-75 m-auto">Questions For Quiz</h2>
+<div class="card card-body w-75 m-auto shadow text-center" data-aos="flip-right" data-aos-duration="2000">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                Description
+            </th>
+            
+          
+            <th></th>
+        </tr>
+        @if(ViewBag.q.Count==0)
+        {
+            <tr>
+                <th colspan="2" class="alert alert-danger">
+                    No Question In This Quiz.<br />
+                    Add From Below.
+                </th>
+            </tr>
+        }
+        @foreach (Question item in ViewBag.q)
+        {
+            <tr>
+                <td>
+                    @item.Description
+                </td>
+                
+                
+                <td>
+                    <a id="1" href="/Questions/Edit?id=@item.QuestionId">Edit</a>
+
+                    |<a id="1" href="/Questions/Details?id=@item.QuestionId">Details</a>|
+                    <a id="1" href="/Questions/Delete?id=@item.QuestionId">Delete</a>|
+                    <a class="text-danger" href="/Quizs/RemoveQuestionFromQuiz?qid=@item.QuestionId&qizid=@Model.Id">Remove from @Model.Name</a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<br />
+<hr />
+<div class="card text-center shadow w-75 m-auto" data-aos="zoom-out-right" data-aos-delay="1000">
+    <div class="card-header display-3">
+        Add From Previously Created Questions.
+    </div>
+    <div class="card-body">
+        @if (ViewBag.Qbank.Count == 0)
+        {
+            <div class="alert alert-danger">No Question Available.</div>
+        }
+        else
+        {
+
+
+            using (Html.BeginForm("QuestionBank", "Quizs", FormMethod.Post))
+            {
+            <div class="form-group">
+
+                <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.quizid" />
+                <br>
+                <select id="Qbank" class="form-control text-center w-50 m-auto" name="Qbank">
+                    @foreach (Live_Quiz.Models.Question item in ViewBag.Qbank)
+                    {
+                        <option class="text-center" value="@item.QuestionId">@item.Description</option>
+                    }
+                </select>
+                <hr />
+                <input class="btn w-50 m-auto btn-outline-success btn-block" type="submit" value="Add" />
+
+            </div>
+
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+<div class="card alert shadow-lg text-capitalize text-center">
+    <div class="card-header shadow-lg">
+        <h1 class="text-danger display-1">Error.</h1>
+    </div>
+    <div class="card-body alert-danger">
+
+       
+        <h2 class="text-danger">An error occurred while processing your request.</h2>
+        <hr />
+        <h3 class="text-danger">
+        @if(ViewBag.error==null)
+        {
+            <span>Access Denied.</span>
+        }
+        @foreach (char c in ViewBag.error) {
+            if (c == '\n')
+            {
+                <br />
+            }
+            else
+            {
+                @c;
+            }
+        }</h3>
+
+
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="btn-group dropright" data-aos="zoom-in" data-aos-duration="1500">
+        <a class="btn btn-outline-dark form-inline" href="/game/index">Enter Game Pin</a>
+        &nbsp;
+        <button type="button" class="btn btn-outline-dark disabled">@User.Identity.GetUserName()</button>
+        <button onclick="changeUpDown()" type="button" class="btn btn-outline-dark" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <i id="changeUD" class="fas fa-chevron-circle-down m-n1"></i>
+        </button>
+
+
+
+    </div>
+
+
+
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right form-inline"><li>
+       <a class="btn btn-outline-info form-inline" href="/game/index">Enter Game Pin</a>&nbsp;
+       @Html.ActionLink("SignIn", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) <i class="fas fa-sign-in-alt"></i></li>
+    </ul>
+}

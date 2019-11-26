@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "nickname";
+}
+
+<form action="nickname?pin=@Request.QueryString["pin"]" method="post">
+    <div class="card w-75 m-auto shadow">
+        <div class="card-header text-center">
+            <h4>NickName</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 w-100">
+
+                    @if (!Request.IsAuthenticated)
+                    {
+
+                        <div class="form-group">
+                            <h4>Enter Name here</h4>
+                            @Html.TextBox("name", null, new { @class = "form-control" })
+                        </div>
+                    }
+                    else
+                    {
+                <div class="form-group">
+                    <h4>UserName</h4>
+                    @Html.Hidden("name",User.Identity.Name)
+                    <input    type="text" class="form-control" disabled value="@User.Identity.Name"/>
+                </div>
+                    }
+                </div>
+                <div class="col-md-4 w-100 h-100 m-auto" style="font-size:22px;">
+                    <i class="fab fa-kickstarter-k fa-10x"></i>
+                </div>
+            </div>
+            <hr />
+            <p class="btn btn-link text-center btn-block">
+                <div class="form-group">
+                    <div>
+                        <input type="submit" value="Enter" class="btn btn-outline-success w-100" />
+                    </div>
+                </div>
+            </p>
+        </div>
+    </div>
+</form>

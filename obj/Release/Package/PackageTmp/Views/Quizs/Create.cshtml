@@ -1,0 +1,97 @@
+﻿@model Live_Quiz.Models.Quiz
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2 class="display-3 text-center">Create</h2>
+
+@if (ViewBag.error != null && ViewBag.error)
+{
+    <div class="w-75 m-auto text-center alert alert-danger text-capitalize">
+        @ViewBag.errormessage
+    </div>
+}
+@using (Html.BeginForm("Create", "Quizs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+                @Html.AntiForgeryToken()
+
+                <div class="card text-center font-weight-bold w-75 m-auto">
+        <h4 class="card-header">Quiz</h4>
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.isPublic, htmlAttributes: new { @class = "from-control" })
+
+
+                @Html.EditorFor(model => model.isPublic, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.isPublic, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group w-25 m-auto">
+                <label>Collection</label>
+
+
+                @Html.DropDownList("coll")
+
+                @{
+                    var x = ViewData["coll"] as IEnumerable<SelectListItem>;
+                    if (x.Count() == 0)
+                    {
+                        Response.Redirect("/Collections/Create?error=nocollection");
+                    }
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="Image">Upload Image</label>
+                <input type="file" class="form-control" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+                <p class="alert alert-danger " id="fileError" style="display: none;">Only image is allowed.</p>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn  btn-outline-secondary w-100">Create</button>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.noFile != null)
+{
+    <div class="w-75 m-auto alert alert-danger text-center">
+        @ViewBag.noFile
+    </div>
+}
+
+<div class="w-75 m-auto alert alert-info text-center">
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center" })
+</div>
+
+<script>
+    document.getElementById("coll").classList.add("form-control");
+</script>
+<script>
+    var flag = false;
+    function change() {
+        flag = !flag;
+        $("#isPublic").val(flag);
+        //alert($("#isPublic").val());
+    }
+</script>

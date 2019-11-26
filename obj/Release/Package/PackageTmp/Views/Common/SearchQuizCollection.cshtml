@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "SearchQuizCollection";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/CSS/StyleSheet1.css")" type="text/css" />
+<h2 class="text-center">Search Quiz or Collection</h2>
+<hr />
+<br />
+
+<div data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="1000">
+    <div action="" class="search" id="search">
+        <input value="@ViewBag.Searched_Value" type="search" id="svalue" class="inputsearch shadow-lg" onchange="submitChangedValue()" placeholder="Search for Quizes or Collections">
+        <i id="iconchange" onclick="change()" class="fa fa-search"></i>
+    </div>
+</div>
+
+<div class="container-fluid">
+    @if (ViewBag.isValAvail)
+    {
+        <h5 class="card-body text-center">Search Results: @ViewBag.Searched_Value</h5>
+        if (ViewBag.collections.Count != 0)
+        {
+            <div class="card shadow text-center">
+
+
+                <div class="card-header">
+                    Collections: @ViewBag.Searched_Value
+                </div>
+                <div class="card-body">
+                    <table class="table table-active table-bordered table-responsive-sm">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>Author</th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                <b>Image</b>
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                        @foreach (Live_Quiz.Models.Collection item in ViewBag.collections)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td>
+                                    @item.Description
+                                </td>
+
+
+                                <td>
+                                    <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
+                                        <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain" src="/Collections/RetrieveImage/@item.ImageId" alt="@item.Name" height=40 width=100 />
+                                    </button>
+                                </td>
+                                <td>
+                                    <a href="/Common/ViewCollectionQuiz?CollectionId=@item.Id" class="btn btn-success">Show Quizes</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+        if (ViewBag.quizs.Count != 0)
+
+
+        { <div class="card shadow text-center">
+
+
+                <div class="card-header">
+                    Quizzes: @ViewBag.Searched_Value
+                </div>
+                <div class="card-body">
+                    <table class="table table-active table-bordered table-responsive-sm">
+                        <tr>
+                            <th>
+                               Name
+                            </th>
+                           
+                            <th>
+                               Description
+                            </th>
+                            <th>
+                                <b>Image</b>
+                            </th>
+                           <th>
+
+                           </th>
+                        </tr>
+                        @foreach (Live_Quiz.Models.Quiz item in ViewBag.quizs)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                             <td>
+                                 @item.Description
+                             </td>
+                               
+
+                                <td>
+                                    <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
+                                        <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain"  alt="@item.Name" height=40 width=100 />
+                                    </button>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-success" onclick="$(location).attr('href','/Quizs/Play/@item.Id')">Play</button>
+                                        <button class="btn btn-success" onclick="$(location).attr('href','/Common/QuizBoard?quizid=@item.Id')">LeaderBoard</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+        <div>
+            @if (ViewBag.collections.Count == 0 && ViewBag.quizs.Count == 0)
+            {
+                <div class="alert alert-danger text-center">
+                    No Quiz Or Collection of such value found.
+                </div>
+            }
+            else if (ViewBag.collections.Count == 0 || ViewBag.quizs.Count == 0)
+            {
+                if (ViewBag.collections.Count == 0)
+                {
+                    <div class="alert alert-danger text-center">
+                        No Collection of such value found.
+                    </div>
+                }
+                if (ViewBag.quizs.Count == 0)
+                {
+                    <div class="alert alert-danger text-center">
+                        No Quiz of such value found.
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+<script>
+   
+        function submitChangedValue() {
+            var value = $("#svalue").val();
+            $(location).attr("href", "/Common/SearchQuizCollection?value=" + value);
+        }
+        var changeflag = false;
+        function change() {
+            if (!changeflag) {
+                document.getElementById("search").style.width = "50%";
+                $("#iconchange").removeClass("fa-search").addClass("fa-times");
+                $("#svalue").css({ "display": "block" });
+
+            }
+            else {
+                document.getElementById("search").style.width = "0%";
+
+                $("#svalue").css({ "display": "none" });
+                $("#iconchange").removeClass("fa-times").addClass("fa-search");
+
+            }
+            changeflag = !changeflag
+        }
+
+</script>

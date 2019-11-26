@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Live_Quiz.Models.League>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <div class="card w-75 m-auto">
+        <div class="card-header">
+            <h2>Index</h2>
+        </div>
+      
+        <div class="card-body">
+
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LeagueName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Min_Value)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Max_Value)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LeagueName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Min_Value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Max_Value)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>

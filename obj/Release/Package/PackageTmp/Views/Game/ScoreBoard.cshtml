@@ -1,0 +1,75 @@
+﻿@using System.Collections;
+@using Live_Quiz.Models;
+@model List<DictionaryEntry>
+
+@{
+    ViewBag.Title = "ScoreBoard";
+}
+
+
+@using (Html.BeginForm("ScoreBoard", "game", FormMethod.Post))
+{
+    <input type="hidden" name="pin" value="@Request.QueryString["pin"]">
+    <div class="card w-75 m-auto shadow">
+        <div class="card-header">  
+            <h2>
+                Answer
+            </h2>
+        </div>
+        <div class="card-body">
+            <center>
+                <h1>
+                    Correct answer is: @ViewBag.qans
+                </h1>
+            </center>
+        </div>
+    </div><br />
+    <div class="card w-75 m-auto shadow">
+        <div class="card-header">  
+            <h2>
+                Result
+            </h2>
+        </div>
+        <div class="card-body">
+            <table class="table" id="utable" style="font-size:24px;">
+                <tr style="font-size:30px;">
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        Score
+                    </td>
+                </tr>
+                @foreach (DictionaryEntry i in Model)
+                {
+                    <tr>
+                        <td>
+                            @i.Key
+                        </td>
+                        <td>
+                            @if (Session[(string)i.Key] != null)
+                            {
+                                if ((string)UserAns.block[Session[(string)i.Key]] == "t")
+                                {
+                                    @:block
+                                }
+                            }
+                            else
+                            {
+                                @i.Value
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+            <hr />
+            <p class="btn btn-link text-center btn-block">
+                <div class="form-group">
+                    <div>
+                        <input type="submit" name="btn" value="Next" class="btn btn-warning w-100" />
+                    </div>
+                </div>
+            </p>
+        </div>
+        </div>
+}

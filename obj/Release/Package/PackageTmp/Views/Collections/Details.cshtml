@@ -1,0 +1,150 @@
+﻿@model Live_Quiz.Models.Collection
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="text-center">Details</h2>
+
+<div class="card w-75 m-auto shadow">
+
+    <div class="card-header text-center">
+        @Html.ActionLink("Edit", "Edit", new { Id = Model.Id }, new { @class = "alert alert-info text-center m-auto d-inline floatleft" })
+        <h4 class=" text-center d-inline text-capitalize text-center">
+
+            Collection
+        </h4>
+    </div>
+    <dl class="card-body text-center">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr />
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+            <hr />
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isPublic)
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isPublic)
+            <hr />
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+
+
+        </dd>
+
+    </dl>
+</div>
+
+<br />
+<hr />
+
+<div class="card text-center w-75 m-auto shadow" data-aos="zoom-in-right" data-aos-duration="1000">
+    <div class="card-header">
+        <h2 class="display-4">Quiz Lists</h2>
+    </div>
+    <div class="card-body">
+
+
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>
+                    Name
+                </th>
+               
+
+                <th></th>
+            </tr>
+            @if (ViewBag.Quizes.Count == 0)
+            {
+                <tr>
+                    <td class="alert alert-danger" colspan="5">
+                        No Quiz found.<br />
+                        <a href="/Quizs/Create" class="btn btn-secondary">Create</a>
+                    </td>
+                </tr>
+            }
+            @foreach (Live_Quiz.Models.Quiz item in ViewBag.Quizes)
+            {
+                <tr data-aos="zoom-in-left" data-aos-delay="1000">
+                    <td>
+                        @item.Name
+                    </td>
+                    
+                    <td>
+                        @Html.ActionLink("Edit", "Edit","Quizs", new { id = item.Id },new { }) |
+                        @Html.ActionLink("Details", "Details","Quizs", new { id = item.Id },new { }) |
+                        @Html.ActionLink("Delete", "Delete","Quizs", new { id = item.Id },new { @class="text-danger"})|
+                        <a class="text-danger" href="/Collections/RemoveQuizFromCollection?qid=@item.Id&cid=@Model.Id">Remove @item.Name from @Model.Name</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+
+<br />
+<hr />
+<div class="card text-center shadow w-75 m-auto" data-aos="zoom-out-right" data-aos-delay="1000">
+    <div class="card-header display-3">
+        Add From Previously Created Quiz.
+    </div>
+    <div class="card-body">
+        @if (ViewBag.availQuiz.Count == 0)
+        {
+            <div class="alert alert-danger">No Quiz Available.</div>
+        }
+        else
+        {
+
+            using (Html.BeginForm("AddQuizToCollection", "Collections", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.collectionid" />
+                    <select id="quizid" class="form-control text-center w-50 m-auto" name="quizid">
+                        @foreach (Live_Quiz.Models.Quiz item in ViewBag.availQuiz)
+                        {
+                            <option class="text-center" value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    <button class="btn w-75 m-auto btn-outline-success btn-block">Add quiz to current collection.</button>
+                </div>
+
+                }
+            }
+        </div>
+</div>
+
+
+<br />
+<hr />
+    
+<div class="w-75 m-auto alert alert-info  text-center m-5 shadow">
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center m-auto" })
+
+</div>

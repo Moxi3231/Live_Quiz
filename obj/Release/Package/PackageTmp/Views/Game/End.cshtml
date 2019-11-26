@@ -1,0 +1,62 @@
+﻿@using System.Collections;
+@using Live_Quiz.Models;
+@model List<DictionaryEntry>
+
+<div class="card w-75 m-auto shadow">
+    <div class="card-header">
+        <center>
+            <h2>
+                Final score
+            </h2>
+        </center>
+    </div>
+    <div class="card-body">
+        <table class="table" id="utable" style="font-size:24px;">
+            <tr style="font-size:30px;">
+                <td>
+                    Name
+                </td>
+                <td>
+                    Score
+                </td>
+            </tr>
+            @foreach (DictionaryEntry i in Model)
+            {
+                <tr>
+                    <td>
+                        @i.Key
+                    </td>
+                    <td>
+                        @if (Session[(string)i.Key] != null)
+                        {
+                            if ((string)UserAns.block[Session[(string)i.Key]] == "t")
+                            {
+                                @:block
+                            }
+                        }
+                        else
+                        {
+                            @i.Value
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+        <hr />
+        <p class="btn btn-link text-center btn-block">
+            <div class="form-group">
+                <div>
+                    <input type="button" onclick="go()" value="Home" class="btn btn-outline-success w-100" />
+                </div>
+            </div>
+        </p>
+    </div>
+    </div>
+
+<script>
+    function go() {
+        window.location="/Home"
+    }
+</script>
+
+

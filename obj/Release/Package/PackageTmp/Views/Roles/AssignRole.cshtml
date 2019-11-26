@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "AssignRole";
+}
+<div class="card w-75 m-auto text-center">
+    <div class="card-header">
+        <h2 class="display-4">AssignRole</h2>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("AssignRole", "Roles", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+        <table class="table table-bordered table-hover table-light border border-dark">
+            @if (!ViewBag.isRoleSelected)
+            {
+                <tr>
+                    <th>
+                        <p>Select Role<i class="fas fa-project-diagram"></i></p>
+                    </th>
+                    <td>
+                        <select class="form-control" id="role" name="role" required onchange="displayUser()">
+                            <option>Select Role</option>
+                            @foreach (var item in ViewBag.roles)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th colspan="2">
+                        <p>Selected Role: <b>@ViewBag.rolename</b></p>
+                        <input type="hidden" value="@ViewBag.rolename" id="role" name="role" />
+
+                    </th>
+
+
+
+                </tr>
+            }
+            @if (ViewBag.isRoleSelected)
+            {
+                if (ViewBag.Modal.Count==0)
+                {
+                    <tr>
+                        <th colspan="2">
+                            <div class="alert alert-danger">
+                                No user avaiable for this role.
+
+                            </div>
+                            <button type="reset" class="btn btn-outline-danger w-25" onclick="$(location).attr('href','/Roles/AssignRole')">Reset</button>
+                        </th>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th>
+                            Select User<i class="fas fa-user"></i>
+                        </th>
+                        <td>
+                            <select required class="form-control" id="userid" name="userid">
+                                @foreach (var item in ViewBag.Modal)
+                                {
+                                    <option value="@item.Id"> @item.Email </option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th colspan="2">
+                            <button type="submit" class="btn btn-outline-secondary w-25">Submit</button>
+                            <button type="reset" class="btn btn-outline-danger w-25" onclick="$(location).attr('href','/Roles/AssignRole')">Reset</button>
+                        </th>
+                    </tr>
+                }
+
+            }
+        </table>
+        }
+    </div>
+</div>
+
+<input type="hidden" value="@ViewBag.role" id="s_role" />
+<script>
+    $(document).ready(function () {
+        alert();
+    });
+
+    function displayUser() {
+        var role = $("#role").val();
+        if (role == '') {
+            //alert("Vaalue Cannot Be Empty");
+        }
+        else {
+            $(location).attr('href', '/Roles/AssignRole?role=' + role);
+        }
+    }
+</script>

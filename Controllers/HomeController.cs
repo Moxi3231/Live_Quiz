@@ -15,7 +15,7 @@ namespace Live_Quiz.Controllers
         public ActionResult Index()
         {
             DataModel db = new DataModel();
-            List<Quiz> lq;
+            /*List<Quiz> lq;
             lq = db.Quizs.Where(q => q.isPublic == true).ToList();
             foreach (var q in lq)
             {
@@ -25,11 +25,12 @@ namespace Live_Quiz.Controllers
                     PinData.qql.Add(PinData.pin, new List<Question>());
                     QuizPlayers.lu.Add(PinData.pin, new ArrayList());
                     UserAns.ans.Add(PinData.pin, new Hashtable());
+                    UserAns.block.Add(PinData.pin, new Hashtable());
                     Live.qon.Add(PinData.pin, "f");
                     Live.qs.Add(PinData.pin, "t");
                     UserAns.score.Add(PinData.pin++, new Hashtable());
                 }
-            }
+            }*/
             return View();
         }
 

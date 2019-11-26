@@ -371,9 +371,11 @@
     <Content Include="Views\Common\ScoreBoard.cshtml" />
     <Content Include="Views\Common\QuizBoard.cshtml" />
     <Content Include="Views\Common\UserBoard.cshtml" />
+    <Content Include="Views\Game\UserEnd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,8 +5,13 @@
     ViewBag.Title = "options";
 }
 <div id="main">
+    @if (Live.qs.ContainsKey(int.Parse(Request.Cookies["pin"].Value.ToString())))
+    {
+        @Url.Action("index", "Home");
+    }
     @if ((string)Live.qs[int.Parse(Request.Cookies["pin"].Value.ToString())] == "f")
     {
+        Url.Action("UserEnd", "game");
         <div class="card w-75 m-auto shadow">
             <div class="card-header">
                 <center>
@@ -27,14 +32,14 @@
                 <p class="btn btn-link text-center btn-block">
                     <div class="form-group">
                         <div>
-                            <input type="button" onclick='window.location="/Home"' value="Home" class="btn btn-outline-success w-100" />
+                            <input type="button" onclick='window.location="/game"' value="Home" class="btn btn-outline-success w-100" />
                         </div>
                     </div>
                 </p>
             </div>
         </div>
     }
-    else if ((string)UserAns.block[Request.Cookies["uname"].Value.ToString()] == "t")
+    else if ((string)Model[Request.Cookies["uname"].Value.ToString()] == "t")
     {
         <div class="card w-75 m-auto shadow">
             <div class="card-header">

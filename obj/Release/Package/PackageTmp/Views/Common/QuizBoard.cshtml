@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "QuizBoard";
+}
+
+
+@{
+    ViewBag.Title = "ScoreBoard";
+}
+
+<div class="card w-75 m-auto text-center shadow-lg">
+    <div class="card-header">
+        <h6 class="display-2">Top 5 for <b>@ViewBag.qname</b></h6>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.emFlag)
+        {
+            <div class="alert alert-danger display-4">
+               No quiz played for this qquiz
+            </div>
+        }
+        else
+        {
+            <table class="table table-hover table-dark table-striped border border-light">
+                <thead>
+                    <tr>
+                        <td>
+                            #
+                        </td>
+                        <td>
+                            UserName
+                        </td>
+                        <td>
+                            Score
+                        </td>
+                        <td>
+                            Country
+                        </td>
+                        <td>
+                            League
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (Live_Quiz.Models.UserQuizModal usr in ViewBag.res)
+                    {
+                    <tr>
+                        <td>@i</td>
+                        <td>
+                        <a href="/Common/UserBoard?uid=@usr.uid">@usr.Uname</a></td>
+                        <td>@usr.score</td>
+                        <td>
+                           @usr.country
+                            @if(usr.country==null)
+                            {
+                                <p>Undefined</p>
+                            }
+                        </td>
+                        <td>
+                            @usr.league
+                            @if (usr.league == null)
+                            {
+                                <p>Undefined</p>
+                            }
+                        </td>
+                    </tr>
+                        i = i + 1;
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

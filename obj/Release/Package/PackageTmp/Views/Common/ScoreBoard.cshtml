@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "ScoreBoard";
+}
+
+<div class="card w-75 m-auto text-center shadow-lg">
+    <div class="card-header">
+        <h6 class="display-2">ScoreBoard</h6>
+    </div>
+    <div class="card-body">
+        @if(ViewBag.emFlag)
+        {
+            <div class="alert alert-danger display-4">
+                You haven't played any quiz.
+            </div>
+        }
+        else
+        {
+            <table class="table table-hover table-dark table-striped border border-light">
+                <thead>
+                    <tr>
+                        <td>
+                            #
+                        </td>
+                        <td>
+                            Quiz
+                        </td>
+                        <td>
+                            Score
+                        </td>
+                        <td>
+                            TOP
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ 
+                        int i = 0;
+                    }
+                    @foreach(Live_Quiz.Models.UserQuizView usr in ViewBag.res)
+                    {
+                    <tr>
+                        <td>@i</td>
+                        <td>@usr.QuizName</td>
+                        <td>@usr.Score</td>
+                        <td>
+                            <a href="/Common/QuizBoard?quizid=@usr.QuizId">Top 5 for @usr.QuizName</a>
+                        </td>
+                    </tr>
+                        i = i + 1;
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+

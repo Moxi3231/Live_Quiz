@@ -1,0 +1,254 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" type="image/png" href="@Url.Content("/Content/Images/Quiz.png")" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+
+<body style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
+    <div class="pos-f-t sticky-top" style="z-index:2;">
+        <nav class="navbar navbar-light bg-light shadow">
+            <div class="btn-group-">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <button class="btn btn-lg " type="button" data-toggle="collapse" data-target="#adminPanel" aria-controls="adminPanel" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-circle-notch fa-1x rotate180"></i>
+                    </button>
+                }
+            </div>
+            <span>
+                <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" data-aos="zoom-in-right" height="35" width="35" alt="...">
+                @Html.ActionLink("Live_Quiz", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </span>
+
+            <div class="navbar-nav">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+
+
+        <div class="collapse" id="collapseExample" >
+            <div class="m-auto   shadow-lg" style="position:fixed; float:right; overflow-x:hidden; z-index:9; width:20%; height:100%; background-color:transparent; right:0; background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
+                <br />
+                <i class="fas fa-user-edit fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
+                <br />
+                <br />
+                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-info p-2  ", @style = "width:95%; margin-left:2.5%; color:black;" })
+                <br />
+                <br />
+                <i class="fas fa-sign-out-alt fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
+
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-sm btn-danger  p-2 " style="width:95%; margin-left:2.5%;">Log Off</a>
+                <br /><br />
+
+            </div>
+        </div>
+        <div class="collapse shadow-sm" id="navbarToggleExternalContent" >
+            <div class="bg-transparent m-1 p-1 text-center text-black-50 "  style=" background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;  ">
+                <span>@Html.ActionLink("Home", "Index", "Home")&nbsp;<i class="fas fa-home text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("About", "About", "Home")&nbsp;<i class="fas fa-circle-notch text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("Contact", "Contact", "Home")&nbsp;<i class="fas fa-address-book text-dark"></i></span>
+            </div>
+        </div>
+
+        <div class="collapse shadow-sm" id="adminPanel">
+            <div class="bg-white m-1 p-1 text-center text-black-50 " >
+                <span>@Html.ActionLink("Create Role", "CreateRole", "Roles")&nbsp;<i class="fas fa-plus text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("View Roles", "ViewRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("Assign Role To User", "AssignRole", "Roles")&nbsp;<i class="fas fa-edit text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("View User's Role's", "ViewUserRoles", "Roles")&nbsp;<i class="fas fa-eye text-dark"></i></span>
+                <br />
+                <span>@Html.ActionLink("Manage League", "Index", "Leagues")&nbsp;<i class="fas fa-eye text-dark"></i></span>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="mySidepanel" class="sidepanel  shadow-lg text-black-50" style="background: url(@Url.Content("~/Content/Images/back4.jpg")) no-repeat center center fixed;
+    background-size: cover;  background-blend-mode: overlay;   ">
+        <p style=" position: absolute; top: 10px; left: 5px; font-size: 36px; margin-left: 50px;">
+            <img src="@Url.Content("/Content/Images/Quiz.png")" class="rounded mr-2" data-aos="zoom-in-right" height="35" width="35" alt="...">
+            QuizIt
+        </p>
+        <a href="javascript:void(0)" class="closebtn " onclick="closeNav()"> <i class="fas fa-times rotate180"></i></a>
+        <hr class="text-white  border-top border-white" />
+        @Html.ActionLink("Collections", "Index", "Collections/", new { }, new { @class = "" })
+        @Html.ActionLink("Explore", "SearchQuizCollection", "Common/", new { }, new { @class = "" })
+        @Html.ActionLink("Quizs", "Index", "Quizs", new { }, new { @class = "" })
+        @Html.ActionLink("Questions", "Index", "Questions", new { }, new { @class = "" })
+
+    </div>
+
+    <br />
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="buttonLeft shakeClass">
+            <button class="btn btn-dark right" onclick="openNav()"><i class="fas fa-angle-right mx-n3" style="font-size:45px;"></i></button>
+        </div>
+    }
+    else
+    {
+        <div class="" style="height:50px;"></div>
+    }
+    <div class=" container-fluid body-content shadow-sm w-100 " data-aos="flip-right" data-aos-duration="2500" style="margin-top:-50px;">
+        @RenderBody()
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close"><i class="fas fa-times rotate180"></i></span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+   
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="https://kit.fontawesome.com/d573236f31.js" crossorigin="anonymous"></script>
+    <script>
+
+        var modal = document.getElementById("myModal");
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+
+
+
+
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        function modalImageZoom(id) {
+            var img = document.getElementById(id);
+            modal.style.display = "block";
+            modalImg.src = img.src;
+            captionText.innerHTML = img.alt;
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+
+        var flagupDown = false;
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "350px";
+        }
+
+        /* Set the width of the sidebar to 0 (hide it) */
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+        function changeUpDown() {
+            flagupDown = !flagupDown;
+            if (flagupDown) {
+                $("#changeUD").removeClass("fa-chevron-circle-down");
+                $("#changeUD").addClass("fa-chevron-circle-up");
+
+            } else {
+                $("#changeUD").removeClass("fa-chevron-circle-up");
+                $("#changeUD").addClass("fa-chevron-circle-down");
+            }
+        }
+
+
+
+        function fileCheck(obj) {
+            $("#fileSubmit").removeClass("disabled");
+            var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+            if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+                $("#fileSubmit").addClass("disabled");
+                $("#fileError").css({ "display": "block" }).hide().fadeIn(1500);
+
+            }
+            else {
+                $("#fileError").css({ "display": "none" }).fadeOut(1500);
+            }
+
+        }
+
+        $("a").each(function (elem) {
+            if (this.innerHTML == "Edit") {
+                $("<i class=\"fas fa-edit\"></>").appendTo(this);
+                this.classList.add("text-warning");
+            }
+            if (this.innerHTML == "Details") {
+                $("<i class=\"fas fa-info\"></>").appendTo(this);
+                this.classList.add("text-success");
+            }
+            if (this.innerHTML == "Delete") {
+                $("<i class=\"fas fa-trash\"></>").appendTo(this);
+                this.classList.add("text-danger");
+            }
+            if (this.innerHTML == "Create New") {
+                $("<i class=\"fas fa-plus rotate180\"></>").appendTo(this);
+                this.classList.add("text-primary");
+            }
+            if (this.innerHTML.startsWith("Remove")) {
+                $("<i class=\"fas fa-minus text-warning\"></>&nbsp;").prependTo(this);
+                this.classList.add("text-warning");
+            }
+            if (this.innerHTML.toLowerCase() == "back to list" || this.innerHTML.toLowerCase() == "back to search") {
+                $("<i class=\"fas fa-backward\"></>").appendTo(this);
+                // this.classList.add("text-success");
+            }
+
+        });
+         $(".card").each(function () {
+             this.classList.add("shadow","bg-light","text-black");
+             $(this).css({ "opacity": "0.97" });    
+        });
+        AOS.init({
+            // Global settings:
+            disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+            startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+            initClassName: 'aos-init', // class applied after initialization
+            animatedClassName: 'aos-animate', // class applied on animation
+            useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+            disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+            debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+            throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+
+            // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+            offset: 120, // offset (in px) from the original trigger point
+            delay: 100, // values from 0 to 3000, with step 50ms
+            duration: 1000, // values from 0 to 3000, with step 50ms
+            easing: 'ease', // default easing for AOS animations
+            once: false, // whether animation should happen only once - while scrolling down
+            mirror: false, // whether elements should animate out while scrolling past them
+            anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+
+        });
+
+
+    </script>
+</body>
+</html>
+<style>
+  
+</style>

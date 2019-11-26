@@ -123,14 +123,7 @@ namespace Live_Quiz.Controllers
                 ViewBag.noFile = "No file recieved.Please try again.";
                 return View();
             }
-            if (quiz.isPublic == true)
-            {
-                PinData.ht.Add(PinData.pin, quiz.Id);
-                Live.qon.Add(PinData.pin, "f");
-                QuizPlayers.lu.Add(PinData.pin, new ArrayList());
-                UserAns.ans.Add(PinData.pin, new Hashtable());
-                UserAns.score.Add(PinData.pin++, new Hashtable());
-            }
+   
             ContentRepository service = new ContentRepository();
             //ImageFile imageFile = new ImageFile();
             int i = service.UploadImageInDataBase(file, new ImageFielView() { });
@@ -167,7 +160,18 @@ namespace Live_Quiz.Controllers
                 db.QuizCollections.Add(qc);
                 db.SaveChanges();
                 TempData["quizId"] = quiz.Id;
-                 return RedirectToAction("AddAnother");
+                /*if (quiz.isPublic == true)
+                {
+                    PinData.ht.Add(PinData.pin, quiz.Id);
+                    PinData.qql.Add(PinData.pin, new List<Question>());
+                    QuizPlayers.lu.Add(PinData.pin, new ArrayList());
+                    UserAns.ans.Add(PinData.pin, new Hashtable());
+                    UserAns.block.Add(PinData.pin, new Hashtable());
+                    Live.qon.Add(PinData.pin, "f");
+                    Live.qs.Add(PinData.pin, "t");
+                    UserAns.score.Add(PinData.pin++, new Hashtable());
+                }*/
+                return RedirectToAction("AddAnother");
             }
            
             return View(quiz);
@@ -436,15 +440,23 @@ namespace Live_Quiz.Controllers
 
         public ActionResult Play(int id)
         {
-            Hashtable h=PinData.ht;
+            /*Hashtable h=PinData.ht;
             foreach(DictionaryEntry e in h)
             {
                 if((int)e.Value==id)
                 {
                     return RedirectToAction("dashboard","game",new {pin=e.Key });
                 }
-            }
-            return View("index");
+            }*/
+            PinData.ht.Add(PinData.pin, id);
+            PinData.qql.Add(PinData.pin, new List<Question>());
+            QuizPlayers.lu.Add(PinData.pin, new ArrayList());
+            UserAns.ans.Add(PinData.pin, new Hashtable());
+            UserAns.block.Add(PinData.pin, new Hashtable());
+            Live.qon.Add(PinData.pin, "f");
+            Live.qs.Add(PinData.pin, "t");
+            UserAns.score.Add(PinData.pin++, new Hashtable());
+            return RedirectToAction("dashboard", "game", new { pin = PinData.pin-1 });
         }
     }
 }
