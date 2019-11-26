@@ -1,6 +1,11 @@
 ﻿
 @{
     ViewBag.Title = "OneQuestion";
+    string[] col = new string[4];
+    col[0] = "btn-dark";
+    col[1] = "btn-info";
+    col[2] = "btn-secondary";
+    col[3] = "btn-danger";
 }
 
     <div class="card text-capitalize text-center shadow-lg">
@@ -12,6 +17,7 @@
         }
         else
         {
+            int ij = 0;
             Live_Quiz.Models.Question que = ViewBag.cquestion;
             <div class="card-header">
                 <h3>Quiz: @ViewBag.quiz.Name</h3>
@@ -19,6 +25,32 @@
             </div>
             <div class="card-body">
 
+                <div class="">
+                    @foreach (Live_Quiz.Models.Options opt in que.Optionss)
+                    {
+
+
+                        if (opt.isAnswer)
+                        {
+                    <form action="" class="shadow w-75 m-auto">
+                        <input value="@que.Score" id="score" name="score" type="hidden" />
+                        <button type="submit" class="btn btn-block @col[ij]  " value="@que.Score"> @opt.ans</button>
+                    </form>
+                        }
+                        else
+                        {
+                            <form action="" class="shadow-lg w-75 m-auto">
+                                <input value="0" id="score" name="score" type="hidden" />
+                                <button type="submit" class="btn btn-block @col[ij]   " value="0"> @opt.ans</button>
+                            </form>
+                        }
+                        ij++;
+                        <br />
+                       
+
+                    }
+                </div>
+                
             </div>
         }
     </div>

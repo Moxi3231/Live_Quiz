@@ -13,7 +13,7 @@
                 @ViewBag.quiz.Description
             </strong>
         </p>
-        <img src="/Collections/RetrieveImage/@ViewBag.quiz.ImageId" alt="No Image" />
+        <img src="/Collections/RetrieveImage/@ViewBag.quiz.ImageId" class="w-100 m-auto" alt="No Image" />
         
         @using (Html.BeginForm("OneQuestion", "OnePlayerMode", FormMethod.Post))
         { 

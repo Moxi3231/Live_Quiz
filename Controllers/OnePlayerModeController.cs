@@ -36,10 +36,20 @@ namespace Live_Quiz.Controllers
             for (int i = 0; i < res.Count; i++)
                 arr[i] = 0;
             Session["question_list"] = arr;
+            Session["anslist"] = arr;
+            Session["one_score"] = 0;
+            Session["one_quiz_valid"] = true;
+            Session["one_point"] = 0;
             return View();
         }
         public ActionResult OneQuestion(FormCollection formCollection)
         {
+            bool ftempflag = Convert.ToBoolean(Session["one_quiz_valid"]);
+            if(!ftempflag)
+            {
+                ViewBag.error = "Access Denied";
+                return View("Error");
+            }
             ViewBag.isValid = false;
             if(Session["one_quiz"]==null)
             {
@@ -47,9 +57,10 @@ namespace Live_Quiz.Controllers
                 return View("Error");
             }
             int[] qlist = (int[])Session["question_list"];
+            int[] anslist = (int[])Session["anslist"];
             bool flag = true;
-            bool flag2 = true;
-            int ib = 0;
+            bool flag2 = false;
+            int ib = Convert.ToInt32(Session["one_point"]);
             foreach(int i in qlist)
             {
                 if (i == 0)
@@ -58,20 +69,50 @@ namespace Live_Quiz.Controllers
                 }
                 if (i == 1)
                 {
-                    flag2 = false;
-                    ib++;
+                    flag2 = true;
+                    //ib++;
                 }
             }
-            if(flag)
+            //var ttttttt = ib;
+            Quiz qui = (Quiz)Session["one_quiz"];
+            var res = db.QuizQuestions.Where(x => x.QuizId == qui.Id).OrderByDescending(x => x.QuestionId).ToList();
+            if (flag || ib==res.Count)
             {
+                int stmm = Convert.ToInt32(Request.QueryString["score"]);
+                if(stmm==0)
+                {
+                    anslist[ib-1] = 0;
+                }
+                else
+                {
+                    anslist[ib-1] = 1;
+                }
+                int sco = (int)Session["one_score"];
+                sco += stmm;
+                Session["one_score"] = sco;
+                Session["isValidEnd"] = true;
                 return RedirectToAction("OnePlayerEnd");
             }
             if(flag2)
             {
                 //logic for correct answer and pass to session
+                int stmm = Convert.ToInt32(Request.QueryString["score"]);
+                if (stmm == 0)
+                {
+                    anslist[ib-1] = 0;
+                }
+                else
+                {
+                    anslist[ib-1] = 1;
+                }
+                int sco = (int)Session["one_score"];
+                sco += stmm;
+                Session["one_score"] = sco;
+
             }
-            Quiz qui = (Quiz)Session["one_quiz"];
-            var res = db.QuizQuestions.Where(x => x.QuizId == qui.Id).OrderByDescending(x=> x.QuestionId).ToList();
+            Session["anslist"] = anslist;
+            
+            var trescount = res.Count;
             if (res.Count == 0)
             {
                 ViewBag.isValid = true;
@@ -81,13 +122,27 @@ namespace Live_Quiz.Controllers
             
             qlist[ib] = 1;
             Session["question_list"] = qlist;
-            int qiddd = res[ib].QuestionId;
+            int qiddd = res.ElementAt(ib).QuestionId;
+            //int qiddd = res[ib].QuestionId;
             ViewBag.cquestion = db.Questions.Where(x=>x.QuestionId==qiddd).SingleOrDefault();
-
+            Session["one_point"] = ib+1;
             return View();
         }
         public ActionResult OnePlayerEnd()
         {
+            Session["one_quiz_valid"] = false;
+            bool flag = Convert.ToBoolean(Session["isValidEnd"]);
+            if(!flag)
+            {
+                ViewBag.error = "Access Denied";
+                return View("Error");
+            }
+            Session["isValidEnd"] = false;
+            int sco = (int)Session["one_score"];
+            ViewBag.tscore = sco;
+            int[] anslist = (int[])Session["anslist"];
+            ViewBag.anslist = anslist;
+            
             return View();
         }
     }
