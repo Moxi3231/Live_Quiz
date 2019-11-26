@@ -173,10 +173,12 @@
     <Compile Include="Controllers\CollectionsController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\ExploreController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaguesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OnePlayerModeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\QuizsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -376,6 +378,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
+    <Content Include="Views\Game\OneOnOne.cshtml" />
+    <Content Include="Views\OnePlayerMode\OnePlayer.cshtml" />
+    <Content Include="Views\OnePlayerMode\OneQuestion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Explore\" />
+    <Content Include="Views\Explore\Index.cshtml" />
+    <Content Include="Views\Explore\Details.cshtml" />
+    <Content Include="Views\Explore\Info.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\OnePlayerMode\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

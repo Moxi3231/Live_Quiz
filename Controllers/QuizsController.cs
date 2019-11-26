@@ -441,6 +441,8 @@ namespace Live_Quiz.Controllers
         public ActionResult Play(int id)
         {
             /*Hashtable h=PinData.ht;
+
+            Hashtable h=PinData.ht;
             foreach(DictionaryEntry e in h)
             {
                 if((int)e.Value==id)

@@ -1,0 +1,56 @@
+﻿@model Live_Quiz.Models.Collection
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="card mb-3" style="max-width: 100%;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img id="@Model.Id" onclick="modalImageZoom(@Model.Id)" class="card-img" src="/Collections/RetrieveImage/@Model.ImageId" alt="@Model.Name" height="200" />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">@Model.Description</p>
+                <p class="card-text"><small class="text-muted">@Model.Email</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+Quiz
+@foreach (Live_Quiz.Models.Quiz x in ViewBag.Quizes)
+{
+    if (x.isPublic == true)
+    {
+        <div class="card mb-2">
+            <div class="row no-gutters">
+                <div class="col-md-2">
+                    <img id="@x.Id" onclick="modalImageZoom(@x.Id)" class="card-img" src="/Collections/RetrieveImage/@x.ImageId" alt="@x.Name" />
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body">
+
+                        <h5 class="card-title">@x.Name</h5>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+
+                            <a href="#" class="btn btn-sm btn-outline-primary">Play</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+}
+
+
+
+
+<br />
+
+<div class="w-75 m-auto alert alert-info  text-center m-5 shadow">
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class = "alert alert-info text-center m-auto" })
+
+</div>

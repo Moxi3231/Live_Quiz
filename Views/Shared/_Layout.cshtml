@@ -48,7 +48,7 @@
                 <i class="fas fa-user-edit fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
                 <br />
                 <br />
-                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-info p-2  ", @style = "width:95%; margin-left:2.5%; color:black;" })
+                @Html.ActionLink("Details", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "btn btn-sm btn-light p-2  ", @style = "width:95%; margin-left:2.5%; color:black;" })
                 <br />
                 <br />
                 <i class="fas fa-sign-out-alt fa-10x text-xl-center text-dark" style="width:95%; margin-left:2.5%;"></i>
@@ -93,10 +93,11 @@
         </p>
         <a href="javascript:void(0)" class="closebtn " onclick="closeNav()"> <i class="fas fa-times rotate180"></i></a>
         <hr class="text-white  border-top border-white" />
-        @Html.ActionLink("Collections", "Index", "Collections/", new { }, new { @class = "" })
-        @Html.ActionLink("Explore", "SearchQuizCollection", "Common/", new { }, new { @class = "" })
-        @Html.ActionLink("Quizs", "Index", "Quizs", new { }, new { @class = "" })
-        @Html.ActionLink("Questions", "Index", "Questions", new { }, new { @class = "" })
+        @Html.ActionLink("Collections", "Index", "Collections/", new { }, new { @class = "ahover" })
+        @Html.ActionLink("Explore", "SearchQuizCollection", "Common/", new { }, new { @class = "ahover" })
+        @Html.ActionLink("Quizs", "Index", "Quizs", new { }, new { @class = "ahover" })
+        @Html.ActionLink("Questions", "Index", "Questions", new { }, new { @class = "ahover" })
+        @Html.ActionLink("LeaderBoard", "ScoreBoard", "Common", new { }, new { @class = "ahover" })
 
     </div>
 
@@ -250,5 +251,16 @@
 </body>
 </html>
 <style>
-  
+ .ahover{
+      
+    
+   color: #2c2c2c;
+   
+    letter-spacing: .05em;
+   
+  }
+ .ahover:hover{
+      color:white;
+      background-color:black;
+  }
 </style>
