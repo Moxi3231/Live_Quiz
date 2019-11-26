@@ -35,6 +35,7 @@ Quiz
                         <div class="btn-group" role="group" aria-label="Basic example">
 
                             <a href="@Url.Action("play","Explore",new { id=x.Id})" class="btn btn-sm btn-outline-primary">Play</a>
+                            <button class="btn btn-primary" onclick="$(location).attr('href','/OnePlayerMode/OnePlayer?qid=@x.Id')">One On One</button>
                         </div>
 
                     </div>
