@@ -376,17 +376,15 @@
     <Content Include="Views\Game\OneOnOne.cshtml" />
     <Content Include="Views\OnePlayerMode\OnePlayer.cshtml" />
     <Content Include="Views\OnePlayerMode\OneQuestion.cshtml" />
+    <Content Include="Views\OnePlayerMode\OnePlayerEnd.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\Explore\" />
     <Content Include="Views\Explore\Index.cshtml" />
     <Content Include="Views\Explore\Details.cshtml" />
     <Content Include="Views\Explore\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\OnePlayerMode\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
