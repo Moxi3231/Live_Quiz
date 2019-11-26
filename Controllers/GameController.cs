@@ -24,7 +24,7 @@ namespace Live_Quiz.Controllers
         {
             //test
             DataModel db = new DataModel();
-            List<Quiz> lq;
+            /*List<Quiz> lq;
             lq = db.Quizs.Where(q => q.isPublic == true).ToList();
             foreach (var q in lq)
             {
@@ -34,32 +34,41 @@ namespace Live_Quiz.Controllers
                     PinData.qql.Add(PinData.pin, new List<Question>());
                     QuizPlayers.lu.Add(PinData.pin, new ArrayList());
                     UserAns.ans.Add(PinData.pin, new Hashtable());
+                    UserAns.block.Add(PinData.pin, new Hashtable());
                     Live.qon.Add(PinData.pin, "f");
                     Live.qs.Add(PinData.pin, "t");
                     UserAns.score.Add(PinData.pin++, new Hashtable());
                 }
             }
-            foreach (DictionaryEntry pair in PinData.qql)
+            foreach (DictionaryEntry pair in PinData.ht)
             {
-                List<Question> qq = (List<Question>)pair.Value;
+                List<Question> qq = (List<Question>)PinData.qql[pair.Key];
                 if (qq.Count == 0)
                 {
-                    Quiz quiz = db.Quizs.Find(PinData.ht[pair.Key]);
-                    foreach (QuizQuestion x in db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList())
+                    Quiz quiz = db.Quizs.Find((int)PinData.ht[pair.Key]);
+                    if (quiz != null)
                     {
-                        qq.Add(x.Question);
+                        List<QuizQuestion> qa = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+                        foreach (QuizQuestion x in qa)
+                        {
+                            qq.Add(x.Question);
+                        }
                     }
                 }
                 else
                 {
                     qq.Clear();
                     Quiz quiz = db.Quizs.Find(PinData.ht[pair.Key]);
-                    foreach (QuizQuestion x in db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList())
+                    if (quiz == null)
                     {
-                        qq.Add(x.Question);
+                        List<QuizQuestion> qa = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+                        foreach (QuizQuestion x in qa)
+                        {
+                            qq.Add(x.Question);
+                        }
                     }
                 }
-            }
+            }*/
             return View();
         }
         [ActionName("Index")]
@@ -83,8 +92,12 @@ namespace Live_Quiz.Controllers
         {
             Hashtable ua = (Hashtable)UserAns.ans[int.Parse(Request.QueryString["pin"])];
             Hashtable us = (Hashtable)UserAns.score[int.Parse(Request.QueryString["pin"])];
-            Hashtable b = (Hashtable)UserAns.block;
+            Hashtable b = (Hashtable)UserAns.block[int.Parse(Request.QueryString["pin"])];
             ArrayList ob = (ArrayList)QuizPlayers.lu[int.Parse(Request.QueryString["pin"])];
+            if(us.ContainsKey(fc["name"]))
+            {
+                return View("nickname");
+            }
             Session["pin"] = int.Parse(Request.QueryString["pin"]);
             Session["name"] = fc["name"];
             Response.Cookies["pin"].Value = Request.QueryString["pin"];
@@ -93,7 +106,7 @@ namespace Live_Quiz.Controllers
             ua.Add(fc["name"], "E");
             b.Add(fc["name"], "f");
             ob.Add(fc["name"]);
-            return RedirectToAction("options");
+            return RedirectToAction("options",b);
         }
         [HttpPost]
         public void on(FormCollection fc)
@@ -109,37 +122,69 @@ namespace Live_Quiz.Controllers
             }
             Response.Redirect("Question?pin=" + fc["pin"]);
         }
-        public ActionResult dashboard(int? p)
+        public ActionResult dashboard(int? pin)
         {
-            int pin;
-            if (p == null)
+            ArrayList ob;
+            lock (this)
             {
-                pin = int.Parse(Request.QueryString["pin"]);
+                DataModel db = new DataModel();
+                int p;
+                if (pin == null)
+                {
+                    p = int.Parse(Request.QueryString["pin"]);
+                }
+                else
+                {
+                    p = (int)pin;
+                }
+                ob = (ArrayList)QuizPlayers.lu[p];
+                List<Question> qq = (List<Question>)PinData.qql[p];
+                if (qq.Count == 0)
+                {
+                    Quiz quiz = db.Quizs.Find((int)PinData.ht[p]);
+                    if (quiz != null)
+                    {
+                        List<QuizQuestion> qa = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+                        foreach (QuizQuestion x in qa)
+                        {
+                            qq.Add(x.Question);
+                        }
+                    }
+                }
+                else
+                {
+                    qq.Clear();
+                    Quiz quiz = db.Quizs.Find(PinData.ht[p]);
+                    if (quiz != null)
+                    {
+                        List<QuizQuestion> qa = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+                        foreach (QuizQuestion x in qa)
+                        {
+                            qq.Add(x.Question);
+                        }
+                    }
+                }
             }
-            else
-            {
-                pin = (int)p;
-            }
-            ArrayList ob = (ArrayList)QuizPlayers.lu[pin];
-
             return View(ob);
         }
         [HttpGet]
         public ActionResult options()
         {
             ViewBag.ua = (Hashtable)UserAns.score[int.Parse(Request.Cookies["pin"].Value.ToString())];
-            return View();
+            Hashtable b = (Hashtable)UserAns.block[int.Parse(Request.Cookies["pin"].Value.ToString())];
+            return View(b);
         }
         [ActionName("options")]
         [HttpPost]
         public ActionResult BlockUser()
         {
             ArrayList ob = (ArrayList)QuizPlayers.lu[Session["pin"]];
+            Hashtable b = (Hashtable)UserAns.block[Session["pin"]];
             if (!ob.Contains(Session["name"]))
             {
-                UserAns.block[Session["name"]] = "t";
+                b[Session["name"]] = "t";
             }
-            return View("options");
+            return View("options",b);
         }
 
         public ActionResult live(string pin)
@@ -229,15 +274,6 @@ namespace Live_Quiz.Controllers
             Hashtable sht = (Hashtable)UserAns.score[pin];
             List<DictionaryEntry> d;
             d = sht.Cast<DictionaryEntry>().OrderByDescending(entry => entry.Value).ToList();
-
-            /*PinData.ht.Remove(pin);
-            PinData.qql.Remove(pin);
-            QuizPlayers.lu.Remove(pin);
-            UserAns.ans.Remove(pin);
-            Live.qon.Remove(pin);
-            Live.qs.Remove(pin);
-            UserAns.score.Remove(pin);*/
-
           
             var users = context1.Users.Select(x => x).ToList();
             foreach(DictionaryEntry e in d)
@@ -303,6 +339,24 @@ namespace Live_Quiz.Controllers
                 }
             }
         }
+        public ActionResult UserEnd()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult remoq(FormCollection fc)
+        {
+            int pin = int.Parse(fc["pin"]);
+            Live.qs[pin] = "f";
+            PinData.ht.Remove(pin);
+            /*PinData.qql.Remove(pin);
+            QuizPlayers.lu.Remove(pin);
+            UserAns.ans.Remove(pin);
+            Live.qon.Remove(pin);
+            Live.qs.Remove(pin);*/
+            return Redirect("/Home");
+        }
+
 
 
         public ActionResult OneOnOne(int? quizid)

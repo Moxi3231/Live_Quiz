@@ -1,0 +1,63 @@
+﻿@model Live_Quiz.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+
+
+
+}
+
+<h2 class="text-center">@ViewBag.Title.</h2>
+<hr />
+<div class="card w-75 m-auto shadow">
+    <div class="card-header">
+        <h4>Create a new account.</h4>
+        <a href="~/Account/Login" class="align-top float-right text-dark btn btn-link btn-outline-secondary">SignIn</a>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 w-100" data-aos="flip-up" data-aos-delay="1500" data-aos-duration="1000">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "card card-body shadow-sm w-100 m-auto", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword)
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserName)
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Country)
+                        @Html.DropDownList("Country", ViewBag.Country_List as IEnumerable<SelectListItem>, "Select", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-outline-primary w-100" value="Register" />
+                    </div>
+                }
+            </div>
+            <div class="col-md-4 w-100 h-100 m-auto" style="font-size:22px;" >
+                <i class="fas fa-user-plus fa-10x"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

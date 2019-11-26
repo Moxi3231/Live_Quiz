@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "ViewCollectionQuiz";
+}
+
+<h2 class="display-3 text-center">Quizzes Collections: <b>@ViewBag.Collection</b></h2>
+<div class="card shadow text-center">
+
+
+    <div class="card-header">
+        Quiz
+    </div>
+    <div class="card-body">
+        <table class="table table-active table-bordered table-responsive-sm">
+            <tr>
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Description
+                </th>
+                <th>
+                    <b>Image</b>
+                </th>
+                <th>
+
+                </th>
+            </tr>
+            @if(ViewBag.quizs.Count==0)
+            {
+                <tr><td colspan="5">
+                    <div class="alert alert-danger text-center">
+                        No Quiz For Collection: @ViewBag.Collection
+                    </div>
+                    </td></tr>
+            }
+            @foreach (Live_Quiz.Models.Quiz item in ViewBag.quizs)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+
+
+                    <td>
+                        <button type="button" class="btn btn-lg imgMain" data-toggle="modal" data-target="#imageModal">
+                            <img id="@item.Id" onclick="modalImageZoom(@item.Id)" class="imgMain" alt="@item.Name" height=40 width=100 />
+                        </button>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-success" onclick="$(location).attr('href','/Quizs/Play/@item.Id')">Play</button>
+                            <button class="btn btn-success" onclick="$(location).attr('href','/Common/QuizBoard?quizid=@item.Id')">LeaderBoard</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+<div class="alert alert-info text-center" >
+    <a href="/Common">Back To Search</a>
+</div>
+      

@@ -1,0 +1,67 @@
+﻿@using Live_Quiz.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log In";
+}
+
+
+    <div class="card w-75 m-auto shadow" data-aos="zoom-in-left" data-aos-delay="100" data-aos-duration="1500">
+        <h2 class="card-header text-center">@ViewBag.Title.</h2>
+        <div class="card-body">
+            <div class="row">
+                <section id="loginForm" class="col-md-8">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control w-100" })
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log In" class="btn btn-outline-success w-100" />
+                            </div>
+                        </div>
+
+                        @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+                    }
+                </section>
+                <div class="col-4 w-100 h-100 " style="font-size:22px;">
+                    <i class="fas fa-user fa-10x"></i>
+                </div>
+            </div>
+            <hr />
+            <p class="btn btn-link text-center btn-block btn-outline-warning">
+                @Html.ActionLink("Register as a new user", "Register",new { }, new { @class="text-dark"})
+            </p>
+        </div>
+    
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

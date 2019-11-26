@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "QuestionBank";
+}
+
+<h2>QuestionBank</h2>
+ @using (Html.BeginForm("QuestionBank", "Quizs", FormMethod.Post))
+            {
+<div class="form-group">
+
+    <input type="hidden" name="collectionid" id="collectionid" value="@ViewBag.quizid" />
+    <br>
+    <select id="Qbank" class="form-control text-center w-50 m-auto" name="Qbank">
+        @foreach (Live_Quiz.Models.Question item in ViewBag.Qbank)
+        {
+            <option class="text-center" value="@item.QuestionId">@item.Description</option>
+        }
+    </select>
+
+    <input class="btn w-75 m-auto btn-outline-success btn-block" type="submit" value="Add" />
+
+</div>
+
+            }

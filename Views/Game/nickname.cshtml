@@ -15,10 +15,13 @@
                     @if (!Request.IsAuthenticated)
                     {
 
-                        <div class="form-group">
-                            <h4>Enter Name here</h4>
-                            @Html.TextBox("name", null, new { @class = "form-control" })
-                        </div>
+                    <div class="form-group">
+                        <h4>Enter Name here</h4>
+                        @Html.TextBox("name", null, new { @class = "form-control" })
+                        <h5 class="text-danger">
+                            If nickname is already used.Than You redirect to this page.
+                        </h5>
+                    </div>
                     }
                     else
                     {

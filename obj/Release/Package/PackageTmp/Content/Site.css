@@ -1,0 +1,403 @@
+﻿
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+i {
+    margin-left: 5px;
+}
+
+.rotate180:hover {
+    transition-duration: 2s;
+    transform: rotateZ(720deg);
+}
+
+   
+.floatleft{
+    float:left;
+}
+.card-body {
+    font-size: 19px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: monospace;
+}
+table td{
+    font-size:15px;
+}
+.rotate180 {
+    -webkit-transition: 0.6s ease-out;
+    -moz-transition: 0.6s ease-out;
+    transition: 0.6s ease-out;
+}
+
+.right {
+    border-bottom-right-radius: 70px;
+    border-top-right-radius: 70px;
+    height: 60px;
+    width: 30px;
+}
+
+.buttonLeft {
+    position: sticky;
+    z-index: 5;
+    top: 45%;
+    bottom: 55%;
+    width: 2%;
+}
+
+.sidepanel {
+    height: 100%;
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 8; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+}
+
+    /* The sidepanel links */
+    .sidepanel a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidepanel a:hover {
+            color: #f1f1f1;
+        }
+
+    /* Position and style the close button (top right corner) */
+    .sidepanel .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+
+/* Style the button that is used to open the sidepanel */
+
+
+.openbtn:hover {
+    background-color: #444;
+}
+.imgMain {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .imgMain:hover {
+        opacity: 0.7;
+    }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 6; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 1.2s;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+.shakeClass {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 1s;
+    /* When the animation is finished, start again */
+    animation-delay: 5s;
+    animation-iteration-count: 2;
+    transform: scale(1);
+   
+    
+}
+    .shakeClass:hover {
+        box-shadow: 0px 0px 150px #bbb;
+        background-color:#D7D7D7;
+        background-color:transparent;
+        transition: all 200ms ease-in;
+        transform: scale(1.5);
+        /* Start the shake animation and make the animation last for 0.5 seconds */
+        animation: shake 0.5s;
+        /* When the animation is finished, start again */
+        animation-iteration-count: infinite;
+    }
+
+@keyframes shake {
+     0% {
+        box-shadow: 0px 0px 150px #bbb;
+        background-color: #D7D7D7;
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+
+
+.card-header{
+    font-size:45px;
+
+}
+.card-header a{
+    font-size:20px;
+}
+
+hr {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+
+.blinking-cursor {
+    font-weight: 100;
+    font-size: 30px;
+    color: #2E3D48;
+    -webkit-animation: 1s blink step-end infinite;
+    -moz-animation: 1s blink step-end infinite;
+    -ms-animation: 1s blink step-end infinite;
+    -o-animation: 1s blink step-end infinite;
+    animation: 1s blink step-end infinite;
+}
+
+@keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+@-moz-keyframes blink {
+    from, to {
+        color: transparent;
+    }
+
+    50% {
+        color: black;
+    }
+}
+
+@-webkit-keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+@-ms-keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+@-o-keyframes
+
+"blink" {
+    from, to
+
+{
+    color: transparent;
+}
+
+50% {
+    color: black;
+}
+
+}
+
+#footer:hover {
+    color: cadetblue;
+}
+
+.content {
+    position: relative;
+    bottom: 275px;
+    /*background: rgba(0, 0, 0, 0.5);
+            */ color: #f1f1f1;
+    width: 100%;
+}
+
+#vidBtn {
+    animation-name: colorChange;
+    animation-direction: normal;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: transparent;
+    }
+
+    25% {
+        background-color: black;
+    }
+
+    50% {
+        background-color: transparent;
+    }
+
+    75% {
+        background-color: black;
+    }
+
+    100% {
+        background-color: whitesmoke;
+    }
+}
+    

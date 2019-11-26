@@ -1,0 +1,52 @@
+﻿@model Live_Quiz.Models.Roles
+
+@{
+    ViewBag.Title = "Create Roles";
+}
+
+<h2 class="display-4 text-center">Create Role</h2>
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success w-75 m-auto">
+        @ViewBag.message
+    </div>
+}
+@using (Html.BeginForm("CreateRole", "Roles", FormMethod.Post, new { @class = "card shadow text-center w-75 m-auto" }))
+{
+    @Html.AntiForgeryToken()
+    <h4 class="card-header">Roles</h4>
+
+    <div class="card-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+
+            <button class="btn btn-block btn-outline-primary" type="submit">Create</button>
+
+        </div>
+    </div>
+}
+@if (ViewBag.flag != null && ViewBag.flag == true)
+{
+    <div class="alert alert-danger w-75 m-auto">
+        Role Already Exists.
+    </div>
+}
+<br />
+<div class="alert alert-info text-center w-75 m-auto" data-aos="fade-in" data-aos-delay="2000">
+    @Html.ActionLink("View Roles", "ViewRoles")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

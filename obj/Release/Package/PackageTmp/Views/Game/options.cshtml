@@ -1,0 +1,142 @@
+﻿@using Live_Quiz.Models;
+@using System.Collections;
+@model Hashtable
+@{
+    ViewBag.Title = "options";
+}
+<div id="main">
+    @if ((string)Live.qs[int.Parse(Request.Cookies["pin"].Value.ToString())] == "f")
+    {
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        Quiz is Over
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <div id="over">
+                    <center>
+                        <h1>
+                            See Result on main Screen
+                        </h1>
+                    </center>
+                </div>
+                <hr />
+                <p class="btn btn-link text-center btn-block">
+                    <div class="form-group">
+                        <div>
+                            <input type="button" onclick='window.location="/Home"' value="Home" class="btn btn-outline-success w-100" />
+                        </div>
+                    </div>
+                </p>
+            </div>
+        </div>
+    }
+    else if ((string)UserAns.block[Request.Cookies["uname"].Value.ToString()] == "t")
+    {
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        Alert
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <div id="block">
+                    <center>
+                        <h1>You are Blocked</h1>
+                    </center>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Live.qon[int.Parse(Request.Cookies["pin"].Value.ToString())].Equals("t"))
+    {
+        <div id="table">
+            <center>
+                <table style="height:620px; width:100%" id="otable">
+                    <tr>
+                        <td style="height:25%; width:25%;"><input class="btn btn-success" type="button" onclick="pass('0')" id="btn1" name="option" value="A" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input class="btn btn-primary" type="button" onclick="pass('1')" id="btn2" name="option" value="B" style="height:100%; width:100%;" /></td>
+                    </tr>
+                    <tr>
+                        <td style="height:25%; width:25%;"><input class="btn btn-warning" type="button" onclick="pass('2')" id="btn3" name="option" value="C" style="height:100%; width:100%;" /></td>
+                        <td style="height:25%; width:25%;"><input class="btn btn-danger" type="button" onclick="pass('3')" id="btn4" name="option" value="D" style="height:100%; width:100%;" /></td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+    }
+    else
+    {
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        Alert
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <div id="wait">
+                    <center>
+                        <h2>Please wait and see on main screen</h2>
+                    </center>
+                </div>
+            </div>
+        </div><br />
+        <div class="card w-75 m-auto shadow">
+            <div class="card-header">
+                <center>
+                    <h2>
+                        Score
+                    </h2>
+                </center>
+            </div>
+            <div class="card-body">
+                <div id="wait">
+                    <center>
+                        @{
+                            var t = 0;
+                            Hashtable us = (Hashtable)UserAns.score[int.Parse(Request.Cookies["pin"].Value.ToString())];
+                            t = (int)us[Request.Cookies["uname"].Value.ToString()];
+                        }
+                        <h2>@t</h2>
+                    </center>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts
+{
+    <script>
+        function pass(a) {
+            $.ajax({
+                url: "update_score",
+                type: "POST",
+                data: {ans:a},
+                success: function (response) {
+                    window.alert("Answer is submited")
+                }
+            })
+        }
+                $(document).ready(function () {
+                    check();
+                    function check() {
+                        $.ajax({
+                            url: "options",
+                            type: "POST",
+                            success: function (response) {
+                            }
+                        })
+                        $("#main").load(location.href + " #main>*", "");
+                        setTimeout(check, 1300);
+                    }
+        })
+    </script>
+}

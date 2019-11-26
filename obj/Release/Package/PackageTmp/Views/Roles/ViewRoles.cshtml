@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Live_Quiz.Models.Roles>
+
+@{
+    ViewBag.Title = "ViewRoles";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>ViewRoles</h2>
+    </div>
+    <div class="card-body">
+
+        <p>
+            @Html.ActionLink("Create New", "CreateRole", new { @class = "alert alert-info" })
+        </p>
+        <table class="table table-hover table-bordered table-striped table-responsive-sm table-light text-md-center">
+            <tr>
+                <th >
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    Operations
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr id="@item.Name">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditRole", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>

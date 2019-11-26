@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Live_Quiz.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <div class="card w-75 m-auto text-center">
+        <div class="card-header">
+            <h2>List  of Questions</h2>
+
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        </div>
+        <div class="card-body">
+    <table class="table table-hover table-striped table-responsive-lg">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+           
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+               
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.QuestionId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.QuestionId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    </div>
