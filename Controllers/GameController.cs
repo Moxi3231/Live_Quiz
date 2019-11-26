@@ -39,7 +39,7 @@ namespace Live_Quiz.Controllers
                     Live.qs.Add(PinData.pin, "t");
                     UserAns.score.Add(PinData.pin++, new Hashtable());
                 }
-            }*/
+            }
             foreach (DictionaryEntry pair in PinData.ht)
             {
                 List<Question> qq = (List<Question>)PinData.qql[pair.Key];
@@ -68,7 +68,7 @@ namespace Live_Quiz.Controllers
                         }
                     }
                 }
-            }
+            }*/
             return View();
         }
         [ActionName("Index")]
@@ -118,19 +118,49 @@ namespace Live_Quiz.Controllers
             }
             Response.Redirect("Question?pin=" + fc["pin"]);
         }
-        public ActionResult dashboard(int? p)
+        public ActionResult dashboard(int? pin)
         {
-            int pin;
-            if (p == null)
+            ArrayList ob;
+            lock (this)
             {
-                pin = int.Parse(Request.QueryString["pin"]);
+                DataModel db = new DataModel();
+                int p;
+                if (pin == null)
+                {
+                    p = int.Parse(Request.QueryString["pin"]);
+                }
+                else
+                {
+                    p = (int)pin;
+                }
+                ob = (ArrayList)QuizPlayers.lu[p];
+                List<Question> qq = (List<Question>)PinData.qql[p];
+                if (qq.Count == 0)
+                {
+                    Quiz quiz = db.Quizs.Find((int)PinData.ht[p]);
+                    if (quiz != null)
+                    {
+                        List<QuizQuestion> qa = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+                        foreach (QuizQuestion x in qa)
+                        {
+                            qq.Add(x.Question);
+                        }
+                    }
+                }
+                else
+                {
+                    qq.Clear();
+                    Quiz quiz = db.Quizs.Find(PinData.ht[p]);
+                    if (quiz != null)
+                    {
+                        List<QuizQuestion> qa = db.QuizQuestions.Include(q => q.Question).Include(q => q.Quiz).Where(x => x.QuizId == quiz.Id).ToList();
+                        foreach (QuizQuestion x in qa)
+                        {
+                            qq.Add(x.Question);
+                        }
+                    }
+                }
             }
-            else
-            {
-                pin = (int)p;
-            }
-            ArrayList ob = (ArrayList)QuizPlayers.lu[pin];
-
             return View(ob);
         }
         [HttpGet]

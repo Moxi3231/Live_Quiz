@@ -438,7 +438,7 @@ namespace Live_Quiz.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Play(int id)
+        public ActionResult Play(int? id)
         {
             /*Hashtable h=PinData.ht;
 

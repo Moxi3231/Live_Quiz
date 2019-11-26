@@ -1,9 +1,15 @@
-﻿using System;
+﻿using Live_Quiz.Models;
+using Live_Quiz.Models.Repository;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Live_Quiz.Models;
+using System.Collections;
 namespace Live_Quiz.Controllers
 {
     public class ExploreController : Controller
@@ -85,6 +91,28 @@ namespace Live_Quiz.Controllers
             ViewBag.availQuiz = availableQuizzes2;
             ViewBag.collectionid = id;
             return View(collection);
+        }
+        public ActionResult Play(int? id)
+        {
+            /*Hashtable h=PinData.ht;
+
+            Hashtable h=PinData.ht;
+            foreach(DictionaryEntry e in h)
+            {
+                if((int)e.Value==id)
+                {
+                    return RedirectToAction("dashboard","game",new {pin=e.Key });
+                }
+            }*/
+            PinData.ht.Add(PinData.pin, id);
+            PinData.qql.Add(PinData.pin, new List<Question>());
+            QuizPlayers.lu.Add(PinData.pin, new ArrayList());
+            UserAns.ans.Add(PinData.pin, new Hashtable());
+            UserAns.block.Add(PinData.pin, new Hashtable());
+            Live.qon.Add(PinData.pin, "f");
+            Live.qs.Add(PinData.pin, "t");
+            UserAns.score.Add(PinData.pin++, new Hashtable());
+            return RedirectToAction("dashboard", "game", new { pin = PinData.pin - 1 });
         }
     }
 }
