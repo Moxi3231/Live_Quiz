@@ -181,6 +181,10 @@ namespace Live_Quiz.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Question question = db.Questions.Find(id);
+            var op = question.Optionss.ToList();
+            foreach (var x in op ) {
+                db.Optionss.Remove(x);
+            }
             db.Questions.Remove(question);
             db.SaveChanges();
             return RedirectToAction("Index");
