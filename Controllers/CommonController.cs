@@ -107,7 +107,7 @@ namespace Live_Quiz.Controllers
                 List<UserQuizView> rlist = new List<UserQuizView>();
                 foreach (UserQuiz uq in res)
                 {
-                    var tempobj = db.Quizs.SingleOrDefault(x => x.Id == uq.UId);
+                    var tempobj = db.Quizs.SingleOrDefault(x => x.Id == uq.QId);
                     if(tempobj==null)
                     {
                         ViewBag.error = "User hasn't played any quiz.";
@@ -140,7 +140,7 @@ namespace Live_Quiz.Controllers
                 List<UserQuizView> rlist = new List<UserQuizView>();
                foreach(UserQuiz uq in res)
                 {
-                    var tempobj = db.Quizs.SingleOrDefault(x => x.Id == uq.UId);
+                    var tempobj = db.Quizs.SingleOrDefault(x => x.Id == uq.QId);
                     if (tempobj == null)
                     {
                         ViewBag.error = "User hasn't played any quiz.";
